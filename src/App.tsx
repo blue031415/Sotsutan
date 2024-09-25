@@ -7,7 +7,7 @@ function App() {
     <>
       <h1>Hello, World!</h1>
       そつたんのトップページ
-      <img src="src\assets\mast24.png" alt="mastの卒業要覧"></img>
+      <img src=".\..\public\mast24.png" alt="mastの卒業要覧"></img>
     </>
   );
 }
