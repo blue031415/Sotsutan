@@ -18,7 +18,7 @@
 
 ## URL
 
-https://sotsutan.github.io/Sotsutan/
+https://sotsutan.vercel.app/
 
 # React + TypeScript + Vite
 
