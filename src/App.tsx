@@ -12,9 +12,7 @@ function App() {
     <>
       <h1>そつたんのトップページ</h1>
       <button onClick={toggleOverlay}>
-        {isOverlayVisible
-          ? "必修科目のハイライトを元に戻す"
-          : "必修科目をハイライトする"}
+        {isOverlayVisible ? "必修科目を表示しない" : "必修科目を表示する"}
       </button>
       <div className="highlight-box">
         <div className="youran_mast">
@@ -25,7 +23,7 @@ function App() {
         {isOverlayVisible && <div className="overlay_common"></div>}
       </div>
       {isOverlayVisible && (
-        <table>
+        <table border={1}>
           <caption>必修科目一覧</caption>
           <thead>
             <tr>
@@ -56,6 +54,104 @@ function App() {
             </tr>
             <tr>
               <th scope="row">専門英語B</th>
+              <td>1</td>
+            </tr>
+            <tr>
+              <th scope="row">微分積分A</th>
+              <td>2</td>
+            </tr>
+            <tr>
+              <th scope="row">微分積分B</th>
+              <td>2</td>
+            </tr>
+            <tr>
+              <th scope="row">線形代数A</th>
+              <td>2</td>
+            </tr>
+            <tr>
+              <th scope="row">線形代数B</th>
+              <td>2</td>
+            </tr>
+            <tr>
+              <th scope="row">情報数学A</th>
+              <td>2</td>
+            </tr>
+            <tr>
+              <th scope="row">確率と統計</th>
+              <td>2</td>
+            </tr>
+            <tr>
+              <th scope="row">プログラミング入門A</th>
+              <td>2</td>
+            </tr>
+            <tr>
+              <th scope="row">プログラミング入門B</th> <td>1</td>
+            </tr>
+            <tr>
+              <th scope="row">プログラミング</th> <td>2</td>
+            </tr>
+            <tr>
+              <th scope="row">コンピュータシステムとOS</th> <td>2</td>
+            </tr>
+            <tr>
+              <th scope="row">データ構造とアルゴリズム</th> <td>2</td>
+            </tr>
+            <tr>
+              <th scope="row">データ構造とアルゴリズム実習</th> <td>1</td>
+            </tr>
+            <tr>
+              <th scope="row">データ工学概論</th> <td>2</td>
+            </tr>
+            <tr>
+              <th scope="row">ファーストイヤーセミナー</th>
+              <td>1</td>
+            </tr>
+            <tr>
+              <th scope="row">学問への誘い</th>
+              <td>1</td>
+            </tr>
+            <tr>
+              <th scope="row">情報リテラシー(講義)</th>
+              <td>1</td>
+            </tr>
+            <tr>
+              <th scope="row">情報リテラシー(演習)</th>
+              <td>1</td>
+            </tr>
+            <tr>
+              <th scope="row">データサイエンス</th>
+              <td>2</td>
+            </tr>
+            <tr>
+              <th scope="row">基礎体育(春)</th>
+              <td>0.5</td>
+            </tr>
+            <tr>
+              <th scope="row">基礎体育(秋)</th>
+              <td>0.5</td>
+            </tr>
+            <tr>
+              <th scope="row">応用体育(春)</th>
+              <td>0.5</td>
+            </tr>
+            <tr>
+              <th scope="row">応用体育(秋)</th>
+              <td>0.5</td>
+            </tr>
+            <tr>
+              <th scope="row">English Presentation Skills I</th>
+              <td>1</td>
+            </tr>
+            <tr>
+              <th scope="row">English Reading Skills I</th>
+              <td>1</td>
+            </tr>
+            <tr>
+              <th scope="row">English Presentation Skills II</th>
+              <td>1</td>
+            </tr>
+            <tr>
+              <th scope="row">English Reading Skills II</th>
               <td>1</td>
             </tr>
           </tbody>
