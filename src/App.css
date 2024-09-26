@@ -40,3 +40,35 @@
 .read-the-docs {
   color: #888;
 }
+
+.highlight-box {
+  position: relative;
+  display: inline-block;
+}
+
+.overlay_major_basic {
+  position: absolute;
+  top: 268px;
+  left: 313px;
+  width: 185px;
+  height: 442px;
+  background-color: rgba(255, 255, 0, 0.5);
+}
+
+.overlay_major {
+  position: absolute;
+  top: 268px;
+  left: 33px;
+  width: 139px;
+  height: 442px;
+  background-color: rgba(255, 255, 0, 0.5);
+}
+
+.overlay_common {
+  position: absolute;
+  top: 268px;
+  left: 639px;
+  width: 158px;
+  height: 442px;
+  background-color: rgba(255, 255, 0, 0.5);
+}

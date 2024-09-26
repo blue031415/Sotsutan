@@ -5,9 +5,13 @@ function App() {
 
   return (
     <>
-      <h1>Hello, World!</h1>
-      そつたんのトップページ
-      <img src="mast24.png" alt="mastの卒業要覧"></img>
+      <h1>そつたんのトップページ</h1>
+      <div className="highlight-box">
+        <img src="mast24.png" alt="mastの卒業要覧"></img>
+        <div className="overlay_major_basic"></div>
+        <div className="overlay_major"></div>
+        <div className="overlay_common"></div>
+      </div>
     </>
   );
 }
