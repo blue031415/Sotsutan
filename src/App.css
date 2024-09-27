@@ -1,12 +1,13 @@
-/*#root {
+#root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-}*/
+  color: #0b0b0b;
+  background-color: #ffffff;
+}
 
 .highlight-box {
-  position: relative;
   display: inline-block;
 }
 
@@ -37,6 +38,16 @@
   background-color: rgba(255, 255, 0, 0.5);
 }
 
+.grayout_bisekiA {
+  position: absolute;
+  top: 268px;
+  left: 313px;
+  width: 185px;
+  height: 18px;
+  background-color: rgba(28, 56, 1, 0.5);
+}
+
 .youran_mast {
+  position: relative;
   text-align: right;
 }

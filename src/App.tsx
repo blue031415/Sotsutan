@@ -3,24 +3,71 @@ import { useState } from "react";
 
 function App() {
   const [isOverlayVisible, setOverlayVisible] = useState(false);
+  const [isGrayoutVisible, setGrayoutVisible] = useState(false);
+  const [bisekiAStatus, setBisekiAStatus] = useState(false);
 
   const toggleOverlay = () => {
     setOverlayVisible(!isOverlayVisible);
   };
 
+  const toggleGrayout = () => {
+    setGrayoutVisible(!isGrayoutVisible);
+  };
+
+  const fetchData = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setBisekiAStatus(false);
+
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const reader = new FileReader();
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        const text = e.target?.result as string;
+        if (!text) return;
+
+        const data = text
+          .trim()
+          .split("\n")
+          .map((line) => line.split(",").map((x) => x.trim()));
+
+        data.forEach((row) => {
+          if (row[3] === '"微分積分A"' && row[7] !== '"D"') {
+            console.log(row);
+            setBisekiAStatus(true);
+          }
+        });
+      };
+      reader.readAsText(file);
+    } catch (error) {
+      console.error("Error reading the CSV file:", error);
+    }
+  };
+
   return (
     <>
       <h1>そつたんのトップページ</h1>
+      <input
+        type="file"
+        name="csv_import"
+        accept="csv"
+        id="upload-file"
+        onChange={fetchData}
+      ></input>
+      <button onClick={toggleGrayout}>
+        {isGrayoutVisible ? "微分積分Aを表示しない" : "微分積分Aを表示する"}
+      </button>
       <button onClick={toggleOverlay}>
         {isOverlayVisible ? "必修科目を表示しない" : "必修科目を表示する"}
       </button>
       <div className="highlight-box">
         <div className="youran_mast">
           <img src="mast24.png" alt="mastの卒業要覧"></img>
+          {isOverlayVisible && <div className="overlay_major_basic"></div>}
+          {isOverlayVisible && <div className="overlay_major"></div>}
+          {isOverlayVisible && <div className="overlay_common"></div>}
+          {bisekiAStatus && <div className="grayout_bisekiA"></div>}
         </div>
-        {isOverlayVisible && <div className="overlay_major_basic"></div>}
-        {isOverlayVisible && <div className="overlay_major"></div>}
-        {isOverlayVisible && <div className="overlay_common"></div>}
       </div>
       {isOverlayVisible && (
         <table border={1}>
@@ -63,7 +110,7 @@ function App() {
               <td>1</td>
               <td>4</td>
             </tr>
-            <tr>
+            <tr style={bisekiAStatus ? { backgroundColor: "#008000" } : {}}>
               <th scope="row">微分積分A</th>
               <td>2</td>
               <td>1</td>
