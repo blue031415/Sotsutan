@@ -1,9 +1,17 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+// type CourseData = {
+//   subjectId: string;
+//   subjectName: string;
+//   credit: number;
+//   status: string;
+// };
 
 function App() {
   const [isOverlayVisible, setOverlayVisible] = useState(false);
   const [isGrayoutVisible, setGrayoutVisible] = useState(false);
+  const [bisekiAStatus, setBisekiAStatus] = useState(false);
 
   const toggleOverlay = () => {
     setOverlayVisible(!isOverlayVisible);
@@ -13,6 +21,50 @@ function App() {
     setGrayoutVisible(!isGrayoutVisible);
     // CSVを読み込んで微分積分Aが履修済みであることかを判定する
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("assets/sample_credit.csv");
+        const text = await response.text();
+        const data = text
+          .trim()
+          .split("\n")
+          .map((line) => line.split(",").map((x) => x.trim()));
+        data.forEach((row) => {
+          if (row[3] == '"微分積分A"' && row[7] !== '"D"') {
+            console.log(row);
+            setBisekiAStatus(true);
+          }
+        });
+      } catch (error) {
+        console.error("Error fetching the CSV file:", error);
+      }
+    };
+
+    fetchData();
+
+    // Papa.parse("assets/sample_credit.csv", {
+    //   download: true,
+    //   header: true,
+    //   complete: (results: any) => {
+    //     const data = results.data.split(",");
+    //     data.forEach((element) => {
+    //       console.log(element['"科目名"']);
+    //       if (element['"科目名"'] === '"微分積分A"') {
+    //         console.log(element);
+    //       }
+    //       // console.log("not found");
+    //     });
+    //     // const bisekiA = data.find((course) => course.subject === "微分積分A");
+    //     // if (bisekiA && bisekiA.status === "A") {
+    //     //   setBisekiAStatus("A");
+    //     // } else {
+    //     //   setBisekiAStatus("notA");
+    //     // }
+    //   },
+    // });
+  }, []);
 
   return (
     <>
@@ -30,7 +82,7 @@ function App() {
         {isOverlayVisible && <div className="overlay_major_basic"></div>}
         {isOverlayVisible && <div className="overlay_major"></div>}
         {isOverlayVisible && <div className="overlay_common"></div>}
-        {isGrayoutVisible && <div className="grayout_bisekiA"></div>}
+        {bisekiAStatus && <div className="grayout_bisekiA"></div>}
       </div>
       {isOverlayVisible && (
         <table border={1}>
@@ -73,7 +125,7 @@ function App() {
               <td>1</td>
               <td>4</td>
             </tr>
-            <tr style={isGrayoutVisible ? { backgroundColor: "#008000" } : {}}>
+            <tr style={bisekiAStatus ? { backgroundColor: "#008000" } : {}}>
               <th scope="row">微分積分A</th>
               <td>2</td>
               <td>1</td>
