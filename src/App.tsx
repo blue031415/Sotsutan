@@ -63,11 +63,11 @@ function App() {
       <div className="highlight-box">
         <div className="youran_mast">
           <img src="mast24.png" alt="mastの卒業要覧"></img>
+          {isOverlayVisible && <div className="overlay_major_basic"></div>}
+          {isOverlayVisible && <div className="overlay_major"></div>}
+          {isOverlayVisible && <div className="overlay_common"></div>}
+          {bisekiAStatus && <div className="grayout_bisekiA"></div>}
         </div>
-        {isOverlayVisible && <div className="overlay_major_basic"></div>}
-        {isOverlayVisible && <div className="overlay_major"></div>}
-        {isOverlayVisible && <div className="overlay_common"></div>}
-        {bisekiAStatus && <div className="grayout_bisekiA"></div>}
       </div>
       {isOverlayVisible && (
         <table border={1}>
