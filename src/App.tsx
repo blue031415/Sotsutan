@@ -2,7 +2,7 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
-  const [isOverlayVisible, setOverlayVisible] = useState(true);
+  const [isOverlayVisible, setOverlayVisible] = useState(false);
 
   const toggleOverlay = () => {
     setOverlayVisible(!isOverlayVisible);
@@ -29,129 +29,168 @@ function App() {
             <tr>
               <th scope="col">科目名</th>
               <th scope="col">単位数</th>
+              <th scope="col">標準履修年次</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th scope="row">卒業研究A</th>
               <td>3</td>
+              <td>4</td>
             </tr>
             <tr>
               <th scope="row">卒業研究B</th>
               <td>3</td>
+              <td>4</td>
             </tr>
             <tr>
               <th scope="row">情報メディア実験A</th>
+              <td>3</td>
               <td>3</td>
             </tr>
             <tr>
               <th scope="row">情報メディア実験B</th>
               <td>3</td>
+              <td>3</td>
             </tr>
             <tr>
               <th scope="row">専門英語A</th>
               <td>1</td>
+              <td>4</td>
             </tr>
             <tr>
               <th scope="row">専門英語B</th>
               <td>1</td>
+              <td>4</td>
             </tr>
             <tr>
               <th scope="row">微分積分A</th>
               <td>2</td>
+              <td>1</td>
             </tr>
             <tr>
               <th scope="row">微分積分B</th>
+              <td>2</td>
               <td>2</td>
             </tr>
             <tr>
               <th scope="row">線形代数A</th>
               <td>2</td>
+              <td>1</td>
             </tr>
             <tr>
               <th scope="row">線形代数B</th>
+              <td>2</td>
               <td>2</td>
             </tr>
             <tr>
               <th scope="row">情報数学A</th>
               <td>2</td>
+              <td>1</td>
             </tr>
             <tr>
               <th scope="row">確率と統計</th>
+              <td>2</td>
               <td>2</td>
             </tr>
             <tr>
               <th scope="row">プログラミング入門A</th>
               <td>2</td>
+              <td>1</td>
             </tr>
             <tr>
-              <th scope="row">プログラミング入門B</th> <td>1</td>
+              <th scope="row">プログラミング入門B</th>
+              <td>1</td>
+              <td>1</td>
             </tr>
             <tr>
-              <th scope="row">プログラミング</th> <td>2</td>
+              <th scope="row">プログラミング</th>
+              <td>2</td>
+              <td>2</td>
             </tr>
             <tr>
-              <th scope="row">コンピュータシステムとOS</th> <td>2</td>
+              <th scope="row">コンピュータシステムとOS</th>
+              <td>2</td>
+              <td>2</td>
             </tr>
             <tr>
-              <th scope="row">データ構造とアルゴリズム</th> <td>2</td>
+              <th scope="row">データ構造とアルゴリズム</th>
+              <td>2</td>
+              <td>2</td>
             </tr>
             <tr>
-              <th scope="row">データ構造とアルゴリズム実習</th> <td>1</td>
+              <th scope="row">データ構造とアルゴリズム実習</th>
+              <td>1</td>
+              <td>2</td>
             </tr>
             <tr>
-              <th scope="row">データ工学概論</th> <td>2</td>
+              <th scope="row">データ工学概論</th>
+              <td>2</td>
+              <td>2</td>
             </tr>
             <tr>
               <th scope="row">ファーストイヤーセミナー</th>
+              <td>1</td>
               <td>1</td>
             </tr>
             <tr>
               <th scope="row">学問への誘い</th>
               <td>1</td>
+              <td>1</td>
             </tr>
             <tr>
               <th scope="row">情報リテラシー(講義)</th>
+              <td>1</td>
               <td>1</td>
             </tr>
             <tr>
               <th scope="row">情報リテラシー(演習)</th>
               <td>1</td>
+              <td>1</td>
             </tr>
             <tr>
               <th scope="row">データサイエンス</th>
               <td>2</td>
+              <td>1</td>
             </tr>
             <tr>
               <th scope="row">基礎体育(春)</th>
               <td>0.5</td>
+              <td>1</td>
             </tr>
             <tr>
               <th scope="row">基礎体育(秋)</th>
               <td>0.5</td>
+              <td>1</td>
             </tr>
             <tr>
               <th scope="row">応用体育(春)</th>
               <td>0.5</td>
+              <td>2</td>
             </tr>
             <tr>
               <th scope="row">応用体育(秋)</th>
               <td>0.5</td>
+              <td>2</td>
             </tr>
             <tr>
               <th scope="row">English Presentation Skills I</th>
+              <td>1</td>
               <td>1</td>
             </tr>
             <tr>
               <th scope="row">English Reading Skills I</th>
               <td>1</td>
+              <td>1</td>
             </tr>
             <tr>
               <th scope="row">English Presentation Skills II</th>
               <td>1</td>
+              <td>1</td>
             </tr>
             <tr>
               <th scope="row">English Reading Skills II</th>
+              <td>1</td>
               <td>1</td>
             </tr>
           </tbody>
