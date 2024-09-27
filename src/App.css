@@ -37,6 +37,15 @@
   background-color: rgba(255, 255, 0, 0.5);
 }
 
+.grayout_bisekiA {
+  position: absolute;
+  top: 268px;
+  left: 313px;
+  width: 185px;
+  height: 18px;
+  background-color: rgba(28, 56, 1, 0.5);
+}
+
 .youran_mast {
   text-align: right;
 }

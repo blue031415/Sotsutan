@@ -3,14 +3,23 @@ import { useState } from "react";
 
 function App() {
   const [isOverlayVisible, setOverlayVisible] = useState(false);
+  const [isGrayoutVisible, setGrayoutVisible] = useState(false);
 
   const toggleOverlay = () => {
     setOverlayVisible(!isOverlayVisible);
   };
 
+  const toggleGrayout = () => {
+    setGrayoutVisible(!isGrayoutVisible);
+    // CSVを読み込んで微分積分Aが履修済みであることかを判定する
+  };
+
   return (
     <>
       <h1>そつたんのトップページ</h1>
+      <button onClick={toggleGrayout}>
+        {isGrayoutVisible ? "微分積分Aを表示しない" : "微分積分Aを表示する"}
+      </button>
       <button onClick={toggleOverlay}>
         {isOverlayVisible ? "必修科目を表示しない" : "必修科目を表示する"}
       </button>
@@ -21,6 +30,7 @@ function App() {
         {isOverlayVisible && <div className="overlay_major_basic"></div>}
         {isOverlayVisible && <div className="overlay_major"></div>}
         {isOverlayVisible && <div className="overlay_common"></div>}
+        {isGrayoutVisible && <div className="grayout_bisekiA"></div>}
       </div>
       {isOverlayVisible && (
         <table border={1}>
@@ -63,7 +73,7 @@ function App() {
               <td>1</td>
               <td>4</td>
             </tr>
-            <tr>
+            <tr style={isGrayoutVisible ? { backgroundColor: "#008000" } : {}}>
               <th scope="row">微分積分A</th>
               <td>2</td>
               <td>1</td>
