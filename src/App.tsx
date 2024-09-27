@@ -54,9 +54,6 @@ function App() {
         id="upload-file"
         onChange={fetchData}
       ></input>
-      <button onClick={toggleGrayout}>
-        {isGrayoutVisible ? "微分積分Aを表示しない" : "微分積分Aを表示する"}
-      </button>
       <button onClick={toggleOverlay}>
         {isOverlayVisible ? "必修科目を表示しない" : "必修科目を表示する"}
       </button>
