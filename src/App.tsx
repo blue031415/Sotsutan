@@ -3,15 +3,10 @@ import { useState } from "react";
 
 function App() {
   const [isOverlayVisible, setOverlayVisible] = useState(false);
-  const [isGrayoutVisible, setGrayoutVisible] = useState(false);
   const [bisekiAStatus, setBisekiAStatus] = useState(false);
 
   const toggleOverlay = () => {
     setOverlayVisible(!isOverlayVisible);
-  };
-
-  const toggleGrayout = () => {
-    setGrayoutVisible(!isGrayoutVisible);
   };
 
   const fetchData = (event: React.ChangeEvent<HTMLInputElement>) => {
