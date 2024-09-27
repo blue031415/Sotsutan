@@ -1,12 +1,5 @@
 import "./App.css";
-import { useState, useEffect } from "react";
-
-// type CourseData = {
-//   subjectId: string;
-//   subjectName: string;
-//   credit: number;
-//   status: string;
-// };
+import { useState } from "react";
 
 function App() {
   const [isOverlayVisible, setOverlayVisible] = useState(false);
@@ -19,56 +12,48 @@ function App() {
 
   const toggleGrayout = () => {
     setGrayoutVisible(!isGrayoutVisible);
-    // CSVを読み込んで微分積分Aが履修済みであることかを判定する
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("assets/sample_credit.csv");
-        const text = await response.text();
+  const fetchData = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setBisekiAStatus(false);
+
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const reader = new FileReader();
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        const text = e.target?.result as string;
+        if (!text) return;
+
         const data = text
           .trim()
           .split("\n")
           .map((line) => line.split(",").map((x) => x.trim()));
+
         data.forEach((row) => {
-          if (row[3] == '"微分積分A"' && row[7] !== '"D"') {
+          if (row[3] === '"微分積分A"' && row[7] !== '"D"') {
             console.log(row);
             setBisekiAStatus(true);
           }
         });
-      } catch (error) {
-        console.error("Error fetching the CSV file:", error);
-      }
-    };
-
-    fetchData();
-
-    // Papa.parse("assets/sample_credit.csv", {
-    //   download: true,
-    //   header: true,
-    //   complete: (results: any) => {
-    //     const data = results.data.split(",");
-    //     data.forEach((element) => {
-    //       console.log(element['"科目名"']);
-    //       if (element['"科目名"'] === '"微分積分A"') {
-    //         console.log(element);
-    //       }
-    //       // console.log("not found");
-    //     });
-    //     // const bisekiA = data.find((course) => course.subject === "微分積分A");
-    //     // if (bisekiA && bisekiA.status === "A") {
-    //     //   setBisekiAStatus("A");
-    //     // } else {
-    //     //   setBisekiAStatus("notA");
-    //     // }
-    //   },
-    // });
-  }, []);
+      };
+      reader.readAsText(file);
+    } catch (error) {
+      console.error("Error reading the CSV file:", error);
+    }
+  };
 
   return (
     <>
       <h1>そつたんのトップページ</h1>
+      <input
+        type="file"
+        name="csv_import"
+        accept="csv"
+        id="upload-file"
+        onChange={fetchData}
+      ></input>
       <button onClick={toggleGrayout}>
         {isGrayoutVisible ? "微分積分Aを表示しない" : "微分積分Aを表示する"}
       </button>
