@@ -3,15 +3,31 @@ import { useState } from "react";
 
 function App() {
   const [isOverlayVisible, setOverlayVisible] = useState(false);
-  const [bisekiAStatus, setBisekiAStatus] = useState(false);
+  const [subjectStatuses, setSubjectStatuses] = useState<
+    { name: string; index: number }[]
+  >([]);
+
+  const subjectsList = [
+    { name: "微分積分A", index: 0 },
+    { name: "微分積分B", index: 1 },
+    { name: "線形代数A", index: 2 },
+    { name: "線形代数B", index: 3 },
+    { name: "情報数学A", index: 4 },
+    { name: "確率と統計", index: 5 },
+    { name: "プログラミング入門A", index: 6 },
+    { name: "プログラミング入門B", index: 7 },
+    { name: "プログラミング", index: 8 },
+    { name: "コンピュータシステムとOS", index: 9 },
+    { name: "データ構造とアルゴリズム", index: 10 },
+    { name: "データ構造とアルゴリズム実習", index: 11 },
+    { name: "データ工学概論", index: 12 },
+  ];
 
   const toggleOverlay = () => {
     setOverlayVisible(!isOverlayVisible);
   };
 
   const fetchData = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setBisekiAStatus(false);
-
     const file = event.target.files?.[0];
     if (!file) return;
 
@@ -26,17 +42,30 @@ function App() {
           .split("\n")
           .map((line) => line.split(",").map((x) => x.trim()));
 
+        const updatedSubjectStatuses: { name: string; index: number }[] = [];
+
         data.forEach((row) => {
-          if (row[3] === '"微分積分A"' && row[7] !== '"D"') {
-            console.log(row);
-            setBisekiAStatus(true);
-          }
+          subjectsList.forEach((subject) => {
+            if (row[3] === `"${subject.name}"` && row[7] !== '"D"') {
+              // 科目名が一致し、かつ成績がDでない場合
+              updatedSubjectStatuses.push({
+                name: subject.name,
+                index: subject.index,
+              });
+            }
+          });
         });
+
+        setSubjectStatuses(updatedSubjectStatuses);
       };
       reader.readAsText(file);
     } catch (error) {
       console.error("Error reading the CSV file:", error);
     }
+  };
+
+  const isSubjectPassed = (subjectName: string) => {
+    return subjectStatuses.some((subject) => subject.name === subjectName);
   };
 
   return (
@@ -58,7 +87,20 @@ function App() {
           {isOverlayVisible && <div className="overlay_major_basic"></div>}
           {isOverlayVisible && <div className="overlay_major"></div>}
           {isOverlayVisible && <div className="overlay_common"></div>}
-          {bisekiAStatus && <div className="grayout_bisekiA"></div>}
+          {subjectStatuses.map((subject, index) => (
+            <div
+              key={index}
+              className="grayout_subject"
+              style={{
+                position: "absolute",
+                top: `${27.8 + 1.97 * subject.index}%`,
+                left: "22.7%",
+                width: "13.4%",
+                height: "1.97%",
+                backgroundColor: "rgba(28, 56, 1, 0.5)",
+              }}
+            ></div>
+          ))}
         </div>
       </div>
       {isOverlayVisible && (
@@ -72,166 +114,52 @@ function App() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">卒業研究A</th>
-              <td>3</td>
-              <td>4</td>
-            </tr>
-            <tr>
-              <th scope="row">卒業研究B</th>
-              <td>3</td>
-              <td>4</td>
-            </tr>
-            <tr>
-              <th scope="row">情報メディア実験A</th>
-              <td>3</td>
-              <td>3</td>
-            </tr>
-            <tr>
-              <th scope="row">情報メディア実験B</th>
-              <td>3</td>
-              <td>3</td>
-            </tr>
-            <tr>
-              <th scope="row">専門英語A</th>
-              <td>1</td>
-              <td>4</td>
-            </tr>
-            <tr>
-              <th scope="row">専門英語B</th>
-              <td>1</td>
-              <td>4</td>
-            </tr>
-            <tr style={bisekiAStatus ? { backgroundColor: "#008000" } : {}}>
-              <th scope="row">微分積分A</th>
-              <td>2</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <th scope="row">微分積分B</th>
-              <td>2</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <th scope="row">線形代数A</th>
-              <td>2</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <th scope="row">線形代数B</th>
-              <td>2</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <th scope="row">情報数学A</th>
-              <td>2</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <th scope="row">確率と統計</th>
-              <td>2</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <th scope="row">プログラミング入門A</th>
-              <td>2</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <th scope="row">プログラミング入門B</th>
-              <td>1</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <th scope="row">プログラミング</th>
-              <td>2</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <th scope="row">コンピュータシステムとOS</th>
-              <td>2</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <th scope="row">データ構造とアルゴリズム</th>
-              <td>2</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <th scope="row">データ構造とアルゴリズム実習</th>
-              <td>1</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <th scope="row">データ工学概論</th>
-              <td>2</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <th scope="row">ファーストイヤーセミナー</th>
-              <td>1</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <th scope="row">学問への誘い</th>
-              <td>1</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <th scope="row">情報リテラシー(講義)</th>
-              <td>1</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <th scope="row">情報リテラシー(演習)</th>
-              <td>1</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <th scope="row">データサイエンス</th>
-              <td>2</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <th scope="row">基礎体育(春)</th>
-              <td>0.5</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <th scope="row">基礎体育(秋)</th>
-              <td>0.5</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <th scope="row">応用体育(春)</th>
-              <td>0.5</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <th scope="row">応用体育(秋)</th>
-              <td>0.5</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <th scope="row">English Presentation Skills I</th>
-              <td>1</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <th scope="row">English Reading Skills I</th>
-              <td>1</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <th scope="row">English Presentation Skills II</th>
-              <td>1</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <th scope="row">English Reading Skills II</th>
-              <td>1</td>
-              <td>1</td>
-            </tr>
+            {[
+              { name: "卒業研究A", units: 3, year: 4 },
+              { name: "卒業研究B", units: 3, year: 4 },
+              { name: "情報メディア実験A", units: 3, year: 3 },
+              { name: "情報メディア実験B", units: 3, year: 3 },
+              { name: "専門英語A", units: 1, year: 4 },
+              { name: "専門英語B", units: 1, year: 4 },
+              { name: "微分積分A", units: 2, year: 1 },
+              { name: "微分積分B", units: 2, year: 2 },
+              { name: "線形代数A", units: 2, year: 1 },
+              { name: "線形代数B", units: 2, year: 2 },
+              { name: "情報数学A", units: 2, year: 1 },
+              { name: "確率と統計", units: 2, year: 2 },
+              { name: "プログラミング入門A", units: 2, year: 1 },
+              { name: "プログラミング入門B", units: 1, year: 1 },
+              { name: "プログラミング", units: 2, year: 2 },
+              { name: "コンピュータシステムとOS", units: 2, year: 2 },
+              { name: "データ構造とアルゴリズム", units: 2, year: 2 },
+              { name: "データ構造とアルゴリズム実習", units: 1, year: 2 },
+              { name: "ファーストイヤーセミナー", units: 1, year: 1 },
+              { name: "学問への誘い", units: 1, year: 1 },
+              { name: "情報リテラシー(講義)", units: 1, year: 1 },
+              { name: "情報リテラシー(演習)", units: 1, year: 1 },
+              { name: "データサイエンス", units: 2, year: 1 },
+              { name: "基礎体育(春)", units: 0.5, year: 1 },
+              { name: "基礎体育(秋)", units: 0.5, year: 1 },
+              { name: "応用体育(春)", units: 0.5, year: 2 },
+              { name: "応用体育(秋)", units: 0.5, year: 2 },
+              { name: "English Presentation Skills I", units: 1, year: 1 },
+              { name: "English Reading Skills I", units: 1, year: 1 },
+              { name: "English Presentation Skills II", units: 1, year: 1 },
+              { name: "English Reading Skills II", units: 1, year: 1 },
+            ].map((subject, index) => (
+              <tr
+                key={index}
+                style={
+                  isSubjectPassed(subject.name)
+                    ? { backgroundColor: "#008000" }
+                    : {}
+                }
+              >
+                <th scope="row">{subject.name}</th>
+                <td>{subject.units}</td>
+                <td>{subject.year}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       )}
