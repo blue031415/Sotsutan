@@ -6,6 +6,9 @@ function App() {
   const [subjectStatuses, setSubjectStatuses] = useState<
     { name: string; index: number }[]
   >([]);
+  const [subjectStatuses_advance, setSubjectStatuses_advance] = useState<
+    { name: string; index: number; height: number }[]
+  >([]);
 
   const subjectsList = [
     { name: "微分積分A", index: 0 },
@@ -21,6 +24,15 @@ function App() {
     { name: "データ構造とアルゴリズム", index: 10 },
     { name: "データ構造とアルゴリズム実習", index: 11 },
     { name: "データ工学概論", index: 12 },
+  ];
+
+  const subjectsList_advance = [
+    { name: "卒業研究A", index: 0, height: 1 },
+    { name: "卒業研究B", index: 1, height: 2 },
+    { name: "情報メディア実験A", index: 3, height: 1 },
+    { name: "情報メディア実験B", index: 4, height: 1 },
+    { name: "専門英語A", index: 5, height: 1 },
+    { name: "専門英語B", index: 6, height: 1 },
   ];
 
   const toggleOverlay = () => {
@@ -43,6 +55,11 @@ function App() {
           .map((line) => line.split(",").map((x) => x.trim()));
 
         const updatedSubjectStatuses: { name: string; index: number }[] = [];
+        const updatedSubjectStatuses_advance: {
+          name: string;
+          index: number;
+          height: number;
+        }[] = [];
 
         data.forEach((row) => {
           subjectsList.forEach((subject) => {
@@ -54,9 +71,20 @@ function App() {
               });
             }
           });
+          subjectsList_advance.forEach((subject) => {
+            if (row[3] === `"${subject.name}"` && row[7] !== '"D"') {
+              // 科目名が一致し、かつ成績がDでない場合
+              updatedSubjectStatuses_advance.push({
+                name: subject.name,
+                index: subject.index,
+                height: subject.height,
+              });
+            }
+          });
         });
 
         setSubjectStatuses(updatedSubjectStatuses);
+        setSubjectStatuses_advance(updatedSubjectStatuses_advance);
       };
       reader.readAsText(file);
     } catch (error) {
@@ -66,6 +94,11 @@ function App() {
 
   const isSubjectPassed = (subjectName: string) => {
     return subjectStatuses.some((subject) => subject.name === subjectName);
+  };
+  const isSubjectPassed_advance = (subjectName: string) => {
+    return subjectStatuses_advance.some(
+      (subject) => subject.name === subjectName
+    );
   };
 
   return (
@@ -93,10 +126,24 @@ function App() {
               className="grayout_subject"
               style={{
                 position: "absolute",
-                top: `${27.8 + 1.97 * subject.index}%`,
+                top: `${27.8 + 1.93 * subject.index}%`,
                 left: "22.7%",
                 width: "13.4%",
-                height: "1.97%",
+                height: "1.93%",
+                backgroundColor: "rgba(28, 56, 1, 0.5)",
+              }}
+            ></div>
+          ))}
+          {subjectStatuses_advance.map((subject, index) => (
+            <div
+              key={index}
+              className="grayout_subject"
+              style={{
+                position: "absolute",
+                top: `${27.8 + 1.93 * subject.index}%`,
+                left: "2.2%",
+                width: "10.2%",
+                height: `${1.93 * subject.height}%`,
                 backgroundColor: "rgba(28, 56, 1, 0.5)",
               }}
             ></div>
@@ -150,7 +197,8 @@ function App() {
               <tr
                 key={index}
                 style={
-                  isSubjectPassed(subject.name)
+                  isSubjectPassed(subject.name) ||
+                  isSubjectPassed_advance(subject.name)
                     ? { backgroundColor: "#008000" }
                     : {}
                 }
