@@ -97,3 +97,46 @@
   margin-top: 15px;
   line-height: 1.6;
 }
+
+.hover_info {
+  position: relative;
+}
+.info {
+  opacity: 0;
+  transition: 0.5s;
+  background: #f8f9fa;
+  position: absolute;
+  color: black;
+  padding: 5px;
+  width: 150px;
+  bottom: calc(100% + 17px);
+  left: -25%;
+  box-sizing: border-box;
+  text-align: center;
+  word-wrap: break-word;
+  border-radius: 5px;
+  visibility: hidden;
+  pointer-events: none;
+  font-size: 10%;
+}
+.hover_info::before {
+  opacity: 0;
+  transition: 0.5s;
+  content: "";
+  position: absolute;
+  border: 7px solid transparent;
+  border-top: 14px solid #f8f9fa;
+  bottom: 12px;
+  left: calc(50% - 7px);
+  margin-top: -3px;
+  visibility: hidden;
+  pointer-events: none;
+}
+.hover_info:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+.hover_info:hover * {
+  opacity: 1;
+  visibility: visible;
+}
