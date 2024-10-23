@@ -131,12 +131,16 @@ function App() {
   const judge_infomation = (N: number) => {
     console.log(N);
     if (N === 0) {
-      return <></>;
+      return (
+        <>
+          <div className="hover_info"></div>
+        </>
+      );
     } else if (N === 3) {
       return (
         <>
           <div
-            className="grayout_subject"
+            className="hover_info"
             style={{
               position: "absolute",
               top: `${27.8 + 7.8}%`,
@@ -152,7 +156,7 @@ function App() {
       return (
         <>
           <div
-            className="grayout_subject"
+            className="hover_info"
             style={{
               position: "absolute",
               top: `${27.8 + 7.8}%`,
@@ -161,7 +165,15 @@ function App() {
               height: "1.93%",
               backgroundColor: "rgba(0, 255, 0, 0.5)",
             }}
-          ></div>
+          >
+            <span>
+              情報リテラシー (講義)
+              <br />
+              情報リテラシー (演習)
+              <br />
+              データサイエンス
+            </span>
+          </div>
         </>
       );
     }
