@@ -101,7 +101,7 @@
 .hover_info {
   position: relative;
 }
-span {
+.info {
   opacity: 0;
   transition: 0.5s;
   background: #f8f9fa;
@@ -132,11 +132,11 @@ span {
   visibility: hidden;
   pointer-events: none;
 }
-.hover_info:hover:before {
+.hover_info:hover::before {
   opacity: 1;
   visibility: visible;
 }
-.hover_info:hover span {
+.hover_info:hover * {
   opacity: 1;
   visibility: visible;
 }

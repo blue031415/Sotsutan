@@ -133,7 +133,15 @@ function App() {
     if (N === 0) {
       return (
         <>
-          <div className="hover_info"></div>
+          <div className="hover_info">
+            <div className="info">
+              情報リテラシー (講義)
+              <br />
+              情報リテラシー (演習)
+              <br />
+              データサイエンス
+            </div>
+          </div>
         </>
       );
     } else if (N === 3) {
@@ -149,7 +157,15 @@ function App() {
               height: "1.93%",
               backgroundColor: "rgba(28, 56, 1, 0.5)",
             }}
-          ></div>
+          >
+            <div className="info">
+              情報リテラシー (講義)
+              <br />
+              情報リテラシー (演習)
+              <br />
+              データサイエンス
+            </div>
+          </div>
         </>
       );
     } else {
@@ -166,13 +182,13 @@ function App() {
               backgroundColor: "rgba(0, 255, 0, 0.5)",
             }}
           >
-            <span>
+            <div className="info">
               情報リテラシー (講義)
               <br />
               情報リテラシー (演習)
               <br />
               データサイエンス
-            </span>
+            </div>
           </div>
         </>
       );
