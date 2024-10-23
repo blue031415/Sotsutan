@@ -136,12 +136,11 @@ function App() {
       return (
         <>
           <div
-            // key={index}
             className="grayout_subject"
             style={{
               position: "absolute",
               top: `${27.8 + 1.93}%`,
-              left: "22.7%",
+              left: "50%",
               width: "13.4%",
               height: "1.93%",
               backgroundColor: "rgba(28, 56, 1, 0.5)",
@@ -158,7 +157,7 @@ function App() {
             style={{
               position: "absolute",
               top: `${27.8 + 1.93}%`,
-              left: "22.7%",
+              left: "50%",
               width: "13.4%",
               height: "1.93%",
               backgroundColor: "rgba(28, 56, 1, 0.5)",
@@ -171,7 +170,14 @@ function App() {
 
   return (
     <>
-      <h1>そつたんのトップページ</h1>
+      <div className="header">
+        <p className="tool-title">履修支援ツール</p>
+        <h1 className="main-title">そつたん</h1>
+        <h2 className="sub-title">mast22, 23, 24生に対応しています</h2>
+        <p className="description">
+          twinsからダウンロードできる成績のcsvを「ファイルを選択」からアップロードすることで履修中・修得済みの単位がグレーアウトされます
+        </p>
+      </div>
       <input
         type="file"
         name="csv_import"
