@@ -139,9 +139,9 @@ function App() {
             className="grayout_subject"
             style={{
               position: "absolute",
-              top: `${27.8 + 1.93}%`,
-              left: "50%",
-              width: "13.4%",
+              top: `${27.8 + 7.8}%`,
+              left: "46.3%",
+              width: "11.5%",
               height: "1.93%",
               backgroundColor: "rgba(28, 56, 1, 0.5)",
             }}
@@ -152,15 +152,14 @@ function App() {
       return (
         <>
           <div
-            // key={index}
             className="grayout_subject"
             style={{
               position: "absolute",
-              top: `${27.8 + 1.93}%`,
-              left: "50%",
-              width: "13.4%",
+              top: `${27.8 + 7.8}%`,
+              left: "46.3%",
+              width: "11.5%",
               height: "1.93%",
-              backgroundColor: "rgba(28, 56, 1, 0.5)",
+              backgroundColor: "rgba(0, 255, 0, 0.5)",
             }}
           ></div>
         </>
