@@ -10,6 +10,10 @@ function App() {
     { name: string; index: number; height: number }[]
   >([]);
 
+  const [infomation, setInfomations] = useState<
+    { name: string; index: number }[]
+  >([]);
+
   const subjectsList = [
     { name: "微分積分A", index: 0 },
     { name: "微分積分B", index: 1 },
@@ -33,6 +37,12 @@ function App() {
     { name: "情報メディア実験B", index: 4, height: 1 },
     { name: "専門英語A", index: 5, height: 1 },
     { name: "専門英語B", index: 6, height: 1 },
+  ];
+
+  const infomation_list = [
+    { name: "情報リテラシー(講義)", index: 0 },
+    { name: "情報リテラシー(演習)", index: 1 },
+    { name: "データサイエンス", index: 2 },
   ];
 
   const toggleOverlay = () => {
@@ -61,6 +71,11 @@ function App() {
           height: number;
         }[] = [];
 
+        const updatedSubjectStatuses_infomations: {
+          name: string;
+          index: number;
+        }[] = [];
+
         data.forEach((row) => {
           subjectsList.forEach((subject) => {
             if (row[3] === `"${subject.name}"` && row[7] !== '"D"') {
@@ -81,10 +96,19 @@ function App() {
               });
             }
           });
+          infomation_list.forEach((subject) => {
+            if (row[3] === `"${subject.name}"` && row[7] !== `"D"`) {
+              updatedSubjectStatuses_infomations.push({
+                name: subject.name,
+                index: subject.index,
+              });
+            }
+          });
         });
 
         setSubjectStatuses(updatedSubjectStatuses);
         setSubjectStatuses_advance(updatedSubjectStatuses_advance);
+        setInfomations(updatedSubjectStatuses_infomations);
       };
       reader.readAsText(file);
     } catch (error) {
@@ -100,10 +124,59 @@ function App() {
       (subject) => subject.name === subjectName
     );
   };
+  const isInfomations_passed = (subjectName: string) => {
+    return infomation.some((subject) => subject.name === subjectName);
+  };
+
+  const judge_infomation = (N: number) => {
+    console.log(N);
+    if (N === 0) {
+      return <></>;
+    } else if (N === 3) {
+      return (
+        <>
+          <div
+            className="grayout_subject"
+            style={{
+              position: "absolute",
+              top: `${27.8 + 7.8}%`,
+              left: "46.3%",
+              width: "11.5%",
+              height: "1.93%",
+              backgroundColor: "rgba(28, 56, 1, 0.5)",
+            }}
+          ></div>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <div
+            className="grayout_subject"
+            style={{
+              position: "absolute",
+              top: `${27.8 + 7.8}%`,
+              left: "46.3%",
+              width: "11.5%",
+              height: "1.93%",
+              backgroundColor: "rgba(0, 255, 0, 0.5)",
+            }}
+          ></div>
+        </>
+      );
+    }
+  };
 
   return (
     <>
-      <h1>そつたんのトップページ</h1>
+      <div className="header">
+        <p className="tool-title">履修支援ツール</p>
+        <h1 className="main-title">そつたん</h1>
+        <h2 className="sub-title">mast22, 23, 24生に対応しています</h2>
+        <p className="description">
+          twinsからダウンロードできる成績のcsvを「ファイルを選択」からアップロードすることで履修中・修得済みの単位がグレーアウトされます
+        </p>
+      </div>
       <input
         type="file"
         name="csv_import"
@@ -148,6 +221,7 @@ function App() {
               }}
             ></div>
           ))}
+          {judge_infomation(infomation.length)}
         </div>
       </div>
       {isOverlayVisible && (
@@ -198,7 +272,8 @@ function App() {
                 key={index}
                 style={
                   isSubjectPassed(subject.name) ||
-                  isSubjectPassed_advance(subject.name)
+                  isSubjectPassed_advance(subject.name) ||
+                  isInfomations_passed(subject.name)
                     ? { backgroundColor: "#008000" }
                     : {}
                 }
