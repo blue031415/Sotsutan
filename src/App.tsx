@@ -128,71 +128,42 @@ function App() {
     return infomation.some((subject) => subject.name === subjectName);
   };
 
-  const judge_infomation = (N: number) => {
-    console.log(N);
-    if (N === 0) {
-      return (
-        <>
-          <div className="hover_info">
-            <div className="info">
-              情報リテラシー (講義)
-              <br />
-              情報リテラシー (演習)
-              <br />
-              データサイエンス
+  const judge_infomation = () => {
+    console.log();
+    //let list: string = "";
+
+    // infomation.forEach((subject) => {
+    //   list = list + `<div style="color=red;">${subject.name}</div><br/>`;
+    // });
+    if (infomation.length === 0) return;
+    return (
+      <div
+        className="hover_info"
+        style={{
+          position: "absolute",
+          top: `${27.8 + 7.8}%`,
+          left: "46.3%",
+          width: "11.5%",
+          height: "1.93%",
+          backgroundColor: "rgba(0, 255, 0, 0.5)",
+        }}
+      >
+        <div className="info">
+          {infomation_list.map((subject, index) => (
+            <div
+              key={index}
+              style={{
+                color: infomation.find((item) => item.name === subject.name)
+                  ? "green"
+                  : "red",
+              }}
+            >
+              {subject.name}
             </div>
-          </div>
-        </>
-      );
-    } else if (N === 3) {
-      return (
-        <>
-          <div
-            className="hover_info"
-            style={{
-              position: "absolute",
-              top: `${27.8 + 7.8}%`,
-              left: "46.3%",
-              width: "11.5%",
-              height: "1.93%",
-              backgroundColor: "rgba(28, 56, 1, 0.5)",
-            }}
-          >
-            <div className="info">
-              情報リテラシー (講義)
-              <br />
-              情報リテラシー (演習)
-              <br />
-              データサイエンス
-            </div>
-          </div>
-        </>
-      );
-    } else {
-      return (
-        <>
-          <div
-            className="hover_info"
-            style={{
-              position: "absolute",
-              top: `${27.8 + 7.8}%`,
-              left: "46.3%",
-              width: "11.5%",
-              height: "1.93%",
-              backgroundColor: "rgba(0, 255, 0, 0.5)",
-            }}
-          >
-            <div className="info">
-              情報リテラシー (講義)
-              <br />
-              情報リテラシー (演習)
-              <br />
-              データサイエンス
-            </div>
-          </div>
-        </>
-      );
-    }
+          ))}
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -249,7 +220,7 @@ function App() {
               }}
             ></div>
           ))}
-          {judge_infomation(infomation.length)}
+          {judge_infomation()}
         </div>
       </div>
       {isOverlayVisible && (
