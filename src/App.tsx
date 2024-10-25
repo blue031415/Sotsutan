@@ -10,7 +10,7 @@ function App() {
     { name: string; index: number; height: number }[]
   >([]);
 
-  const [infomation, setInfomations] = useState<
+  const [information, setInformation] = useState<
     { name: string; index: number }[]
   >([]);
 
@@ -39,7 +39,7 @@ function App() {
     { name: "専門英語B", index: 6, height: 1 },
   ];
 
-  const infomation_list = [
+  const information_list = [
     { name: "情報リテラシー(講義)", index: 0 },
     { name: "情報リテラシー(演習)", index: 1 },
     { name: "データサイエンス", index: 2 },
@@ -71,7 +71,7 @@ function App() {
           height: number;
         }[] = [];
 
-        const updatedSubjectStatuses_infomations: {
+        const updatedSubjectStatuses_information: {
           name: string;
           index: number;
         }[] = [];
@@ -96,9 +96,9 @@ function App() {
               });
             }
           });
-          infomation_list.forEach((subject) => {
+          information_list.forEach((subject) => {
             if (row[3] === `"${subject.name}"` && row[7] !== `"D"`) {
-              updatedSubjectStatuses_infomations.push({
+              updatedSubjectStatuses_information.push({
                 name: subject.name,
                 index: subject.index,
               });
@@ -108,7 +108,7 @@ function App() {
 
         setSubjectStatuses(updatedSubjectStatuses);
         setSubjectStatuses_advance(updatedSubjectStatuses_advance);
-        setInfomations(updatedSubjectStatuses_infomations);
+        setInformation(updatedSubjectStatuses_information);
       };
       reader.readAsText(file);
     } catch (error) {
@@ -124,11 +124,11 @@ function App() {
       (subject) => subject.name === subjectName
     );
   };
-  const isInfomations_passed = (subjectName: string) => {
-    return infomation.some((subject) => subject.name === subjectName);
+  const isInformation_passed = (subjectName: string) => {
+    return information.some((subject) => subject.name === subjectName);
   };
 
-  const judge_infomation = (N: number) => {
+  const judge_information = (N: number) => {
     console.log(N);
     if (N === 0) {
       return (
@@ -249,7 +249,7 @@ function App() {
               }}
             ></div>
           ))}
-          {judge_infomation(infomation.length)}
+          {judge_information(information.length)}
         </div>
       </div>
       {isOverlayVisible && (
@@ -301,7 +301,7 @@ function App() {
                 style={
                   isSubjectPassed(subject.name) ||
                   isSubjectPassed_advance(subject.name) ||
-                  isInfomations_passed(subject.name)
+                  isInformation_passed(subject.name)
                     ? { backgroundColor: "#008000" }
                     : {}
                 }
