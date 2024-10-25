@@ -130,11 +130,6 @@ function App() {
 
   const judge_information = () => {
     console.log();
-    //let list: string = "";
-
-    // information.forEach((subject) => {
-    //   list = list + `<div style="color=red;">${subject.name}</div><br/>`;
-    // });
     if (information.length === 0) return;
     return (
       <div
@@ -145,7 +140,10 @@ function App() {
           left: "46.3%",
           width: "11.5%",
           height: "1.93%",
-          backgroundColor: "rgba(0, 255, 0, 0.5)",
+          backgroundColor:
+            information.length === 3
+              ? "rgba(0, 0, 0, 0.5)"
+              : "rgba(0, 255, 0, 0.5)",
         }}
       >
         <div className="info">
