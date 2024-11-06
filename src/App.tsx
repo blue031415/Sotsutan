@@ -143,7 +143,7 @@ function App() {
           backgroundColor:
             information.length === 3
               ? "rgba(0, 0, 0, 0.5)"
-              : "rgba(0, 255, 0, 0.5)",
+              : "rgba(256, 256, 0, 0.5)",
         }}
       >
         <div className="info">
@@ -200,7 +200,7 @@ function App() {
                 left: "22.7%",
                 width: "13.4%",
                 height: "1.93%",
-                backgroundColor: "rgba(28, 56, 1, 0.5)",
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
               }}
             ></div>
           ))}
@@ -214,7 +214,7 @@ function App() {
                 left: "2.2%",
                 width: "10.2%",
                 height: `${1.93 * subject.height}%`,
-                backgroundColor: "rgba(28, 56, 1, 0.5)",
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
               }}
             ></div>
           ))}
