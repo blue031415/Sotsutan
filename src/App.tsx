@@ -10,7 +10,7 @@ function App() {
     { name: string; index: number; height: number }[]
   >([]);
 
-  const [infomation, setInfomations] = useState<
+  const [information, setInformation] = useState<
     { name: string; index: number }[]
   >([]);
 
@@ -39,7 +39,7 @@ function App() {
     { name: "専門英語B", index: 6, height: 1 },
   ];
 
-  const infomation_list = [
+  const information_list = [
     { name: "情報リテラシー(講義)", index: 0 },
     { name: "情報リテラシー(演習)", index: 1 },
     { name: "データサイエンス", index: 2 },
@@ -71,7 +71,7 @@ function App() {
           height: number;
         }[] = [];
 
-        const updatedSubjectStatuses_infomations: {
+        const updatedSubjectStatuses_information: {
           name: string;
           index: number;
         }[] = [];
@@ -96,9 +96,9 @@ function App() {
               });
             }
           });
-          infomation_list.forEach((subject) => {
+          information_list.forEach((subject) => {
             if (row[3] === `"${subject.name}"` && row[7] !== `"D"`) {
-              updatedSubjectStatuses_infomations.push({
+              updatedSubjectStatuses_information.push({
                 name: subject.name,
                 index: subject.index,
               });
@@ -108,7 +108,7 @@ function App() {
 
         setSubjectStatuses(updatedSubjectStatuses);
         setSubjectStatuses_advance(updatedSubjectStatuses_advance);
-        setInfomations(updatedSubjectStatuses_infomations);
+        setInformation(updatedSubjectStatuses_information);
       };
       reader.readAsText(file);
     } catch (error) {
@@ -124,18 +124,13 @@ function App() {
       (subject) => subject.name === subjectName
     );
   };
-  const isInfomations_passed = (subjectName: string) => {
-    return infomation.some((subject) => subject.name === subjectName);
+  const isInformation_passed = (subjectName: string) => {
+    return information.some((subject) => subject.name === subjectName);
   };
 
-  const judge_infomation = () => {
+  const judge_information = () => {
     console.log();
-    //let list: string = "";
-
-    // infomation.forEach((subject) => {
-    //   list = list + `<div style="color=red;">${subject.name}</div><br/>`;
-    // });
-    if (infomation.length === 0) return;
+    if (information.length === 0) return;
     return (
       <div
         className="hover_info"
@@ -145,15 +140,18 @@ function App() {
           left: "46.3%",
           width: "11.5%",
           height: "1.93%",
-          backgroundColor: "rgba(0, 255, 0, 0.5)",
+          backgroundColor:
+            information.length === 3
+              ? "rgba(0, 0, 0, 0.5)"
+              : "rgba(0, 255, 0, 0.5)",
         }}
       >
         <div className="info">
-          {infomation_list.map((subject, index) => (
+          {information_list.map((subject, index) => (
             <div
               key={index}
               style={{
-                color: infomation.find((item) => item.name === subject.name)
+                color: information.find((item) => item.name === subject.name)
                   ? "green"
                   : "red",
               }}
@@ -220,7 +218,7 @@ function App() {
               }}
             ></div>
           ))}
-          {judge_infomation()}
+          {judge_information()}
         </div>
       </div>
       {isOverlayVisible && (
@@ -272,7 +270,7 @@ function App() {
                 style={
                   isSubjectPassed(subject.name) ||
                   isSubjectPassed_advance(subject.name) ||
-                  isInfomations_passed(subject.name)
+                  isInformation_passed(subject.name)
                     ? { backgroundColor: "#008000" }
                     : {}
                 }
