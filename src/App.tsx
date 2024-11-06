@@ -3,6 +3,7 @@ import { useState } from "react";
 
 function App() {
   const [isOverlayVisible, setOverlayVisible] = useState(false);
+  const [showRishunenji, setShowRishunenji] = useState(false);
   const [subjectStatuses, setSubjectStatuses] = useState<
     { name: string; index: number }[]
   >([]);
@@ -13,6 +14,7 @@ function App() {
   const [information, setInformation] = useState<
     { name: string; index: number }[]
   >([]);
+
 
   const subjectsList = [
     { name: "微分積分A", index: 0 },
@@ -48,6 +50,11 @@ function App() {
   const toggleOverlay = () => {
     setOverlayVisible(!isOverlayVisible);
   };
+
+  const toggleRishuneji = () => {
+    setShowRishunenji(!showRishunenji);
+  };
+
 
   const fetchData = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -184,10 +191,13 @@ function App() {
       <button onClick={toggleOverlay}>
         {isOverlayVisible ? "必修科目を表示しない" : "必修科目を表示する"}
       </button>
+      <button onClick={toggleRishuneji}>
+        {showRishunenji ? "履修年次を表示しない" : "履修年次を表示する"}
+      </button>
       <div className="highlight-box">
         <div className="youran_mast">
-          <img src="mast24.png" alt="mastの卒業要覧"></img>
-          {isOverlayVisible && <div className="overlay_major_basic"></div>}
+        <img src={showRishunenji ? 'mast24_rishunenji.png' : 'mast24.png'} />       
+         {isOverlayVisible && <div className="overlay_major_basic"></div>}
           {isOverlayVisible && <div className="overlay_major"></div>}
           {isOverlayVisible && <div className="overlay_common"></div>}
           {subjectStatuses.map((subject, index) => (
