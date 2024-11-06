@@ -142,8 +142,8 @@ function App() {
           height: "1.93%",
           backgroundColor:
             information.length === 3
-              ? "rgba(0, 0, 0, 0.5)"
-              : "rgba(256, 256, 0, 0.5)",
+              ? "rgba(0, 128, 0, 0.4)"
+              : "rgba(256, 256, 0, 0.4)",
         }}
       >
         <div className="info">
@@ -159,6 +159,8 @@ function App() {
               {subject.name}
             </div>
           ))}
+          {/* <div style={{ color: "green" }}>緑: 修得済/履修中</div>
+          <div style={{ color: "red" }}>赤: 未履修</div> */}
         </div>
       </div>
     );
@@ -173,6 +175,7 @@ function App() {
         <p className="description">
           twinsからダウンロードできる成績のcsvを「ファイルを選択」からアップロードすることで履修中・修得済みの単位がグレーアウトされます
         </p>
+        <img src="hover_ex.png" alt="吹き出し内の凡例" width="500px"></img>
       </div>
       <input
         type="file"
@@ -200,7 +203,7 @@ function App() {
                 left: "22.7%",
                 width: "13.4%",
                 height: "1.93%",
-                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                backgroundColor: "rgba(0, 128, 0, 0.4)",
               }}
             ></div>
           ))}
@@ -214,7 +217,7 @@ function App() {
                 left: "2.2%",
                 width: "10.2%",
                 height: `${1.93 * subject.height}%`,
-                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                backgroundColor: "rgba(0, 128, 0, 0.4)",
               }}
             ></div>
           ))}
