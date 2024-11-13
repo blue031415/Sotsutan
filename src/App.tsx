@@ -148,6 +148,21 @@ function App() {
             </div>
           ))}
         </div>
+        <div
+          style={{
+            position: "absolute",
+            top: `-12%`,
+            left: "65.3%",
+            width: "11.5%",
+            height: "1.93%",
+          }}
+        >
+          {information.length === 3 ? (
+            <img src="checkmark_v3.png"></img>
+          ) : (
+            <img src="exclamation-mark.png"></img>
+          )}
+        </div>
       </div>
     );
   };
