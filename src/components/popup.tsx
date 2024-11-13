@@ -3,7 +3,7 @@ import styles from "./../styles/popup.module.css";
 
 const PopUp = () => {
   const [isPopUpVisible, setPopUpVisible] = useState(false);
-  const popUpRef = useRef(null);
+  const popUpRef = useRef<HTMLDivElement>(null);
 
   const togglePopUp = () => {
     setPopUpVisible(!isPopUpVisible);
