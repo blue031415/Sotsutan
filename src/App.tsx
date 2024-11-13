@@ -156,6 +156,7 @@ function App() {
             information.length === 3
               ? "rgba(0, 128, 0, 0.4)"
               : "rgba(256, 256, 0, 0.4)",
+          zIndex: 1,
         }}
       >
         <div className="info">
@@ -196,7 +197,7 @@ function App() {
     if (sougou_must.length === 0) return;
     return (
       <div
-        className="hover_info"
+        className="hover_sougou_must"
         style={{
           position: "absolute",
           top: `27.8%`,
@@ -209,7 +210,7 @@ function App() {
               : "rgba(256, 256, 0, 0.4)",
         }}
       >
-        <div className="info">
+        <div className="sougou_must">
           {sougou_must_list.map((subject, index) => (
             <div
               key={index}
@@ -294,8 +295,8 @@ function App() {
               }}
             ></div>
           ))}
-          {judge_information()}
           {judge_sougou_must()}
+          {judge_information()}
         </div>
       </div>
     </>
