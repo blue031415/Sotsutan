@@ -14,6 +14,10 @@ function App() {
     { name: string; index: number }[]
   >([]);
 
+  const [sougou_must, setSougou_must] = useState<
+    { name: string; index: number }[]
+  >([]);
+
   const subjectsList = [
     { name: "微分積分A", index: 0 },
     { name: "微分積分B", index: 1 },
@@ -43,6 +47,11 @@ function App() {
     { name: "情報リテラシー(講義)", index: 0 },
     { name: "情報リテラシー(演習)", index: 1 },
     { name: "データサイエンス", index: 2 },
+  ];
+
+  const sougou_must_list = [
+    { name: "ファーストイヤーセミナー", index: 0 },
+    { name: "学問への誘い", index: 1 },
   ];
 
   const toggleRishuneji = () => {
@@ -76,6 +85,11 @@ function App() {
           index: number;
         }[] = [];
 
+        const updatedSubjectStatuses_sougou_must: {
+          name: string;
+          index: number;
+        }[] = [];
+
         data.forEach((row) => {
           subjectsList.forEach((subject) => {
             if (row[3] === `"${subject.name}"` && row[7] !== '"D"') {
@@ -104,11 +118,21 @@ function App() {
               });
             }
           });
+
+          sougou_must_list.forEach((subject) => {
+            if (row[3] === `"${subject.name}"` && row[7] !== `"D"`) {
+              updatedSubjectStatuses_sougou_must.push({
+                name: subject.name,
+                index: subject.index,
+              });
+            }
+          });
         });
 
         setSubjectStatuses(updatedSubjectStatuses);
         setSubjectStatuses_advance(updatedSubjectStatuses_advance);
         setInformation(updatedSubjectStatuses_information);
+        setSougou_must(updatedSubjectStatuses_sougou_must);
       };
       reader.readAsText(file);
     } catch (error) {
@@ -158,6 +182,57 @@ function App() {
           }}
         >
           {information.length === 3 ? (
+            <img src="checkmark_v3.png"></img>
+          ) : (
+            <img src="exclamation-mark.png"></img>
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  const judge_sougou_must = () => {
+    console.log();
+    if (sougou_must.length === 0) return;
+    return (
+      <div
+        className="hover_info"
+        style={{
+          position: "absolute",
+          top: `27.8%`,
+          left: "46.3%",
+          width: "11.5%",
+          height: `${1.93 * 4}%`,
+          backgroundColor:
+            sougou_must.length === 2
+              ? "rgba(0, 128, 0, 0.4)"
+              : "rgba(256, 256, 0, 0.4)",
+        }}
+      >
+        <div className="info">
+          {sougou_must_list.map((subject, index) => (
+            <div
+              key={index}
+              style={{
+                color: sougou_must.find((item) => item.name === subject.name)
+                  ? "green"
+                  : "red",
+              }}
+            >
+              {subject.name}
+            </div>
+          ))}
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            top: `40%`,
+            left: "65.3%",
+            width: "11.5%",
+            height: "1.93%",
+          }}
+        >
+          {sougou_must.length === 2 ? (
             <img src="checkmark_v3.png"></img>
           ) : (
             <img src="exclamation-mark.png"></img>
@@ -220,6 +295,7 @@ function App() {
             ></div>
           ))}
           {judge_information()}
+          {judge_sougou_must()}
         </div>
       </div>
     </>
