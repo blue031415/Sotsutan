@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState } from "react";
+import PopUp from "./components/popup";
 
 function App() {
   const [showRishunenji, setShowRishunenji] = useState(false);
@@ -252,6 +253,7 @@ function App() {
         <p className="description">
           twinsからダウンロードできる成績のcsvを「ファイルを選択」からアップロードすることで履修中・修得済みの単位がグレーアウトされます
         </p>
+        <PopUp />
         <img src="hover_ex.png" alt="吹き出し内の凡例" width="500px"></img>
       </div>
       <input
