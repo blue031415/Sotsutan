@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState } from "react";
+import PopUp from "./components/popup";
 
 function App() {
   const [isOverlayVisible, setOverlayVisible] = useState(false);
@@ -14,7 +15,6 @@ function App() {
   const [information, setInformation] = useState<
     { name: string; index: number }[]
   >([]);
-
 
   const subjectsList = [
     { name: "微分積分A", index: 0 },
@@ -54,7 +54,6 @@ function App() {
   const toggleRishuneji = () => {
     setShowRishunenji(!showRishunenji);
   };
-
 
   const fetchData = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -182,6 +181,7 @@ function App() {
         <p className="description">
           twinsからダウンロードできる成績のcsvを「ファイルを選択」からアップロードすることで履修中・修得済みの単位がグレーアウトされます
         </p>
+        <PopUp />
         <img src="hover_ex.png" alt="吹き出し内の凡例" width="500px"></img>
       </div>
       <input
@@ -199,8 +199,8 @@ function App() {
       </button>
       <div className="highlight-box">
         <div className="youran_mast">
-        <img src={showRishunenji ? 'mast24_rishunenji.png' : 'mast24.png'} />       
-         {isOverlayVisible && <div className="overlay_major_basic"></div>}
+          <img src={showRishunenji ? "mast24_rishunenji.png" : "mast24.png"} />
+          {isOverlayVisible && <div className="overlay_major_basic"></div>}
           {isOverlayVisible && <div className="overlay_major"></div>}
           {isOverlayVisible && <div className="overlay_common"></div>}
           {subjectStatuses.map((subject, index) => (
