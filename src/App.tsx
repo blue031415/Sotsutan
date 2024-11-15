@@ -55,6 +55,13 @@ function App() {
     { name: "学問への誘い", index: 1 },
   ];
 
+  const pe_list = [
+    { name: "基礎体育(春)", index: 0 },
+    { name: "基礎体育(秋)", index: 1 },
+    { name: "応用体育(春)", index: 2 },
+    { name: "応用体育(秋)", index: 3 },
+  ];
+
   const toggleRishuneji = () => {
     setShowRishunenji(!showRishunenji);
   };
@@ -91,6 +98,11 @@ function App() {
           index: number;
         }[] = [];
 
+        const updatedSubjectStatuses_pe: {
+          name: string;
+          index: number;
+        }[] = [];
+
         data.forEach((row) => {
           subjectsList.forEach((subject) => {
             if (row[3] === `"${subject.name}"` && row[7] !== '"D"') {
@@ -123,6 +135,20 @@ function App() {
           sougou_must_list.forEach((subject) => {
             if (row[3] === `"${subject.name}"` && row[7] !== `"D"`) {
               updatedSubjectStatuses_sougou_must.push({
+                name: subject.name,
+                index: subject.index,
+              });
+            }
+          });
+
+          pe_list.forEach((subject) => {
+            console.log(subject.name)
+            const first_four = subject.name.slice(0, 4);
+            const last_two = subject.name.slice(4, 7);
+            const pePattern = /^(応用体育|基礎体育).*[(](春|秋)[)]$/;
+
+            if (pePattern.test(row[3].slice(0,4) == first_four && row[7] !== '"D"') {
+              updatedSubjectStatuses_pe.push({
                 name: subject.name,
                 index: subject.index,
               });
