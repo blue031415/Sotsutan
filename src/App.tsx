@@ -19,9 +19,7 @@ function App() {
     { name: string; index: number }[]
   >([]);
 
-  const [pe, setPe] = useState<
-    { name: string; index: number }[]
-  >([]);
+  const [pe, setPe] = useState<{ name: string; index: number }[]>([]);
 
   const subjectsList = [
     { name: "微分積分A", index: 0 },
@@ -148,7 +146,11 @@ function App() {
           pe_list.forEach((subject) => {
             const first_four = subject.name.slice(0, 4);
             const last_two = subject.name.slice(4, 7);
-            if (row[3].slice(1,5) == first_four && row[3].slice(-4,-1) == last_two  && row[7] !== '"D"') {
+            if (
+              row[3].slice(1, 5) == first_four &&
+              row[3].slice(-4, -1) == last_two &&
+              row[7] !== '"D"'
+            ) {
               updatedSubjectStatuses_pe.push({
                 name: subject.name,
                 index: subject.index,
@@ -271,7 +273,53 @@ function App() {
     );
   };
 
-
+  const judge_pe = () => {
+    if (pe.length === 0) return;
+    return (
+      <div
+        className="hover_sougou_must"
+        style={{
+          position: "absolute",
+          top: `${27.8 + 1.93 * 5}%`,
+          left: "46.3%",
+          width: "11.5%",
+          height: `${1.93}%`,
+          backgroundColor:
+            pe.length === 4 ? "rgba(0, 128, 0, 0.4)" : "rgba(256, 256, 0, 0.4)",
+        }}
+      >
+        <div className="sougou_must">
+          {pe_list.map((subject, index) => (
+            <div
+              key={index}
+              style={{
+                color: pe.find((item) => item.name === subject.name)
+                  ? "green"
+                  : "red",
+              }}
+            >
+              {subject.name}
+            </div>
+          ))}
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            top: `0%`,
+            left: "65.3%",
+            width: "11.5%",
+            height: "1.93%",
+          }}
+        >
+          {pe.length === 4 ? (
+            <img src="checkmark_v3.png"></img>
+          ) : (
+            <img src="exclamation-mark.png"></img>
+          )}
+        </div>
+      </div>
+    );
+  };
 
   return (
     <>
@@ -328,6 +376,7 @@ function App() {
           ))}
           {judge_sougou_must()}
           {judge_information()}
+          {judge_pe()}
         </div>
       </div>
     </>
