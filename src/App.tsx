@@ -19,6 +19,10 @@ function App() {
     { name: string; index: number }[]
   >([]);
 
+  const [pe, setPe] = useState<
+    { name: string; index: number }[]
+  >([]);
+
   const subjectsList = [
     { name: "微分積分A", index: 0 },
     { name: "微分積分B", index: 1 },
@@ -142,12 +146,9 @@ function App() {
           });
 
           pe_list.forEach((subject) => {
-            console.log(subject.name)
             const first_four = subject.name.slice(0, 4);
             const last_two = subject.name.slice(4, 7);
-            const pePattern = /^(応用体育|基礎体育).*[(](春|秋)[)]$/;
-
-            if (pePattern.test(row[3].slice(0,4) == first_four && row[7] !== '"D"') {
+            if (row[3].slice(1,5) == first_four && row[3].slice(-4,-1) == last_two  && row[7] !== '"D"') {
               updatedSubjectStatuses_pe.push({
                 name: subject.name,
                 index: subject.index,
@@ -160,6 +161,7 @@ function App() {
         setSubjectStatuses_advance(updatedSubjectStatuses_advance);
         setInformation(updatedSubjectStatuses_information);
         setSougou_must(updatedSubjectStatuses_sougou_must);
+        setPe(updatedSubjectStatuses_pe);
       };
       reader.readAsText(file);
     } catch (error) {
@@ -220,7 +222,6 @@ function App() {
   };
 
   const judge_sougou_must = () => {
-    console.log();
     if (sougou_must.length === 0) return;
     return (
       <div
@@ -269,6 +270,8 @@ function App() {
       </div>
     );
   };
+
+
 
   return (
     <>
