@@ -19,6 +19,8 @@ function App() {
     { name: string; index: number }[]
   >([]);
 
+  const [English, setEnglish] = useState<{ name: string; index: number }[]>([]);
+
   const subjectsList = [
     { name: "微分積分A", index: 0 },
     { name: "微分積分B", index: 1 },
@@ -55,6 +57,13 @@ function App() {
     { name: "学問への誘い", index: 1 },
   ];
 
+  const English_list = [
+    { name: "English Reading Skills I", index: 0 },
+    { name: "English Presentation Skills I", index: 1 },
+    { name: "English Reading Skills II", index: 2 },
+    { name: "English Presentation Skills II", index: 3 },
+  ];
+
   const toggleRishuneji = () => {
     setShowRishunenji(!showRishunenji);
   };
@@ -87,6 +96,11 @@ function App() {
         }[] = [];
 
         const updatedSubjectStatuses_sougou_must: {
+          name: string;
+          index: number;
+        }[] = [];
+
+        const updatedSubjectStatuses_English: {
           name: string;
           index: number;
         }[] = [];
@@ -128,12 +142,22 @@ function App() {
               });
             }
           });
+
+          English_list.forEach((subject) => {
+            if (row[3] === `"${subject.name}"` && row[7] !== `"D"`) {
+              updatedSubjectStatuses_English.push({
+                name: subject.name,
+                index: subject.index,
+              });
+            }
+          });
         });
 
         setSubjectStatuses(updatedSubjectStatuses);
         setSubjectStatuses_advance(updatedSubjectStatuses_advance);
         setInformation(updatedSubjectStatuses_information);
         setSougou_must(updatedSubjectStatuses_sougou_must);
+        setEnglish(updatedSubjectStatuses_English);
       };
       reader.readAsText(file);
     } catch (error) {
@@ -244,6 +268,58 @@ function App() {
     );
   };
 
+  const judge_English = () => {
+    console.log();
+    if (English.length === 0) return;
+    return (
+      <div
+        className="hover_English"
+        style={{
+          position: "absolute",
+          top: `${27.8 + 3.9 * 3}%`,
+          left: "46.3%",
+          width: "11.5%",
+          height: "1.93%",
+          backgroundColor:
+            English.length === 4
+              ? "rgba(0, 128, 0, 0.4)"
+              : "rgba(256, 256, 0, 0.4)",
+          zIndex: 1,
+        }}
+      >
+        <div className="English">
+          {English_list.map((subject, index) => (
+            <div
+              key={index}
+              style={{
+                color: English.find((item) => item.name === subject.name)
+                  ? "green"
+                  : "red",
+              }}
+            >
+              {subject.name}
+            </div>
+          ))}
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            top: `-12%`,
+            left: "65.3%",
+            width: "11.5%",
+            height: "1.93%",
+          }}
+        >
+          {English.length === 4 ? (
+            <img src="checkmark_v3.png"></img>
+          ) : (
+            <img src="exclamation-mark.png"></img>
+          )}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
       <div className="header">
@@ -299,6 +375,7 @@ function App() {
           ))}
           {judge_sougou_must()}
           {judge_information()}
+          {judge_English()}
         </div>
       </div>
     </>
