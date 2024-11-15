@@ -24,7 +24,9 @@ const PopUp = () => {
   return (
     <>
       <div>
-        <button onClick={togglePopUp}>CSVファイルの出力方法はこちら</button>
+        <button onClick={togglePopUp} className={styles.showPopUp}>
+          CSVファイルの出力方法はこちら
+        </button>
         {isPopUpVisible && (
           <div className={styles.PopUp}>
             <div
