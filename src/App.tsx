@@ -19,6 +19,7 @@ function App() {
     { name: string; index: number }[]
   >([]);
 
+  const [pe, setPe] = useState<{ name: string; index: number }[]>([]);
   const [English, setEnglish] = useState<{ name: string; index: number }[]>([]);
 
   const subjectsList = [
@@ -57,6 +58,12 @@ function App() {
     { name: "学問への誘い", index: 1 },
   ];
 
+  const pe_list = [
+    { name: "基礎体育(春)", index: 0 },
+    { name: "基礎体育(秋)", index: 1 },
+    { name: "応用体育(春)", index: 2 },
+    { name: "応用体育(秋)", index: 3 },
+  ];
   const English_list = [
     { name: "English Reading Skills I", index: 0 },
     { name: "English Presentation Skills I", index: 1 },
@@ -96,6 +103,11 @@ function App() {
         }[] = [];
 
         const updatedSubjectStatuses_sougou_must: {
+          name: string;
+          index: number;
+        }[] = [];
+
+        const updatedSubjectStatuses_pe: {
           name: string;
           index: number;
         }[] = [];
@@ -143,6 +155,20 @@ function App() {
             }
           });
 
+          pe_list.forEach((subject) => {
+            const first_four = subject.name.slice(0, 4);
+            const last_two = subject.name.slice(4, 7);
+            if (
+              row[3].slice(1, 5) == first_four &&
+              row[3].slice(-4, -1) == last_two &&
+              row[7] !== '"D"'
+            ) {
+              updatedSubjectStatuses_pe.push({
+                name: subject.name,
+                index: subject.index,
+              });
+            }
+          });
           English_list.forEach((subject) => {
             if (row[3] === `"${subject.name}"` && row[7] !== `"D"`) {
               updatedSubjectStatuses_English.push({
@@ -157,6 +183,7 @@ function App() {
         setSubjectStatuses_advance(updatedSubjectStatuses_advance);
         setInformation(updatedSubjectStatuses_information);
         setSougou_must(updatedSubjectStatuses_sougou_must);
+        setPe(updatedSubjectStatuses_pe);
         setEnglish(updatedSubjectStatuses_English);
       };
       reader.readAsText(file);
@@ -218,7 +245,6 @@ function App() {
   };
 
   const judge_sougou_must = () => {
-    console.log();
     if (sougou_must.length === 0) return;
     return (
       <div
@@ -259,6 +285,54 @@ function App() {
           }}
         >
           {sougou_must.length === 2 ? (
+            <img src="checkmark_v3.png"></img>
+          ) : (
+            <img src="exclamation-mark.png"></img>
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  const judge_pe = () => {
+    if (pe.length === 0) return;
+    return (
+      <div
+        className="hover_sougou_must"
+        style={{
+          position: "absolute",
+          top: `${27.8 + 1.93 * 5}%`,
+          left: "46.3%",
+          width: "11.5%",
+          height: `${1.93}%`,
+          backgroundColor:
+            pe.length === 4 ? "rgba(0, 128, 0, 0.4)" : "rgba(256, 256, 0, 0.4)",
+        }}
+      >
+        <div className="sougou_must">
+          {pe_list.map((subject, index) => (
+            <div
+              key={index}
+              style={{
+                color: pe.find((item) => item.name === subject.name)
+                  ? "green"
+                  : "red",
+              }}
+            >
+              {subject.name}
+            </div>
+          ))}
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            top: `0%`,
+            left: "65.3%",
+            width: "11.5%",
+            height: "1.93%",
+          }}
+        >
+          {pe.length === 4 ? (
             <img src="checkmark_v3.png"></img>
           ) : (
             <img src="exclamation-mark.png"></img>
@@ -375,6 +449,7 @@ function App() {
           ))}
           {judge_sougou_must()}
           {judge_information()}
+          {judge_pe()}
           {judge_English()}
         </div>
       </div>
