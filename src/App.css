@@ -175,7 +175,7 @@
   position: absolute;
   border: 7px solid transparent;
   border-top: 14px solid #f8f9fa;
-  bottom: 60px;
+  bottom: 62px;
   left: calc(50% - 7px);
   margin-top: -3px;
   visibility: hidden;
@@ -231,6 +231,51 @@
   visibility: visible;
 }
 .hover_English:hover * {
+  opacity: 1;
+  visibility: visible;
+}
+
+.hover_pe {
+  position: relative;
+  z-index: 1;
+}
+.pe {
+  opacity: 0;
+  transition: 0.5s;
+  background: #f8f9fa;
+  position: absolute;
+  color: black;
+  padding: 5px;
+  width: 150px;
+  bottom: calc(100% + 17px);
+  left: -25%;
+  box-sizing: border-box;
+  text-align: center;
+  word-wrap: break-word;
+  border-radius: 5px;
+  visibility: hidden;
+  pointer-events: none;
+  font-size: 10%;
+  z-index: 1;
+}
+.hover_pe::before {
+  opacity: 0;
+  transition: 0.5s;
+  content: "";
+  position: absolute;
+  border: 7px solid transparent;
+  border-top: 14px solid #f8f9fa;
+  bottom: 12px;
+  left: calc(50% - 7px);
+  margin-top: -3px;
+  visibility: hidden;
+  pointer-events: none;
+}
+.hover_pe:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+.hover_pe:hover * {
   opacity: 1;
   visibility: visible;
 }

@@ -298,7 +298,7 @@ function App() {
     if (pe.length === 0) return;
     return (
       <div
-        className="hover_sougou_must"
+        className="hover_pe"
         style={{
           position: "absolute",
           top: `${27.8 + 1.93 * 5}%`,
@@ -309,7 +309,7 @@ function App() {
             pe.length === 4 ? "rgba(0, 128, 0, 0.4)" : "rgba(256, 256, 0, 0.4)",
         }}
       >
-        <div className="sougou_must">
+        <div className="pe">
           {pe_list.map((subject, index) => (
             <div
               key={index}
