@@ -63,7 +63,7 @@ function App() {
     { name: "基礎体育(秋)", index: 1 },
     { name: "応用体育(春)", index: 2 },
     { name: "応用体育(秋)", index: 3 },
-   ];
+  ];
   const English_list = [
     { name: "English Reading Skills I", index: 0 },
     { name: "English Presentation Skills I", index: 1 },
@@ -110,8 +110,8 @@ function App() {
         const updatedSubjectStatuses_pe: {
           name: string;
           index: number;
-        }[] = [];     
-        
+        }[] = [];
+
         const updatedSubjectStatuses_English: {
           name: string;
           index: number;
@@ -322,6 +322,26 @@ function App() {
               {subject.name}
             </div>
           ))}
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            top: `0%`,
+            left: "65.3%",
+            width: "11.5%",
+            height: "1.93%",
+          }}
+        >
+          {pe.length === 4 ? (
+            <img src="checkmark_v3.png"></img>
+          ) : (
+            <img src="exclamation-mark.png"></img>
+          )}
+        </div>
+      </div>
+    );
+  };
+
   const judge_English = () => {
     console.log();
     if (English.length === 0) return;
@@ -370,21 +390,6 @@ function App() {
             <img src="exclamation-mark.png"></img>
           )}
         </div>
-        <div
-          style={{
-            position: "absolute",
-            top: `0%`,
-            left: "65.3%",
-            width: "11.5%",
-            height: "1.93%",
-          }}
-        >
-          {pe.length === 4 ? (
-            <img src="checkmark_v3.png"></img>
-          ) : (
-            <img src="exclamation-mark.png"></img>
-          )}
-        </div>        
       </div>
     );
   };
