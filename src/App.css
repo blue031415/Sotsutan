@@ -145,7 +145,7 @@
 
 .hover_sougou_must {
   position: relative;
-  z-index: 1000;
+  z-index: 1;
 }
 
 .sougou_must {
@@ -165,6 +165,7 @@
   visibility: hidden;
   pointer-events: none;
   font-size: 10%;
+  z-index: 1;
 }
 
 .hover_sougou_must::before {
