@@ -128,7 +128,7 @@
   position: absolute;
   border: 7px solid transparent;
   border-top: 14px solid #f8f9fa;
-  bottom: 12px;
+  bottom: 17px;
   left: calc(50% - 7px);
   margin-top: -3px;
   visibility: hidden;
@@ -175,9 +175,9 @@
   position: absolute;
   border: 7px solid transparent;
   border-top: 14px solid #f8f9fa;
-  bottom: 62px;
+  bottom: 82px;
   left: calc(50% - 7px);
-  margin-top: -3px;
+  margin-top: -2px;
   visibility: hidden;
   pointer-events: none;
 }
@@ -220,7 +220,7 @@
   position: absolute;
   border: 7px solid transparent;
   border-top: 14px solid #f8f9fa;
-  bottom: 12px;
+  bottom: 17px;
   left: calc(50% - 7px);
   margin-top: -3px;
   visibility: hidden;
@@ -265,7 +265,7 @@
   position: absolute;
   border: 7px solid transparent;
   border-top: 14px solid #f8f9fa;
-  bottom: 12px;
+  bottom: 18px;
   left: calc(50% - 7px);
   margin-top: -3px;
   visibility: hidden;
