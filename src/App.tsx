@@ -303,7 +303,7 @@ function App() {
           position: "absolute",
           top: `${26.4 + 1.98 * 5}%`,
           left: "46.1%",
-          width: "11.4%",
+          width: "11.5%",
           height: `${1.98}%`,
           backgroundColor:
             pe.length === 4 ? "rgba(0, 128, 0, 0.4)" : "rgba(256, 256, 0, 0.4)",
