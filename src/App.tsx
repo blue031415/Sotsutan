@@ -36,6 +36,7 @@ function App() {
     subjectList: subjectList[],
     row: any
   ) => {
+    let count = 0;
     subjectList.forEach((subject) => {
       if (row[3] === `"${subject.name}"` && row[7] !== '"D"') {
         // 科目名が一致し、かつ成績がDでない場合
@@ -44,8 +45,14 @@ function App() {
           index: subject.index,
           height: subject.height,
         });
+        count++;
       }
     });
+    if (count > 0) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   const fetchData = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,13 +77,37 @@ function App() {
         const updatedSubjectStatuses_pe: subjectList[] = [];
         const updatedSubjectStatuses_English: subjectList[] = [];
 
-        data.forEach((row) => {
-          checkPass(updatedSubjectStatuses, subjectsList, row);
-          checkPass(updatedSubjectStatuses_advance, subjectsList_advance, row);
-          checkPass(updatedSubjectStatuses_information, information_list, row);
-          checkPass(updatedSubjectStatuses_sougou_must, sougou_must_list, row);
-          checkPass(updatedSubjectStatuses_English, English_list, row);
+        const electiveSubjects: subjectList[] = [];
 
+        data.forEach((row) => {
+          const flagSubjectList: boolean = checkPass(
+            updatedSubjectStatuses,
+            subjectsList,
+            row
+          );
+          const flagSubjectList_advance: boolean = checkPass(
+            updatedSubjectStatuses_advance,
+            subjectsList_advance,
+            row
+          );
+          const flagSubjectList_information: boolean = checkPass(
+            updatedSubjectStatuses_information,
+            information_list,
+            row
+          );
+          const flagSubjectList_sougou_must: boolean = checkPass(
+            updatedSubjectStatuses_sougou_must,
+            sougou_must_list,
+            row
+          );
+          const flagSubjectList_English: boolean = checkPass(
+            updatedSubjectStatuses_English,
+            English_list,
+            row
+          );
+
+          let peCounter = 0;
+          let flagSubjectList_pe;
           pe_list.forEach((subject) => {
             const first_four = subject.name.slice(0, 4);
             const last_two = subject.name.slice(4, 7);
@@ -90,8 +121,23 @@ function App() {
                 index: subject.index,
                 height: subject.height,
               });
+              peCounter++;
             }
           });
+          if (peCounter === 0) flagSubjectList_pe = false;
+          else flagSubjectList_pe = true;
+
+          if (
+            !(
+              flagSubjectList ||
+              flagSubjectList_English ||
+              flagSubjectList_advance ||
+              flagSubjectList_information ||
+              flagSubjectList_pe ||
+              flagSubjectList_sougou_must
+            )
+          ) {
+          }
         });
 
         setSubjectStatuses(updatedSubjectStatuses);
