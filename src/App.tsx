@@ -2,43 +2,40 @@ import "./App.css";
 import { useState } from "react";
 import PopUp from "./components/popup";
 
+type subjectList = {
+  name: string;
+  index: number;
+  height: number;
+};
+
 function App() {
   const [showRishunenji, setShowRishunenji] = useState(false);
-  const [subjectStatuses, setSubjectStatuses] = useState<
-    { name: string; index: number }[]
-  >([]);
+  const [subjectStatuses, setSubjectStatuses] = useState<subjectList[]>([]);
   const [subjectStatuses_advance, setSubjectStatuses_advance] = useState<
-    { name: string; index: number; height: number }[]
+    subjectList[]
   >([]);
+  const [information, setInformation] = useState<subjectList[]>([]);
+  const [sougou_must, setSougou_must] = useState<subjectList[]>([]);
+  const [pe, setPe] = useState<subjectList[]>([]);
+  const [English, setEnglish] = useState<subjectList[]>([]);
 
-  const [information, setInformation] = useState<
-    { name: string; index: number }[]
-  >([]);
-
-  const [sougou_must, setSougou_must] = useState<
-    { name: string; index: number }[]
-  >([]);
-
-  const [pe, setPe] = useState<{ name: string; index: number }[]>([]);
-  const [English, setEnglish] = useState<{ name: string; index: number }[]>([]);
-
-  const subjectsList = [
-    { name: "微分積分A", index: 0 },
-    { name: "微分積分B", index: 1 },
-    { name: "線形代数A", index: 2 },
-    { name: "線形代数B", index: 3 },
-    { name: "情報数学A", index: 4 },
-    { name: "確率と統計", index: 5 },
-    { name: "プログラミング入門A", index: 6 },
-    { name: "プログラミング入門B", index: 7 },
-    { name: "プログラミング", index: 8 },
-    { name: "コンピュータシステムとOS", index: 9 },
-    { name: "データ構造とアルゴリズム", index: 10 },
-    { name: "データ構造とアルゴリズム実習", index: 11 },
-    { name: "データ工学概論", index: 12 },
+  const subjectsList: subjectList[] = [
+    { name: "微分積分A", index: 0, height: 1 },
+    { name: "微分積分B", index: 1, height: 1 },
+    { name: "線形代数A", index: 2, height: 1 },
+    { name: "線形代数B", index: 3, height: 1 },
+    { name: "情報数学A", index: 4, height: 1 },
+    { name: "確率と統計", index: 5, height: 1 },
+    { name: "プログラミング入門A", index: 6, height: 1 },
+    { name: "プログラミング入門B", index: 7, height: 1 },
+    { name: "プログラミング", index: 8, height: 1 },
+    { name: "コンピュータシステムとOS", index: 9, height: 1 },
+    { name: "データ構造とアルゴリズム", index: 10, height: 1 },
+    { name: "データ構造とアルゴリズム実習", index: 11, height: 1 },
+    { name: "データ工学概論", index: 12, height: 1 },
   ];
 
-  const subjectsList_advance = [
+  const subjectsList_advance: subjectList[] = [
     { name: "卒業研究A", index: 0, height: 1 },
     { name: "卒業研究B", index: 1, height: 2 },
     { name: "情報メディア実験A", index: 3, height: 1 },
@@ -47,32 +44,49 @@ function App() {
     { name: "専門英語B", index: 6, height: 1 },
   ];
 
-  const information_list = [
-    { name: "情報リテラシー(講義)", index: 0 },
-    { name: "情報リテラシー(演習)", index: 1 },
-    { name: "データサイエンス", index: 2 },
+  const information_list: subjectList[] = [
+    { name: "情報リテラシー(講義)", index: 0, height: 1 },
+    { name: "情報リテラシー(演習)", index: 1, height: 1 },
+    { name: "データサイエンス", index: 2, height: 1 },
   ];
 
-  const sougou_must_list = [
-    { name: "ファーストイヤーセミナー", index: 0 },
-    { name: "学問への誘い", index: 1 },
+  const sougou_must_list: subjectList[] = [
+    { name: "ファーストイヤーセミナー", index: 0, height: 1 },
+    { name: "学問への誘い", index: 1, height: 1 },
   ];
 
-  const pe_list = [
-    { name: "基礎体育(春)", index: 0 },
-    { name: "基礎体育(秋)", index: 1 },
-    { name: "応用体育(春)", index: 2 },
-    { name: "応用体育(秋)", index: 3 },
+  const pe_list: subjectList[] = [
+    { name: "基礎体育(春)", index: 0, height: 1 },
+    { name: "基礎体育(秋)", index: 1, height: 1 },
+    { name: "応用体育(春)", index: 2, height: 1 },
+    { name: "応用体育(秋)", index: 3, height: 1 },
   ];
-  const English_list = [
-    { name: "English Reading Skills I", index: 0 },
-    { name: "English Presentation Skills I", index: 1 },
-    { name: "English Reading Skills II", index: 2 },
-    { name: "English Presentation Skills II", index: 3 },
+  const English_list: subjectList[] = [
+    { name: "English Reading Skills I", index: 0, height: 1 },
+    { name: "English Presentation Skills I", index: 1, height: 1 },
+    { name: "English Reading Skills II", index: 2, height: 1 },
+    { name: "English Presentation Skills II", index: 3, height: 1 },
   ];
 
   const toggleRishuneji = () => {
     setShowRishunenji(!showRishunenji);
+  };
+
+  const checkPass = (
+    updateList: subjectList[],
+    subjectList: subjectList[],
+    row: any
+  ) => {
+    subjectList.forEach((subject) => {
+      if (row[3] === `"${subject.name}"` && row[7] !== '"D"') {
+        // 科目名が一致し、かつ成績がDでない場合
+        updateList.push({
+          name: subject.name,
+          index: subject.index,
+          height: subject.height,
+        });
+      }
+    });
   };
 
   const fetchData = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,70 +104,19 @@ function App() {
           .split("\n")
           .map((line) => line.split(",").map((x) => x.trim()));
 
-        const updatedSubjectStatuses: { name: string; index: number }[] = [];
-        const updatedSubjectStatuses_advance: {
-          name: string;
-          index: number;
-          height: number;
-        }[] = [];
-
-        const updatedSubjectStatuses_information: {
-          name: string;
-          index: number;
-        }[] = [];
-
-        const updatedSubjectStatuses_sougou_must: {
-          name: string;
-          index: number;
-        }[] = [];
-
-        const updatedSubjectStatuses_pe: {
-          name: string;
-          index: number;
-        }[] = [];
-
-        const updatedSubjectStatuses_English: {
-          name: string;
-          index: number;
-        }[] = [];
+        const updatedSubjectStatuses: subjectList[] = [];
+        const updatedSubjectStatuses_advance: subjectList[] = [];
+        const updatedSubjectStatuses_information: subjectList[] = [];
+        const updatedSubjectStatuses_sougou_must: subjectList[] = [];
+        const updatedSubjectStatuses_pe: subjectList[] = [];
+        const updatedSubjectStatuses_English: subjectList[] = [];
 
         data.forEach((row) => {
-          subjectsList.forEach((subject) => {
-            if (row[3] === `"${subject.name}"` && row[7] !== '"D"') {
-              // 科目名が一致し、かつ成績がDでない場合
-              updatedSubjectStatuses.push({
-                name: subject.name,
-                index: subject.index,
-              });
-            }
-          });
-          subjectsList_advance.forEach((subject) => {
-            if (row[3] === `"${subject.name}"` && row[7] !== '"D"') {
-              // 科目名が一致し、かつ成績がDでない場合
-              updatedSubjectStatuses_advance.push({
-                name: subject.name,
-                index: subject.index,
-                height: subject.height,
-              });
-            }
-          });
-          information_list.forEach((subject) => {
-            if (row[3] === `"${subject.name}"` && row[7] !== `"D"`) {
-              updatedSubjectStatuses_information.push({
-                name: subject.name,
-                index: subject.index,
-              });
-            }
-          });
-
-          sougou_must_list.forEach((subject) => {
-            if (row[3] === `"${subject.name}"` && row[7] !== `"D"`) {
-              updatedSubjectStatuses_sougou_must.push({
-                name: subject.name,
-                index: subject.index,
-              });
-            }
-          });
+          checkPass(updatedSubjectStatuses, subjectsList, row);
+          checkPass(updatedSubjectStatuses_advance, subjectsList_advance, row);
+          checkPass(updatedSubjectStatuses_information, information_list, row);
+          checkPass(updatedSubjectStatuses_sougou_must, sougou_must_list, row);
+          checkPass(updatedSubjectStatuses_English, English_list, row);
 
           pe_list.forEach((subject) => {
             const first_four = subject.name.slice(0, 4);
@@ -166,14 +129,7 @@ function App() {
               updatedSubjectStatuses_pe.push({
                 name: subject.name,
                 index: subject.index,
-              });
-            }
-          });
-          English_list.forEach((subject) => {
-            if (row[3] === `"${subject.name}"` && row[7] !== `"D"`) {
-              updatedSubjectStatuses_English.push({
-                name: subject.name,
-                index: subject.index,
+                height: subject.height,
               });
             }
           });
