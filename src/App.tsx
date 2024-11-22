@@ -26,6 +26,8 @@ function App() {
   const [sougou_must, setSougou_must] = useState<subjectList[]>([]);
   const [pe, setPe] = useState<subjectList[]>([]);
   const [English, setEnglish] = useState<subjectList[]>([]);
+  const [electiveSubjects, setElectiveSubjects] =
+    useState<{ name: string; subjectId: string }[]>();
 
   const toggleRishuneji = () => {
     setShowRishunenji(!showRishunenji);
@@ -38,7 +40,11 @@ function App() {
   ) => {
     let count = 0;
     subjectList.forEach((subject) => {
-      if (row[3] === `"${subject.name}"` && row[7] !== '"D"') {
+      if (
+        row[3] === `"${subject.name}"` &&
+        row[7] !== '"D"' &&
+        row[7] !== '"F"'
+      ) {
         // 科目名が一致し、かつ成績がDでない場合
         updateList.push({
           name: subject.name,
@@ -54,7 +60,6 @@ function App() {
       return false;
     }
   };
-
   const fetchData = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -76,8 +81,8 @@ function App() {
         const updatedSubjectStatuses_sougou_must: subjectList[] = [];
         const updatedSubjectStatuses_pe: subjectList[] = [];
         const updatedSubjectStatuses_English: subjectList[] = [];
-
-        const electiveSubjects: subjectList[] = [];
+        const updateElectiveSubjects: { name: string; subjectId: string }[] =
+          [];
 
         data.forEach((row) => {
           const flagSubjectList: boolean = checkPass(
@@ -137,6 +142,12 @@ function App() {
               flagSubjectList_sougou_must
             )
           ) {
+            if (row[7] !== `"D"` && row[7] !== "`F`") {
+              updateElectiveSubjects.push({
+                name: row[3],
+                subjectId: row[2],
+              });
+            }
           }
         });
 
@@ -146,6 +157,7 @@ function App() {
         setSougou_must(updatedSubjectStatuses_sougou_must);
         setPe(updatedSubjectStatuses_pe);
         setEnglish(updatedSubjectStatuses_English);
+        setElectiveSubjects(updateElectiveSubjects);
       };
       reader.readAsText(file);
     } catch (error) {
