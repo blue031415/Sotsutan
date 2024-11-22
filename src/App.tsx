@@ -200,10 +200,10 @@ function App() {
         className="hover_info"
         style={{
           position: "absolute",
-          top: `${27.8 + 7.8}%`,
-          left: "46.3%",
+          top: `${26.5 + 7.8}%`,
+          left: "46.1%",
           width: "11.5%",
-          height: "1.93%",
+          height: "1.98%",
           backgroundColor:
             information.length === 3
               ? "rgba(0, 128, 0, 0.4)"
@@ -228,10 +228,10 @@ function App() {
         <div
           style={{
             position: "absolute",
-            top: `-12%`,
+            top: `9%`,
             left: "65.3%",
             width: "11.5%",
-            height: "1.93%",
+            height: "1.98%",
           }}
         >
           {information.length === 3 ? (
@@ -251,10 +251,10 @@ function App() {
         className="hover_sougou_must"
         style={{
           position: "absolute",
-          top: `27.8%`,
-          left: "46.3%",
-          width: "11.5%",
-          height: `${1.93 * 4}%`,
+          top: `26.4%`,
+          left: "46.1%",
+          width: "11.4%",
+          height: `${1.98 * 4}%`,
           backgroundColor:
             sougou_must.length === 2
               ? "rgba(0, 128, 0, 0.4)"
@@ -278,10 +278,10 @@ function App() {
         <div
           style={{
             position: "absolute",
-            top: `40%`,
+            top: "40%",
             left: "65.3%",
             width: "11.5%",
-            height: "1.93%",
+            height: "1.98%",
           }}
         >
           {sougou_must.length === 2 ? (
@@ -301,10 +301,10 @@ function App() {
         className="hover_pe"
         style={{
           position: "absolute",
-          top: `${27.8 + 1.93 * 5}%`,
-          left: "46.3%",
-          width: "11.5%",
-          height: `${1.93}%`,
+          top: `${26.4 + 1.98 * 5}%`,
+          left: "46.1%",
+          width: "11.4%",
+          height: `${1.98}%`,
           backgroundColor:
             pe.length === 4 ? "rgba(0, 128, 0, 0.4)" : "rgba(256, 256, 0, 0.4)",
         }}
@@ -326,10 +326,10 @@ function App() {
         <div
           style={{
             position: "absolute",
-            top: `0%`,
+            top: `7%`,
             left: "65.3%",
             width: "11.5%",
-            height: "1.93%",
+            height: "1.98%",
           }}
         >
           {pe.length === 4 ? (
@@ -350,10 +350,10 @@ function App() {
         className="hover_English"
         style={{
           position: "absolute",
-          top: `${27.8 + 3.9 * 3}%`,
-          left: "46.3%",
+          top: `${26.4 + 1.98 * 6}%`,
+          left: "46.1%",
           width: "11.5%",
-          height: "1.93%",
+          height: "1.98%",
           backgroundColor:
             English.length === 4
               ? "rgba(0, 128, 0, 0.4)"
@@ -378,10 +378,10 @@ function App() {
         <div
           style={{
             position: "absolute",
-            top: `-12%`,
+            top: `9%`,
             left: "65.3%",
             width: "11.5%",
-            height: "1.93%",
+            height: "1.98%",
           }}
         >
           {English.length === 4 ? (
@@ -425,10 +425,10 @@ function App() {
               className="grayout_subject"
               style={{
                 position: "absolute",
-                top: `${27.8 + 1.93 * subject.index}%`,
-                left: "22.7%",
+                top: `${26.5 + 1.98 * subject.index}%`,
+                left: "22.5%",
                 width: "13.4%",
-                height: "1.93%",
+                height: "1.98%",
                 backgroundColor: "rgba(0, 128, 0, 0.4)",
               }}
             ></div>
@@ -439,10 +439,10 @@ function App() {
               className="grayout_subject"
               style={{
                 position: "absolute",
-                top: `${27.8 + 1.93 * subject.index}%`,
+                top: `${26.5 + 1.98 * subject.index}%`,
                 left: "2.2%",
                 width: "10.2%",
-                height: `${1.93 * subject.height}%`,
+                height: `${1.98 * subject.height}%`,
                 backgroundColor: "rgba(0, 128, 0, 0.4)",
               }}
             ></div>
