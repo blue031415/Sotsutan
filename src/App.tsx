@@ -253,7 +253,7 @@ function App() {
           position: "absolute",
           top: `26.4%`,
           left: "46.1%",
-          width: "11.4%",
+          width: "11.5%",
           height: `${1.98 * 4}%`,
           backgroundColor:
             sougou_must.length === 2
