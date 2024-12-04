@@ -26,8 +26,8 @@ function App() {
   const [sougou_must, setSougou_must] = useState<subjectList[]>([]);
   const [pe, setPe] = useState<subjectList[]>([]);
   const [English, setEnglish] = useState<subjectList[]>([]);
-  const [electiveSubjects, setElectiveSubjects] =
-    useState<{ name: string; subjectId: string }[]>();
+  // const [electiveSubjects, setElectiveSubjects] =
+  // useState<{ name: string; subjectId: string }[]>();
 
   const toggleRishuneji = () => {
     setShowRishunenji(!showRishunenji);
@@ -157,7 +157,7 @@ function App() {
         setSougou_must(updatedSubjectStatuses_sougou_must);
         setPe(updatedSubjectStatuses_pe);
         setEnglish(updatedSubjectStatuses_English);
-        setElectiveSubjects(updateElectiveSubjects);
+        // setElectiveSubjects(updateElectiveSubjects);
       };
       reader.readAsText(file);
     } catch (error) {
