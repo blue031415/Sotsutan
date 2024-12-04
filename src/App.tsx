@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PopUp from "./components/popup";
 import {
   subjectsList,
@@ -16,6 +16,12 @@ type subjectList = {
   height: number;
 };
 
+type electiveSubjectList={
+  name: string;
+  subjectId: string;
+  numberOfUnits: number
+}
+
 function App() {
   const [showRishunenji, setShowRishunenji] = useState(false);
   const [subjectStatuses, setSubjectStatuses] = useState<subjectList[]>([]);
@@ -26,8 +32,14 @@ function App() {
   const [sougou_must, setSougou_must] = useState<subjectList[]>([]);
   const [pe, setPe] = useState<subjectList[]>([]);
   const [English, setEnglish] = useState<subjectList[]>([]);
-  // const [electiveSubjects, setElectiveSubjects] =
-  // useState<{ name: string; subjectId: string }[]>();
+  const [electiveSubjects, setElectiveSubjects] =
+  useState<electiveSubjectList[]>([]);
+  const [electiveSubjects_basic, setElectiveSubjects_basic] =
+  useState<electiveSubjectList[]>([]);
+  const [electiveSubjects_advanced, setElectiveSubjects_advanced] =
+  useState<electiveSubjectList[]>([]);
+  const [unit_basic, setUnit_basic]=useState<number|null>(null);
+  const [unit_advanced, setUnit_advanced]= useState<number|null>(null);
 
   const toggleRishuneji = () => {
     setShowRishunenji(!showRishunenji);
@@ -60,6 +72,39 @@ function App() {
       return false;
     }
   };
+
+  const updatedelectiveSubjects_basic:electiveSubjectList[] = [];
+  const updatedelectiveSubjects_advanced: electiveSubjectList[]= [];
+
+  useEffect(() => {
+    electiveSubjects.map((subject) => {
+      if (subject.subjectId.startsWith('"GC2') || subject.subjectId.startsWith('"GA1')) {
+        updatedelectiveSubjects_basic.push(subject);
+      }
+      if (subject.subjectId.startsWith('"GC5') || subject.subjectId.startsWith('"GA4')) {
+        updatedelectiveSubjects_advanced.push(subject);
+      }
+    });
+    setElectiveSubjects_basic(updatedelectiveSubjects_basic);
+    setElectiveSubjects_advanced(updatedelectiveSubjects_advanced);
+  }, [electiveSubjects]);
+
+  useEffect(()=>{
+    let unit = 0
+    electiveSubjects_basic.forEach((subject)=>{
+      unit +=subject.numberOfUnits
+    })
+    setUnit_basic(unit)
+  },[electiveSubjects_basic])
+
+  useEffect(()=>{
+    let unit = 0
+    electiveSubjects_advanced.forEach((subject)=>{
+      unit +=subject.numberOfUnits
+    })
+    setUnit_advanced(unit)
+  },[electiveSubjects_advanced])
+
   const fetchData = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -81,7 +126,7 @@ function App() {
         const updatedSubjectStatuses_sougou_must: subjectList[] = [];
         const updatedSubjectStatuses_pe: subjectList[] = [];
         const updatedSubjectStatuses_English: subjectList[] = [];
-        const updateElectiveSubjects: { name: string; subjectId: string }[] =
+        const updateElectiveSubjects: electiveSubjectList[] =
           [];
 
         data.forEach((row) => {
@@ -146,6 +191,7 @@ function App() {
               updateElectiveSubjects.push({
                 name: row[3],
                 subjectId: row[2],
+                numberOfUnits: Number(row[4].replace(/"/g, '').trim())
               });
             }
           }
@@ -157,7 +203,7 @@ function App() {
         setSougou_must(updatedSubjectStatuses_sougou_must);
         setPe(updatedSubjectStatuses_pe);
         setEnglish(updatedSubjectStatuses_English);
-        // setElectiveSubjects(updateElectiveSubjects);
+        setElectiveSubjects(updateElectiveSubjects);
       };
       reader.readAsText(file);
     } catch (error) {
@@ -366,6 +412,44 @@ function App() {
       </div>
     );
   };
+  
+  const judge_elective_basic = () => {
+    if (!unit_basic) return<></>;
+    return(
+      <div
+        style={{
+          position: "absolute",
+          top: "30%",
+          left: "30%",
+          width: "11.5%",
+          height: "1.98%",
+        }}
+      >
+    
+        <p>{unit_basic}<br/> /最低32</p>
+      </div>
+    );
+  }
+
+  const judge_elective_advanced = () => {
+    if (!unit_advanced) return<></>;
+    return(
+      <div
+        style={{
+          position: "absolute",
+          top: "30%",
+          left: "6.5%",
+          width: "11.5%",
+          height: "1.98%",
+        }}
+      >
+        <p>{unit_advanced}<br/>/最低20</p>
+      </div>
+    );
+  }
+
+
+
 
   return (
     <>
@@ -424,6 +508,8 @@ function App() {
           {judge_information()}
           {judge_pe()}
           {judge_English()}
+          {judge_elective_basic()}
+          {judge_elective_advanced()}
         </div>
       </div>
     </>
