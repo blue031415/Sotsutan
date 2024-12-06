@@ -16,11 +16,11 @@ type subjectList = {
   height: number;
 };
 
-type electiveSubjectList = {
+type electiveSubjectList={
   name: string;
   subjectId: string;
-  numberOfUnits: number;
-};
+  numberOfUnits: number
+}
 
 function App() {
   const [showRishunenji, setShowRishunenji] = useState(false);
@@ -32,38 +32,14 @@ function App() {
   const [sougou_must, setSougou_must] = useState<subjectList[]>([]);
   const [pe, setPe] = useState<subjectList[]>([]);
   const [English, setEnglish] = useState<subjectList[]>([]);
-  const [electiveSubjects, setElectiveSubjects] = useState<
-    electiveSubjectList[]
-  >([]);
-  const [electiveSubjects_basic, setElectiveSubjects_basic] = useState<
-    electiveSubjectList[]
-  >([]);
-  const [electiveSubjects_advanced, setElectiveSubjects_advanced] = useState<
-    electiveSubjectList[]
-  >([]);
-  const [gakusiSubjects, setGakusiSubjects] = useState<electiveSubjectList[]>(
-    []
-  );
-  const [electivePE, setElectivePE] = useState<electiveSubjectList[]>([]);
-  const [electiveLanguage, setElectiveLanguage] = useState<
-    electiveSubjectList[]
-  >([]);
-  const [electiveJapanese, setElectiveJapanese] = useState<
-    electiveSubjectList[]
-  >([]);
-  const [electiveArt, setElectiveArt] = useState<electiveSubjectList[]>([]);
-
-  const [unit_basic, setUnit_basic] = useState<number | null>(null);
-  const [unit_advanced, setUnit_advanced] = useState<number | null>(null);
-  const [unit_gakusi, setUnit_gakusi] = useState<number | null>(null);
-  const [unit_electivePE, setUnit_electivePE] = useState<number | null>(null);
-  const [unit_electiveLanguage, setUnit_electiveLanguage] = useState<
-    number | null
-  >(null);
-  const [unit_electiveJapanese, setUnit_electiveJapanese] = useState<
-    number | null
-  >(null);
-  const [unit_electiveArt, setUnit_electiveArt] = useState<number | null>(null);
+  const [electiveSubjects, setElectiveSubjects] =
+  useState<electiveSubjectList[]>([]);
+  const [electiveSubjects_basic, setElectiveSubjects_basic] =
+  useState<electiveSubjectList[]>([]);
+  const [electiveSubjects_advanced, setElectiveSubjects_advanced] =
+  useState<electiveSubjectList[]>([]);
+  const [unit_basic, setUnit_basic]=useState<number|null>(null);
+  const [unit_advanced, setUnit_advanced]= useState<number|null>(null);
 
   const toggleRishuneji = () => {
     setShowRishunenji(!showRishunenji);
@@ -97,128 +73,37 @@ function App() {
     }
   };
 
-  const updatedelectiveSubjects_basic: electiveSubjectList[] = [];
-  const updatedelectiveSubjects_advanced: electiveSubjectList[] = [];
-  const updatedgakusiSubjects: electiveSubjectList[] = [];
-  const updatedelectivePE: electiveSubjectList[] = [];
-  const updatedelectiveLanguage: electiveSubjectList[] = [];
-  const updatedelectiveJapanese: electiveSubjectList[] = [];
-  const updatedelectiveArt: electiveSubjectList[] = [];
+  const updatedelectiveSubjects_basic:electiveSubjectList[] = [];
+  const updatedelectiveSubjects_advanced: electiveSubjectList[]= [];
 
   useEffect(() => {
     electiveSubjects.map((subject) => {
-      if (
-        subject.subjectId.startsWith('"GC2') ||
-        subject.subjectId.startsWith('"GA1')
-      ) {
+      if (subject.subjectId.startsWith('"GC2') || subject.subjectId.startsWith('"GA1')) {
         updatedelectiveSubjects_basic.push(subject);
       }
-      if (
-        subject.subjectId.startsWith('"GC5') ||
-        subject.subjectId.startsWith('"GA4')
-      ) {
+      if (subject.subjectId.startsWith('"GC5') || subject.subjectId.startsWith('"GA4')) {
         updatedelectiveSubjects_advanced.push(subject);
-      }
-      if (
-        subject.subjectId.startsWith('"12') ||
-        subject.subjectId.startsWith('"14')
-      ) {
-        updatedgakusiSubjects.push(subject);
-      }
-      if (
-        subject.subjectId.startsWith('"26') ||
-        subject.subjectId.startsWith('"28')
-      ) {
-        updatedelectivePE.push(subject);
-      }
-      if (
-        subject.subjectId.startsWith('"31') ||
-        subject.subjectId.startsWith('"32') ||
-        subject.subjectId.startsWith('"33') ||
-        subject.subjectId.startsWith('"34') ||
-        subject.subjectId.startsWith('"35') ||
-        subject.subjectId.startsWith('"36') ||
-        subject.subjectId.startsWith('"37') ||
-        subject.subjectId.startsWith('"38') ||
-        subject.subjectId.startsWith('"39')
-      ) {
-        updatedelectiveLanguage.push(subject);
-      }
-      if (
-        subject.subjectId.startsWith('"51') ||
-        subject.subjectId.startsWith('"52') ||
-        subject.subjectId.startsWith('"53')
-      ) {
-        updatedelectiveJapanese.push(subject);
-      }
-      if (subject.subjectId.startsWith('"40')) {
-        updatedelectiveArt.push(subject);
       }
     });
     setElectiveSubjects_basic(updatedelectiveSubjects_basic);
     setElectiveSubjects_advanced(updatedelectiveSubjects_advanced);
-    setGakusiSubjects(updatedgakusiSubjects);
-    setElectivePE(updatedelectivePE);
-    setElectiveLanguage(updatedelectiveLanguage);
-    setElectiveJapanese(updatedelectiveJapanese);
-    setElectiveArt(updatedelectiveArt);
   }, [electiveSubjects]);
 
-  useEffect(() => {
-    let unit = 0;
-    electiveSubjects_basic.forEach((subject) => {
-      unit += subject.numberOfUnits;
-    });
-    setUnit_basic(unit);
-  }, [electiveSubjects_basic]);
+  useEffect(()=>{
+    let unit = 0
+    electiveSubjects_basic.forEach((subject)=>{
+      unit +=subject.numberOfUnits
+    })
+    setUnit_basic(unit)
+  },[electiveSubjects_basic])
 
-  useEffect(() => {
-    let unit = 0;
-    electiveSubjects_advanced.forEach((subject) => {
-      unit += subject.numberOfUnits;
-    });
-    setUnit_advanced(unit);
-  }, [electiveSubjects_advanced]);
-
-  useEffect(() => {
-    let unit = 0;
-    gakusiSubjects.forEach((subject) => {
-      unit += subject.numberOfUnits;
-    });
-    setUnit_gakusi(unit);
-  }, [gakusiSubjects]);
-
-  useEffect(() => {
-    let unit = 0;
-    electivePE.forEach((subject) => {
-      unit += subject.numberOfUnits;
-    });
-    setUnit_electivePE(unit);
-  }, [electivePE]);
-
-  useEffect(() => {
-    let unit = 0;
-    electiveLanguage.forEach((subject) => {
-      unit += subject.numberOfUnits;
-    });
-    setUnit_electiveLanguage(unit);
-  }, [electiveLanguage]);
-
-  useEffect(() => {
-    let unit = 0;
-    electiveJapanese.forEach((subject) => {
-      unit += subject.numberOfUnits;
-    });
-    setUnit_electiveJapanese(unit);
-  }, [electiveJapanese]);
-
-  useEffect(() => {
-    let unit = 0;
-    electiveArt.forEach((subject) => {
-      unit += subject.numberOfUnits;
-    });
-    setUnit_electiveArt(unit);
-  }, [electiveArt]);
+  useEffect(()=>{
+    let unit = 0
+    electiveSubjects_advanced.forEach((subject)=>{
+      unit +=subject.numberOfUnits
+    })
+    setUnit_advanced(unit)
+  },[electiveSubjects_advanced])
 
   const fetchData = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -241,7 +126,8 @@ function App() {
         const updatedSubjectStatuses_sougou_must: subjectList[] = [];
         const updatedSubjectStatuses_pe: subjectList[] = [];
         const updatedSubjectStatuses_English: subjectList[] = [];
-        const updateElectiveSubjects: electiveSubjectList[] = [];
+        const updateElectiveSubjects: electiveSubjectList[] =
+          [];
 
         data.forEach((row) => {
           const flagSubjectList: boolean = checkPass(
@@ -305,7 +191,7 @@ function App() {
               updateElectiveSubjects.push({
                 name: row[3],
                 subjectId: row[2],
-                numberOfUnits: Number(row[4].replace(/"/g, "").trim()),
+                numberOfUnits: Number(row[4].replace(/"/g, '').trim())
               });
             }
           }
@@ -526,10 +412,10 @@ function App() {
       </div>
     );
   };
-
+  
   const judge_elective_basic = () => {
-    if (!unit_basic) return <></>;
-    return (
+    if (!unit_basic) return<></>;
+    return(
       <div
         style={{
           position: "absolute",
@@ -539,17 +425,15 @@ function App() {
           height: "1.98%",
         }}
       >
-        <p>
-          {unit_basic}
-          <br /> /最低32
-        </p>
+    
+        <p>{unit_basic}<br/> /最低32</p>
       </div>
     );
-  };
+  }
 
   const judge_elective_advanced = () => {
-    if (!unit_advanced) return <></>;
-    return (
+    if (!unit_advanced) return<></>;
+    return(
       <div
         style={{
           position: "absolute",
@@ -559,108 +443,13 @@ function App() {
           height: "1.98%",
         }}
       >
-        <p>
-          {unit_advanced}
-          <br />
-          /最低20
-        </p>
+        <p>{unit_advanced}<br/>/最低20</p>
       </div>
     );
-  };
+  }
 
-  const judge_gakusi = () => {
-    if (!unit_gakusi) return <></>;
-    return (
-      <div
-        style={{
-          position: "absolute",
-          top: "29%",
-          left: "51.8%",
-          width: "11.5%",
-          height: "1.98%",
-          fontSize: "80%",
-        }}
-      >
-        <p>
-          {unit_gakusi}
-          <br />
-          /最低1
-        </p>
-      </div>
-    );
-  };
 
-  const judge_electivePE = () => {
-    if (!unit_electivePE) return <></>;
-    return (
-      <div
-        style={{
-          position: "absolute",
-          top: "33%",
-          left: "51.8%",
-          width: "11.5%",
-          height: "1.98%",
-          fontSize: "80%",
-        }}
-      >
-        <p>{unit_electivePE}/最低0</p>
-      </div>
-    );
-  };
 
-  const judge_electiveLanguage = () => {
-    if (!unit_electiveLanguage) return <></>;
-    return (
-      <div
-        style={{
-          position: "absolute",
-          top: "35%",
-          left: "51.8%",
-          width: "11.5%",
-          height: "1.98%",
-          fontSize: "80%",
-        }}
-      >
-        <p>{unit_electiveLanguage}/最低0</p>
-      </div>
-    );
-  };
-
-  const judge_electiveJapanese = () => {
-    if (!unit_electiveJapanese) return <></>;
-    return (
-      <div
-        style={{
-          position: "absolute",
-          top: "37%",
-          left: "51.8%",
-          width: "11.5%",
-          height: "1.98%",
-          fontSize: "80%",
-        }}
-      >
-        <p>{unit_electiveJapanese}/最低0</p>
-      </div>
-    );
-  };
-
-  const judge_electiveArt = () => {
-    if (!unit_electiveArt) return <></>;
-    return (
-      <div
-        style={{
-          position: "absolute",
-          top: "39%",
-          left: "51.8%",
-          width: "11.5%",
-          height: "1.98%",
-          fontSize: "80%",
-        }}
-      >
-        <p>{unit_electiveArt}/最低0</p>
-      </div>
-    );
-  };
 
   return (
     <>
@@ -721,11 +510,6 @@ function App() {
           {judge_English()}
           {judge_elective_basic()}
           {judge_elective_advanced()}
-          {judge_gakusi()}
-          {judge_electivePE()}
-          {judge_electiveLanguage()}
-          {judge_electiveJapanese()}
-          {judge_electiveArt()}
         </div>
       </div>
     </>
