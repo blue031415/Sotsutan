@@ -41,6 +41,7 @@ function App() {
   const [electiveSubjects_advanced, setElectiveSubjects_advanced] = useState<
     electiveSubjectList[]
   >([]);
+
   const [gakusiSubjects, setGakusiSubjects] = useState<electiveSubjectList[]>(
     []
   );
@@ -64,6 +65,7 @@ function App() {
     number | null
   >(null);
   const [unit_electiveArt, setUnit_electiveArt] = useState<number | null>(null);
+
 
   const toggleRishuneji = () => {
     setShowRishunenji(!showRishunenji);
@@ -99,6 +101,7 @@ function App() {
 
   const updatedelectiveSubjects_basic: electiveSubjectList[] = [];
   const updatedelectiveSubjects_advanced: electiveSubjectList[] = [];
+
   const updatedgakusiSubjects: electiveSubjectList[] = [];
   const updatedelectivePE: electiveSubjectList[] = [];
   const updatedelectiveLanguage: electiveSubjectList[] = [];
@@ -168,6 +171,7 @@ function App() {
     let unit = 0;
     electiveSubjects_basic.forEach((subject) => {
       unit += subject.numberOfUnits;
+
     });
     setUnit_basic(unit);
   }, [electiveSubjects_basic]);
@@ -530,19 +534,35 @@ function App() {
   const judge_elective_basic = () => {
     if (!unit_basic) return <></>;
     return (
-      <div
-        style={{
-          position: "absolute",
-          top: "30%",
-          left: "30%",
-          width: "11.5%",
-          height: "1.98%",
-        }}
-      >
-        <p>
-          {unit_basic}
-          <br /> /最低32
-        </p>
+      <div>
+        <div
+          className="hover_elective_basic"
+          style={{
+            position: "absolute",
+            top: `${26.4}%`,
+            left: "36%",
+            width: "10%",
+            height: "47.9%",
+            backgroundColor:
+              unit_basic >= 32
+                ? "rgba(0, 128, 0, 0.4)"
+                : "rgba(255, 255, 0, 0.4)",
+          }}
+        >
+          <div className="elective_basic">
+            {electiveSubjects_basic.map((subject, index) => (
+              <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
+            ))}
+          </div>
+        </div>
+        <div className="basic-white-area">
+          <p>
+            現在取得済み{unit_basic} <br />
+            取得すべき最低単位数:32
+            <br />
+            取得できる最大単位数:47
+          </p>
+        </div>
       </div>
     );
   };
@@ -550,20 +570,36 @@ function App() {
   const judge_elective_advanced = () => {
     if (!unit_advanced) return <></>;
     return (
-      <div
-        style={{
-          position: "absolute",
-          top: "30%",
-          left: "6.5%",
-          width: "11.5%",
-          height: "1.98%",
-        }}
-      >
-        <p>
-          {unit_advanced}
-          <br />
-          /最低20
-        </p>
+      <div>
+        <div
+          className="hover_elective_basic"
+          style={{
+            position: "absolute",
+            top: `${26.4}%`,
+            left: "12.3%",
+            width: "10.2%",
+            height: "47.9%",
+            backgroundColor:
+              unit_advanced >= 32
+                ? "rgba(0, 128, 0, 0.4)"
+                : "rgba(256, 256, 0, 0.4)",
+          }}
+        >
+          <div className="elective_basic">
+            {electiveSubjects_advanced.map((subject, index) => (
+              <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
+            ))}
+          </div>
+        </div>
+        <div className="advanced-white-area">
+          <p>
+            現在取得済み：{unit_advanced}
+            <br />
+            取得すべき最低単位数:20
+            <br />
+            取得できる最大単位数:35
+          </p>
+        </div>
       </div>
     );
   };
