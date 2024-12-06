@@ -16,11 +16,11 @@ type subjectList = {
   height: number;
 };
 
-type electiveSubjectList={
+type electiveSubjectList = {
   name: string;
   subjectId: string;
-  numberOfUnits: number
-}
+  numberOfUnits: number;
+};
 
 function App() {
   const [showRishunenji, setShowRishunenji] = useState(false);
@@ -32,14 +32,17 @@ function App() {
   const [sougou_must, setSougou_must] = useState<subjectList[]>([]);
   const [pe, setPe] = useState<subjectList[]>([]);
   const [English, setEnglish] = useState<subjectList[]>([]);
-  const [electiveSubjects, setElectiveSubjects] =
-  useState<electiveSubjectList[]>([]);
-  const [electiveSubjects_basic, setElectiveSubjects_basic] =
-  useState<electiveSubjectList[]>([]);
-  const [electiveSubjects_advanced, setElectiveSubjects_advanced] =
-  useState<electiveSubjectList[]>([]);
-  const [unit_basic, setUnit_basic]=useState<number|null>(null);
-  const [unit_advanced, setUnit_advanced]= useState<number|null>(null);
+  const [electiveSubjects, setElectiveSubjects] = useState<
+    electiveSubjectList[]
+  >([]);
+  const [electiveSubjects_basic, setElectiveSubjects_basic] = useState<
+    electiveSubjectList[]
+  >([]);
+  const [electiveSubjects_advanced, setElectiveSubjects_advanced] = useState<
+    electiveSubjectList[]
+  >([]);
+  const [unit_basic, setUnit_basic] = useState<number | null>(null);
+  const [unit_advanced, setUnit_advanced] = useState<number | null>(null);
 
   const toggleRishuneji = () => {
     setShowRishunenji(!showRishunenji);
@@ -73,15 +76,21 @@ function App() {
     }
   };
 
-  const updatedelectiveSubjects_basic:electiveSubjectList[] = [];
-  const updatedelectiveSubjects_advanced: electiveSubjectList[]= [];
+  const updatedelectiveSubjects_basic: electiveSubjectList[] = [];
+  const updatedelectiveSubjects_advanced: electiveSubjectList[] = [];
 
   useEffect(() => {
     electiveSubjects.map((subject) => {
-      if (subject.subjectId.startsWith('"GC2') || subject.subjectId.startsWith('"GA1')) {
+      if (
+        subject.subjectId.startsWith('"GC2') ||
+        subject.subjectId.startsWith('"GA1')
+      ) {
         updatedelectiveSubjects_basic.push(subject);
       }
-      if (subject.subjectId.startsWith('"GC5') || subject.subjectId.startsWith('"GA4')) {
+      if (
+        subject.subjectId.startsWith('"GC5') ||
+        subject.subjectId.startsWith('"GA4')
+      ) {
         updatedelectiveSubjects_advanced.push(subject);
       }
     });
@@ -89,21 +98,22 @@ function App() {
     setElectiveSubjects_advanced(updatedelectiveSubjects_advanced);
   }, [electiveSubjects]);
 
-  useEffect(()=>{
-    let unit = 0
-    electiveSubjects_basic.forEach((subject)=>{
-      unit +=subject.numberOfUnits
-    })
-    setUnit_basic(unit)
-  },[electiveSubjects_basic])
+  useEffect(() => {
+    let unit = 0;
+    electiveSubjects_basic.forEach((subject) => {
+      unit += subject.numberOfUnits;
+      console.log(subject);
+    });
+    setUnit_basic(unit);
+  }, [electiveSubjects_basic]);
 
-  useEffect(()=>{
-    let unit = 0
-    electiveSubjects_advanced.forEach((subject)=>{
-      unit +=subject.numberOfUnits
-    })
-    setUnit_advanced(unit)
-  },[electiveSubjects_advanced])
+  useEffect(() => {
+    let unit = 0;
+    electiveSubjects_advanced.forEach((subject) => {
+      unit += subject.numberOfUnits;
+    });
+    setUnit_advanced(unit);
+  }, [electiveSubjects_advanced]);
 
   const fetchData = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -126,8 +136,7 @@ function App() {
         const updatedSubjectStatuses_sougou_must: subjectList[] = [];
         const updatedSubjectStatuses_pe: subjectList[] = [];
         const updatedSubjectStatuses_English: subjectList[] = [];
-        const updateElectiveSubjects: electiveSubjectList[] =
-          [];
+        const updateElectiveSubjects: electiveSubjectList[] = [];
 
         data.forEach((row) => {
           const flagSubjectList: boolean = checkPass(
@@ -191,7 +200,7 @@ function App() {
               updateElectiveSubjects.push({
                 name: row[3],
                 subjectId: row[2],
-                numberOfUnits: Number(row[4].replace(/"/g, '').trim())
+                numberOfUnits: Number(row[4].replace(/"/g, "").trim()),
               });
             }
           }
@@ -412,44 +421,79 @@ function App() {
       </div>
     );
   };
-  
+
   const judge_elective_basic = () => {
-    if (!unit_basic) return<></>;
-    return(
-      <div
-        style={{
-          position: "absolute",
-          top: "30%",
-          left: "30%",
-          width: "11.5%",
-          height: "1.98%",
-        }}
-      >
-    
-        <p>{unit_basic}<br/> /最低32</p>
+    if (!unit_basic) return <></>;
+    return (
+      <div>
+        <div
+          className="hover_elective_basic"
+          style={{
+            position: "absolute",
+            top: `${26.4}%`,
+            left: "36%",
+            width: "10%",
+            height: "47.9%",
+            backgroundColor:
+              unit_basic >= 32
+                ? "rgba(0, 128, 0, 0.4)"
+                : "rgba(255, 255, 0, 0.4)",
+          }}
+        >
+          <div className="elective_basic">
+            {electiveSubjects_basic.map((subject, index) => (
+              <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
+            ))}
+          </div>
+        </div>
+        <div className="basic-white-area">
+          <p>
+            現在取得済み{unit_basic} <br />
+            取得すべき最低単位数:32
+            <br />
+            取得できる最大単位数:47
+          </p>
+        </div>
       </div>
     );
-  }
+  };
 
   const judge_elective_advanced = () => {
-    if (!unit_advanced) return<></>;
-    return(
-      <div
-        style={{
-          position: "absolute",
-          top: "30%",
-          left: "6.5%",
-          width: "11.5%",
-          height: "1.98%",
-        }}
-      >
-        <p>{unit_advanced}<br/>/最低20</p>
+    if (!unit_advanced) return <></>;
+    return (
+      <div>
+        <div
+          className="hover_elective_basic"
+          style={{
+            position: "absolute",
+            top: `${26.4}%`,
+            left: "12.3%",
+            width: "10.2%",
+            height: "47.9%",
+            backgroundColor:
+              unit_advanced >= 32
+                ? "rgba(0, 128, 0, 0.4)"
+                : "rgba(256, 256, 0, 0.4)",
+          }}
+        >
+          <div className="elective_basic">
+            {electiveSubjects_advanced.map((subject, index) => (
+              <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
+            ))}
+          </div>
+        </div>
+        <div className="advanced-white-area">
+          <p>
+            現在取得済み：{unit_advanced}
+            <br />
+            取得すべき最低単位数:20
+            <br />
+            取得できる最大単位数:35
+          </p>
+        </div>
       </div>
     );
-  }
-
-
-
+  };
 
   return (
     <>
