@@ -66,7 +66,6 @@ function App() {
   >(null);
   const [unit_electiveArt, setUnit_electiveArt] = useState<number | null>(null);
 
-
   const toggleRishuneji = () => {
     setShowRishunenji(!showRishunenji);
   };
@@ -171,7 +170,6 @@ function App() {
     let unit = 0;
     electiveSubjects_basic.forEach((subject) => {
       unit += subject.numberOfUnits;
-
     });
     setUnit_basic(unit);
   }, [electiveSubjects_basic]);
@@ -608,20 +606,24 @@ function App() {
     if (!unit_gakusi) return <></>;
     return (
       <div
+        className="hover_gakusi"
         style={{
           position: "absolute",
-          top: "29%",
-          left: "51.8%",
-          width: "11.5%",
-          height: "1.98%",
-          fontSize: "80%",
+          top: `${26.4}%`,
+          left: "57.5%",
+          width: "10.65%",
+          height: "8%",
+          backgroundColor:
+            unit_gakusi >= 1
+              ? "rgba(0, 128, 0, 0.4)"
+              : "rgba(256, 256, 0, 0.4)",
         }}
       >
-        <p>
-          {unit_gakusi}
-          <br />
-          /最低1
-        </p>
+        <div className="gakusi">
+          {gakusiSubjects.map((subject, index) => (
+            <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
+          ))}
+        </div>
       </div>
     );
   };
