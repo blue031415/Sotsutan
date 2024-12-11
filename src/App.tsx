@@ -632,16 +632,21 @@ function App() {
     if (!unit_electivePE) return <></>;
     return (
       <div
+        className="hover_electivePE"
         style={{
           position: "absolute",
-          top: "33%",
-          left: "51.8%",
-          width: "11.5%",
-          height: "1.98%",
-          fontSize: "80%",
+          top: `${34.2}%`,
+          left: "57.5%",
+          width: "10.65%",
+          height: "2.1%",
+          backgroundColor: "rgba(0, 128, 0, 0.4)",
         }}
       >
-        <p>{unit_electivePE}/最低0</p>
+        <div className="electivePE">
+          {electivePE.map((subject, index) => (
+            <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
+          ))}
+        </div>
       </div>
     );
   };
@@ -650,16 +655,21 @@ function App() {
     if (!unit_electiveLanguage) return <></>;
     return (
       <div
+        className="hover_electiveLanguage"
         style={{
           position: "absolute",
-          top: "35%",
-          left: "51.8%",
-          width: "11.5%",
-          height: "1.98%",
-          fontSize: "80%",
+          top: `${36.2}%`,
+          left: "57.5%",
+          width: "10.65%",
+          height: "2.1%",
+          backgroundColor: "rgba(0, 128, 0, 0.4)",
         }}
       >
-        <p>{unit_electiveLanguage}/最低0</p>
+        <div className="electiveLanguage">
+          {electiveLanguage.map((subject, index) => (
+            <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
+          ))}
+        </div>
       </div>
     );
   };
@@ -668,16 +678,21 @@ function App() {
     if (!unit_electiveJapanese) return <></>;
     return (
       <div
+        className="hover_electiveJapanese"
         style={{
           position: "absolute",
-          top: "37%",
-          left: "51.8%",
-          width: "11.5%",
-          height: "1.98%",
-          fontSize: "80%",
+          top: `${38.2}%`,
+          left: "57.5%",
+          width: "10.65%",
+          height: "2.1%",
+          backgroundColor: "rgba(0, 128, 0, 0.4)",
         }}
       >
-        <p>{unit_electiveJapanese}/最低0</p>
+        <div className="electiveJapanese">
+          {electiveJapanese.map((subject, index) => (
+            <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
+          ))}
+        </div>
       </div>
     );
   };
@@ -686,16 +701,21 @@ function App() {
     if (!unit_electiveArt) return <></>;
     return (
       <div
+        className="hover_electiveJapanese"
         style={{
           position: "absolute",
-          top: "39%",
-          left: "51.8%",
-          width: "11.5%",
-          height: "1.98%",
-          fontSize: "80%",
+          top: `${40.2}%`,
+          left: "57.5%",
+          width: "10.65%",
+          height: "2.1%",
+          backgroundColor: "rgba(0, 128, 0, 0.4)",
         }}
       >
-        <p>{unit_electiveArt}/最低0</p>
+        <div className="electiveJapanese">
+          {electiveArt.map((subject, index) => (
+            <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
+          ))}
+        </div>
       </div>
     );
   };
