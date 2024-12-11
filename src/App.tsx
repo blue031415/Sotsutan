@@ -666,20 +666,24 @@ function App() {
     if (!unit_gakusi) return <></>;
     return (
       <div
+        className="hover_gakusi"
         style={{
           position: "absolute",
-          top: "29%",
-          left: "51.8%",
-          width: "11.5%",
-          height: "1.98%",
-          fontSize: "80%",
+          top: `${26.4}%`,
+          left: "57.5%",
+          width: "10.65%",
+          height: "8%",
+          backgroundColor:
+            unit_gakusi >= 1
+              ? "rgba(0, 128, 0, 0.4)"
+              : "rgba(256, 256, 0, 0.4)",
         }}
       >
-        <p>
-          {unit_gakusi}
-          <br />
-          /最低1
-        </p>
+        <div className="gakusi">
+          {gakusiSubjects.map((subject, index) => (
+            <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
+          ))}
+        </div>
       </div>
     );
   };
@@ -688,16 +692,21 @@ function App() {
     if (!unit_electivePE) return <></>;
     return (
       <div
+        className="hover_electivePE"
         style={{
           position: "absolute",
-          top: "33%",
-          left: "51.8%",
-          width: "11.5%",
-          height: "1.98%",
-          fontSize: "80%",
+          top: `${34.2}%`,
+          left: "57.5%",
+          width: "10.65%",
+          height: "2.1%",
+          backgroundColor: "rgba(0, 128, 0, 0.4)",
         }}
       >
-        <p>{unit_electivePE}/最低0</p>
+        <div className="electivePE">
+          {electivePE.map((subject, index) => (
+            <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
+          ))}
+        </div>
       </div>
     );
   };
@@ -706,16 +715,21 @@ function App() {
     if (!unit_electiveLanguage) return <></>;
     return (
       <div
+        className="hover_electiveLanguage"
         style={{
           position: "absolute",
-          top: "35%",
-          left: "51.8%",
-          width: "11.5%",
-          height: "1.98%",
-          fontSize: "80%",
+          top: `${36.2}%`,
+          left: "57.5%",
+          width: "10.65%",
+          height: "2.1%",
+          backgroundColor: "rgba(0, 128, 0, 0.4)",
         }}
       >
-        <p>{unit_electiveLanguage}/最低0</p>
+        <div className="electiveLanguage">
+          {electiveLanguage.map((subject, index) => (
+            <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
+          ))}
+        </div>
       </div>
     );
   };
@@ -724,16 +738,21 @@ function App() {
     if (!unit_electiveJapanese) return <></>;
     return (
       <div
+        className="hover_electiveJapanese"
         style={{
           position: "absolute",
-          top: "37%",
-          left: "51.8%",
-          width: "11.5%",
-          height: "1.98%",
-          fontSize: "80%",
+          top: `${38.2}%`,
+          left: "57.5%",
+          width: "10.65%",
+          height: "2.1%",
+          backgroundColor: "rgba(0, 128, 0, 0.4)",
         }}
       >
-        <p>{unit_electiveJapanese}/最低0</p>
+        <div className="electiveJapanese">
+          {electiveJapanese.map((subject, index) => (
+            <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
+          ))}
+        </div>
       </div>
     );
   };
@@ -742,16 +761,75 @@ function App() {
     if (!unit_electiveArt) return <></>;
     return (
       <div
+        className="hover_electiveJapanese"
         style={{
           position: "absolute",
-          top: "39%",
-          left: "56.8%",
+          top: `${40.2}%`,
+          left: "57.5%",
+          width: "10.65%",
+          height: "2.1%",
+          backgroundColor: "rgba(0, 128, 0, 0.4)",
+        }}
+      >
+        <div className="electiveJapanese">
+          {electiveArt.map((subject, index) => (
+            <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  const judge_electiveGBGE = () => {
+    if (!unit_electiveGBGE) return <></>;
+    return (
+      <div
+        style={{
+          position: "absolute",
+          top: "37%",
+          left: "69.0%",
           width: "11.5%",
           height: "1.98%",
           fontSize: "80%",
         }}
       >
-        <p>{unit_electiveArt}/最低0</p>
+        <p>{unit_electiveGBGE}/最低0</p>
+      </div>
+    );
+  };
+
+  const judge_electiveMuseum = () => {
+    if (!unit_electiveMuseum) return <></>;
+    return (
+      <div
+        style={{
+          position: "absolute",
+          top: "43%",
+          left: "69.0%",
+          width: "11.5%",
+          height: "1.98%",
+          fontSize: "80%",
+        }}
+      >
+        <p>{unit_electiveMuseum}/最低0</p>
+      </div>
+    );
+  };
+
+  const judge_otherSubjects = () => {
+    if (!unit_otherSubjects) return <></>;
+    return (
+      <div
+        style={{
+          position: "absolute",
+          top: "35%",
+          left: "69.0%",
+          width: "11.5%",
+          height: "1.98%",
+          fontSize: "80%",
+        }}
+      >
+        <p>{unit_otherSubjects}/最低6</p>
       </div>
     );
   };
