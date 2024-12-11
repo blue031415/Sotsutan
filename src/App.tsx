@@ -35,6 +35,9 @@ function App() {
   const [electiveSubjects, setElectiveSubjects] = useState<
     electiveSubjectList[]
   >([]);
+
+  const [otherSubjects, setOtherSubjects] = useState<electiveSubjectList[]>([]);
+
   const [electiveSubjects_basic, setElectiveSubjects_basic] = useState<
     electiveSubjectList[]
   >([]);
@@ -53,6 +56,10 @@ function App() {
     electiveSubjectList[]
   >([]);
   const [electiveArt, setElectiveArt] = useState<electiveSubjectList[]>([]);
+  const [electiveGBGE, setElectiveGBGE] = useState<electiveSubjectList[]>([]);
+  const [electiveMuseum, setElectiveMuseum] = useState<electiveSubjectList[]>(
+    []
+  );
 
   const [unit_basic, setUnit_basic] = useState<number | null>(null);
   const [unit_advanced, setUnit_advanced] = useState<number | null>(null);
@@ -65,7 +72,16 @@ function App() {
     number | null
   >(null);
   const [unit_electiveArt, setUnit_electiveArt] = useState<number | null>(null);
+  const [unit_electiveGBGE, setUnit_electiveGBGE] = useState<number | null>(
+    null
+  );
+  const [unit_electiveMuseum, setUnit_electiveMuseum] = useState<number | null>(
+    null
+  );
 
+  const [unit_otherSubjects, setUnit_otherSubjects] = useState<number | null>(
+    null
+  );
 
   const toggleRishuneji = () => {
     setShowRishunenji(!showRishunenji);
@@ -107,6 +123,10 @@ function App() {
   const updatedelectiveLanguage: electiveSubjectList[] = [];
   const updatedelectiveJapanese: electiveSubjectList[] = [];
   const updatedelectiveArt: electiveSubjectList[] = [];
+  const updatedelectiveGBGE: electiveSubjectList[] = [];
+  const updatedelectiveMuseum: electiveSubjectList[] = [];
+
+  const updatedOtherSubjects: electiveSubjectList[] = [];
 
   useEffect(() => {
     electiveSubjects.map((subject) => {
@@ -115,26 +135,22 @@ function App() {
         subject.subjectId.startsWith('"GA1')
       ) {
         updatedelectiveSubjects_basic.push(subject);
-      }
-      if (
+      } else if (
         subject.subjectId.startsWith('"GC5') ||
         subject.subjectId.startsWith('"GA4')
       ) {
         updatedelectiveSubjects_advanced.push(subject);
-      }
-      if (
+      } else if (
         subject.subjectId.startsWith('"12') ||
         subject.subjectId.startsWith('"14')
       ) {
         updatedgakusiSubjects.push(subject);
-      }
-      if (
+      } else if (
         subject.subjectId.startsWith('"26') ||
         subject.subjectId.startsWith('"28')
       ) {
         updatedelectivePE.push(subject);
-      }
-      if (
+      } else if (
         subject.subjectId.startsWith('"31') ||
         subject.subjectId.startsWith('"32') ||
         subject.subjectId.startsWith('"33') ||
@@ -146,16 +162,30 @@ function App() {
         subject.subjectId.startsWith('"39')
       ) {
         updatedelectiveLanguage.push(subject);
-      }
-      if (
+      } else if (
         subject.subjectId.startsWith('"51') ||
         subject.subjectId.startsWith('"52') ||
         subject.subjectId.startsWith('"53')
       ) {
         updatedelectiveJapanese.push(subject);
-      }
-      if (subject.subjectId.startsWith('"40')) {
+      } else if (subject.subjectId.startsWith('"40')) {
         updatedelectiveArt.push(subject);
+      } else if (
+        subject.subjectId.startsWith('"GB') ||
+        subject.subjectId.startsWith('"GE')
+      ) {
+        updatedelectiveGBGE.push(subject);
+      } else if (
+        subject.subjectId.startsWith('"99') ||
+        subject.subjectId.startsWith('"80') ||
+        subject.subjectId.startsWith('"81') ||
+        subject.subjectId.startsWith('"82') ||
+        subject.subjectId.startsWith('"83')
+      ) {
+        updatedelectiveMuseum.push(subject);
+      } else {
+        console.log(subject);
+        updatedOtherSubjects.push(subject);
       }
     });
     setElectiveSubjects_basic(updatedelectiveSubjects_basic);
@@ -165,13 +195,15 @@ function App() {
     setElectiveLanguage(updatedelectiveLanguage);
     setElectiveJapanese(updatedelectiveJapanese);
     setElectiveArt(updatedelectiveArt);
+    setElectiveGBGE(updatedelectiveGBGE);
+    setElectiveMuseum(updatedelectiveMuseum);
+    setOtherSubjects(updatedOtherSubjects);
   }, [electiveSubjects]);
 
   useEffect(() => {
     let unit = 0;
     electiveSubjects_basic.forEach((subject) => {
       unit += subject.numberOfUnits;
-
     });
     setUnit_basic(unit);
   }, [electiveSubjects_basic]);
@@ -224,6 +256,30 @@ function App() {
     setUnit_electiveArt(unit);
   }, [electiveArt]);
 
+  useEffect(() => {
+    let unit = 0;
+    electiveGBGE.forEach((subject) => {
+      unit += subject.numberOfUnits;
+    });
+    setUnit_electiveGBGE(unit);
+  }, [electiveGBGE]);
+
+  useEffect(() => {
+    let unit = 0;
+    electiveMuseum.forEach((subject) => {
+      unit += subject.numberOfUnits;
+    });
+    setUnit_electiveMuseum(unit);
+  }, [electiveMuseum]);
+
+  useEffect(() => {
+    let unit = 0;
+    otherSubjects.forEach((subject) => {
+      unit += subject.numberOfUnits;
+    });
+    setUnit_otherSubjects(unit);
+  }, [otherSubjects]);
+
   const fetchData = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -246,6 +302,8 @@ function App() {
         const updatedSubjectStatuses_pe: subjectList[] = [];
         const updatedSubjectStatuses_English: subjectList[] = [];
         const updateElectiveSubjects: electiveSubjectList[] = [];
+
+        data.splice(0, 1);
 
         data.forEach((row) => {
           const flagSubjectList: boolean = checkPass(
@@ -687,13 +745,67 @@ function App() {
         style={{
           position: "absolute",
           top: "39%",
-          left: "51.8%",
+          left: "56.8%",
           width: "11.5%",
           height: "1.98%",
           fontSize: "80%",
         }}
       >
         <p>{unit_electiveArt}/最低0</p>
+      </div>
+    );
+  };
+
+  const judge_electiveGBGE = () => {
+    if (!unit_electiveGBGE) return <></>;
+    return (
+      <div
+        style={{
+          position: "absolute",
+          top: "37%",
+          left: "69.0%",
+          width: "11.5%",
+          height: "1.98%",
+          fontSize: "80%",
+        }}
+      >
+        <p>{unit_electiveGBGE}/最低0</p>
+      </div>
+    );
+  };
+
+  const judge_electiveMuseum = () => {
+    if (!unit_electiveMuseum) return <></>;
+    return (
+      <div
+        style={{
+          position: "absolute",
+          top: "43%",
+          left: "69.0%",
+          width: "11.5%",
+          height: "1.98%",
+          fontSize: "80%",
+        }}
+      >
+        <p>{unit_electiveMuseum}/最低0</p>
+      </div>
+    );
+  };
+
+  const judge_otherSubjects = () => {
+    if (!unit_otherSubjects) return <></>;
+    return (
+      <div
+        style={{
+          position: "absolute",
+          top: "35%",
+          left: "69.0%",
+          width: "11.5%",
+          height: "1.98%",
+          fontSize: "80%",
+        }}
+      >
+        <p>{unit_otherSubjects}/最低6</p>
       </div>
     );
   };
@@ -762,6 +874,9 @@ function App() {
           {judge_electiveLanguage()}
           {judge_electiveJapanese()}
           {judge_electiveArt()}
+          {judge_electiveGBGE()}
+          {judge_electiveMuseum()}
+          {judge_otherSubjects()}
         </div>
       </div>
     </>
