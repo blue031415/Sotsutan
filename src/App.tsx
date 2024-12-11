@@ -834,60 +834,6 @@ function App() {
     );
   };
 
-  const judge_electiveGBGE = () => {
-    if (!unit_electiveGBGE) return <></>;
-    return (
-      <div
-        style={{
-          position: "absolute",
-          top: "37%",
-          left: "69.0%",
-          width: "11.5%",
-          height: "1.98%",
-          fontSize: "80%",
-        }}
-      >
-        <p>{unit_electiveGBGE}/最低0</p>
-      </div>
-    );
-  };
-
-  const judge_electiveMuseum = () => {
-    if (!unit_electiveMuseum) return <></>;
-    return (
-      <div
-        style={{
-          position: "absolute",
-          top: "43%",
-          left: "69.0%",
-          width: "11.5%",
-          height: "1.98%",
-          fontSize: "80%",
-        }}
-      >
-        <p>{unit_electiveMuseum}/最低0</p>
-      </div>
-    );
-  };
-
-  const judge_otherSubjects = () => {
-    if (!unit_otherSubjects) return <></>;
-    return (
-      <div
-        style={{
-          position: "absolute",
-          top: "35%",
-          left: "69.0%",
-          width: "11.5%",
-          height: "1.98%",
-          fontSize: "80%",
-        }}
-      >
-        <p>{unit_otherSubjects}/最低6</p>
-      </div>
-    );
-  };
-
   return (
     <>
       <div className="header">
