@@ -553,7 +553,7 @@ function App() {
             English.length === 4
               ? "rgba(0, 128, 0, 0.4)"
               : "rgba(256, 256, 0, 0.4)",
-          zIndex: 1,
+          zIndex: 3,
         }}
       >
         <div className="English">
@@ -605,6 +605,7 @@ function App() {
               unit_basic >= 32
                 ? "rgba(0, 128, 0, 0.4)"
                 : "rgba(255, 255, 0, 0.4)",
+            zIndex: 3,
           }}
         >
           <div className="elective_basic">
@@ -614,12 +615,7 @@ function App() {
           </div>
         </div>
         <div className="basic-white-area">
-          <p>
-            現在取得済み{unit_basic} <br />
-            取得すべき最低単位数:32
-            <br />
-            取得できる最大単位数:47
-          </p>
+          <p>現在取得済み：{unit_basic}</p>
         </div>
       </div>
     );
@@ -641,6 +637,7 @@ function App() {
               unit_advanced >= 32
                 ? "rgba(0, 128, 0, 0.4)"
                 : "rgba(256, 256, 0, 0.4)",
+            zIndex: 4,
           }}
         >
           <div className="elective_basic">
@@ -650,13 +647,7 @@ function App() {
           </div>
         </div>
         <div className="advanced-white-area">
-          <p>
-            現在取得済み：{unit_advanced}
-            <br />
-            取得すべき最低単位数:20
-            <br />
-            取得できる最大単位数:35
-          </p>
+          <p>現在取得済み：{unit_advanced}</p>
         </div>
       </div>
     );
@@ -665,24 +656,36 @@ function App() {
   const judge_gakusi = () => {
     if (!unit_gakusi) return <></>;
     return (
-      <div
-        className="hover_gakusi"
-        style={{
-          position: "absolute",
-          top: `${26.4}%`,
-          left: "57.5%",
-          width: "10.65%",
-          height: "8%",
-          backgroundColor:
-            unit_gakusi >= 1
-              ? "rgba(0, 128, 0, 0.4)"
-              : "rgba(256, 256, 0, 0.4)",
-        }}
-      >
-        <div className="gakusi">
-          {gakusiSubjects.map((subject, index) => (
-            <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
-          ))}
+      <div>
+        <div
+          className="hover_gakusi"
+          style={{
+            position: "absolute",
+            top: `${26.4}%`,
+            left: "57.5%",
+            width: "8.67%",
+            height: "8%",
+            backgroundColor:
+              unit_gakusi >= 1
+                ? "rgba(0, 128, 0, 0.4)"
+                : "rgba(256, 256, 0, 0.4)",
+          }}
+        >
+          <div className="gakusi">
+            {gakusiSubjects.map((subject, index) => (
+              <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
+            ))}
+          </div>
+        </div>
+        <div className="common-white-area">
+          <p>
+            現在取得済み：
+            {unit_gakusi +
+              (unit_electivePE === null ? 0 : unit_electivePE) +
+              (unit_electiveLanguage === null ? 0 : unit_electiveLanguage) +
+              (unit_electiveJapanese === null ? 0 : unit_electiveJapanese) +
+              (unit_electiveArt === null ? 0 : unit_electiveArt)}
+          </p>
         </div>
       </div>
     );
@@ -697,7 +700,7 @@ function App() {
           position: "absolute",
           top: `${34.2}%`,
           left: "57.5%",
-          width: "10.65%",
+          width: "8.67%",
           height: "2.1%",
           backgroundColor: "rgba(0, 128, 0, 0.4)",
         }}
@@ -720,7 +723,7 @@ function App() {
           position: "absolute",
           top: `${36.2}%`,
           left: "57.5%",
-          width: "10.65%",
+          width: "8.67%",
           height: "2.1%",
           backgroundColor: "rgba(0, 128, 0, 0.4)",
         }}
@@ -743,7 +746,7 @@ function App() {
           position: "absolute",
           top: `${38.2}%`,
           left: "57.5%",
-          width: "10.65%",
+          width: "8.67%",
           height: "2.1%",
           backgroundColor: "rgba(0, 128, 0, 0.4)",
         }}
@@ -766,7 +769,7 @@ function App() {
           position: "absolute",
           top: `${40.2}%`,
           left: "57.5%",
-          width: "10.65%",
+          width: "8.67%",
           height: "2.1%",
           backgroundColor: "rgba(0, 128, 0, 0.4)",
         }}
@@ -784,16 +787,22 @@ function App() {
     if (!unit_electiveGBGE) return <></>;
     return (
       <div
+        className="hover_electiveGBGE"
         style={{
           position: "absolute",
-          top: "37%",
-          left: "69.0%",
-          width: "11.5%",
-          height: "1.98%",
-          fontSize: "80%",
+          top: `${38.4}%`,
+          left: "74.1%",
+          width: "9.3%",
+          height: "4.1%",
+          backgroundColor: "rgba(0, 128, 0, 0.4)",
+          zIndex: 1,
         }}
       >
-        <p>{unit_electiveGBGE}/最低0</p>
+        <div className="electiveGBGE">
+          {electiveGBGE.map((subject, index) => (
+            <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
+          ))}
+        </div>
       </div>
     );
   };
@@ -802,16 +811,22 @@ function App() {
     if (!unit_electiveMuseum) return <></>;
     return (
       <div
+        className="hover_electiveMuseum"
         style={{
           position: "absolute",
-          top: "43%",
-          left: "69.0%",
-          width: "11.5%",
-          height: "1.98%",
-          fontSize: "80%",
+          top: `${42.5}%`,
+          left: "74.1%",
+          width: "9.3%",
+          height: "7.9%",
+          backgroundColor: "rgba(0, 128, 0, 0.4)",
+          zIndex: 2,
         }}
       >
-        <p>{unit_electiveMuseum}/最低0</p>
+        <div className="electiveMuseum">
+          {electiveMuseum.map((subject, index) => (
+            <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
+          ))}
+        </div>
       </div>
     );
   };
@@ -819,17 +834,36 @@ function App() {
   const judge_otherSubjects = () => {
     if (!unit_otherSubjects) return <></>;
     return (
-      <div
-        style={{
-          position: "absolute",
-          top: "35%",
-          left: "69.0%",
-          width: "11.5%",
-          height: "1.98%",
-          fontSize: "80%",
-        }}
-      >
-        <p>{unit_otherSubjects}/最低6</p>
+      <div>
+        <div
+          className="hover_otherSubjects"
+          style={{
+            position: "absolute",
+            top: `${26.4}%`,
+            left: "74.1%",
+            width: "9.3%",
+            height: "11.9%",
+            backgroundColor:
+              unit_otherSubjects >= 6
+                ? "rgba(0, 128, 0, 0.4)"
+                : "rgba(256, 256, 0, 0.4)",
+            zIndex: 0,
+          }}
+        >
+          <div className="otherSubjects">
+            {otherSubjects.map((subject, index) => (
+              <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
+            ))}
+          </div>
+        </div>
+        <div className="relation-white-area">
+          <p>
+            現在取得済み：
+            {unit_otherSubjects +
+              (unit_electiveGBGE === null ? 0 : unit_electiveGBGE) +
+              (unit_electiveMuseum === null ? 0 : unit_electiveMuseum)}
+          </p>
+        </div>
       </div>
     );
   };
