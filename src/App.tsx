@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import PopUp from "./components/popup";
+import ElectivePopup from "./components/popup_rishu";
 import {
   subjectsList,
   subjectsList_advance,
@@ -23,6 +24,19 @@ type electiveSubjectList = {
 };
 
 function App() {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault(); // イベントのデフォルト動作を防止
+    const rect = e.currentTarget.getBoundingClientRect();
+    setPopupPosition({ 
+      x: rect.right + 10, // 要素の右側に10pxの余白を追加
+      y: rect.top
+    });
+    setIsPopupOpen(true);
+  };
+
   const [showRishunenji, setShowRishunenji] = useState(false);
   const [subjectStatuses, setSubjectStatuses] = useState<subjectList[]>([]);
   const [subjectStatuses_advance, setSubjectStatuses_advance] = useState<
@@ -184,7 +198,6 @@ function App() {
       ) {
         updatedelectiveMuseum.push(subject);
       } else {
-        console.log(subject);
         updatedOtherSubjects.push(subject);
       }
     });
@@ -589,6 +602,9 @@ function App() {
     );
   };
 
+
+  
+
   const judge_elective_basic = () => {
     if (!unit_basic) return <></>;
     return (
@@ -605,7 +621,7 @@ function App() {
               unit_basic >= 32
                 ? "rgba(0, 128, 0, 0.4)"
                 : "rgba(255, 255, 0, 0.4)",
-          }}
+          }} 
         >
           <div className="elective_basic">
             {electiveSubjects_basic.map((subject, index) => (
@@ -642,12 +658,14 @@ function App() {
                 ? "rgba(0, 128, 0, 0.4)"
                 : "rgba(256, 256, 0, 0.4)",
           }}
+          onClick={handleClick}
         >
           <div className="elective_basic">
             {electiveSubjects_advanced.map((subject, index) => (
               <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
             ))}
           </div>
+
         </div>
         <div className="advanced-white-area">
           <p>
@@ -658,6 +676,12 @@ function App() {
             取得できる最大単位数:35
           </p>
         </div>
+        <ElectivePopup
+            isOpen={isPopupOpen}
+            onClose={() => setIsPopupOpen(false)}
+            items={electiveSubjects_advanced.map(subject => subject.name)}
+            position={popupPosition}
+          />
       </div>
     );
   };
