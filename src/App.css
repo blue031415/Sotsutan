@@ -111,7 +111,7 @@
   padding: 5px;
   width: 150px;
   bottom: calc(100% + 17px);
-  left: -25%;
+  left: 0%;
   box-sizing: border-box;
   text-align: center;
   word-wrap: break-word;
@@ -157,7 +157,7 @@
   padding: 5px;
   width: 150px;
   bottom: calc(100% + 17px);
-  left: -25%;
+  left: 0%;
   box-sizing: border-box;
   text-align: center;
   word-wrap: break-word;
@@ -192,7 +192,7 @@
 
 .hover_English {
   position: relative;
-  z-index: 1;
+  z-index: 3;
 }
 .English {
   opacity: 0;
@@ -203,7 +203,7 @@
   padding: 5px;
   width: 150px;
   bottom: calc(100% + 17px);
-  left: -25%;
+  left: 0%;
   box-sizing: border-box;
   text-align: center;
   word-wrap: break-word;
@@ -211,7 +211,7 @@
   visibility: hidden;
   pointer-events: none;
   font-size: 10%;
-  z-index: 1;
+  z-index: 3;
 }
 .hover_English::before {
   opacity: 0;
@@ -248,7 +248,7 @@
   padding: 5px;
   width: 150px;
   bottom: calc(100% + 17px);
-  left: -25%;
+  left: 0%;
   box-sizing: border-box;
   text-align: center;
   word-wrap: break-word;
@@ -297,12 +297,12 @@
   visibility: hidden;
   pointer-events: none;
   font-size: 10%;
-  z-index: 1;
+  z-index: 3;
   color: green;
 }
 
 .hover_elective_basic {
-  border-color: rgb(128, 0, 128);
+  border-color: black;
   border-width: 2px;
   border-style: solid;
   box-sizing: border-box;
@@ -323,12 +323,12 @@
   background: white; /* 背景色を白に設定 */
   text-align: center;
   align-items: center;
-  width: 10%;
+  width: 9.72%;
   top: 65%;
-  left: 36%;
+  left: 36.14%;
   height: 9.1%; /* 必要に応じて高さを指定 */
   z-index: 10;
-  font-size: 8.5px;
+  font-size: 30%;
   white-space: nowrap;
 }
 
@@ -337,12 +337,12 @@
   background: white;
   text-align: center;
   align-items: center;
-  width: 10.1%;
+  width: 9.92%;
   top: 65%;
-  left: 12.4%;
+  left: 12.45%;
   height: 9.1%;
   z-index: 10;
-  font-size: 8.5px;
+  font-size: 30%;
   white-space: nowrap;
 }
 
@@ -564,4 +564,224 @@
 .hover_electiveArt:hover * {
   opacity: 1;
   visibility: visible;
+}
+
+.electiveGBGE {
+  opacity: 0;
+  transition: 0.5s;
+  background: #f8f9fa;
+  position: absolute;
+  color: green;
+  padding: 5px;
+  width: 180px;
+  bottom: 40px;
+  box-sizing: border-box;
+  text-align: center;
+  word-wrap: break-word;
+  border-radius: 5px;
+  visibility: hidden;
+  pointer-events: none;
+  font-size: 10%;
+  z-index: 1;
+}
+.hover_electiveGBGE {
+  position: relative;
+  z-index: 1;
+}
+.hover_electiveGBGE::before {
+  opacity: 0;
+  transition: 0.5s;
+  content: "";
+  position: absolute;
+  border: 7px solid transparent;
+  border-top: 14px solid #f8f9fa;
+  bottom: 20px;
+  left: 20px;
+  margin-top: -3px;
+  visibility: hidden;
+  pointer-events: none;
+}
+.hover_electiveGBGE:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+.hover_electiveGBGE:hover * {
+  opacity: 1;
+  visibility: visible;
+}
+
+.electiveMuseum {
+  opacity: 0;
+  transition: 0.5s;
+  background: #f8f9fa;
+  position: absolute;
+  color: green;
+  padding: 5px;
+  width: 180px;
+  bottom: 40px;
+  box-sizing: border-box;
+  text-align: center;
+  word-wrap: break-word;
+  border-radius: 5px;
+  visibility: hidden;
+  pointer-events: none;
+  font-size: 10%;
+  z-index: 1;
+}
+.hover_electiveMuseum {
+  position: relative;
+  z-index: 1;
+}
+.hover_electiveMuseum::before {
+  opacity: 0;
+  transition: 0.5s;
+  content: "";
+  position: absolute;
+  border: 7px solid transparent;
+  border-top: 14px solid #f8f9fa;
+  bottom: 20px;
+  left: 20px;
+  margin-top: -3px;
+  visibility: hidden;
+  pointer-events: none;
+}
+.hover_electiveMuseum:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+.hover_electiveMuseum:hover * {
+  opacity: 1;
+  visibility: visible;
+}
+
+.otherSubjects {
+  opacity: 0;
+  transition: 0.5s;
+  background: #f8f9fa;
+  position: absolute;
+  color: green;
+  padding: 5px;
+  width: 180px;
+  bottom: 80px;
+  box-sizing: border-box;
+  text-align: center;
+  word-wrap: break-word;
+  border-radius: 5px;
+  visibility: hidden;
+  pointer-events: none;
+  font-size: 10%;
+  z-index: 1;
+}
+.hover_otherSubjects {
+  position: relative;
+  z-index: 1;
+}
+.hover_otherSubjects::before {
+  opacity: 0;
+  transition: 0.5s;
+  content: "";
+  position: absolute;
+  border: 7px solid transparent;
+  border-top: 14px solid #f8f9fa;
+  bottom: 60px;
+  left: 20px;
+  margin-top: -3px;
+  visibility: hidden;
+  pointer-events: none;
+}
+.hover_otherSubjects:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+.hover_otherSubjects:hover * {
+  opacity: 1;
+  visibility: visible;
+}
+
+.common-white-area {
+  position: absolute;
+  background: white;
+  text-align: center;
+  align-items: center;
+  width: 8.6%;
+  top: 65%;
+  left: 57.6%;
+  height: 9.2%;
+  z-index: 10;
+  font-size: 30%;
+  white-space: nowrap;
+}
+
+.relation-white-area {
+  position: absolute;
+  background: white;
+  text-align: center;
+  align-items: center;
+  width: 9.19%;
+  top: 65%;
+  left: 74.25%;
+  height: 9.2%;
+  z-index: 10;
+  font-size: 30%;
+  white-space: nowrap;
+}
+
+.alert_lack_of_elective_units {
+  position: absolute;
+  top: 26.4%;
+  left: 90.3%;
+  width: 2.9%;
+  height: 51%;
+  background: rgba(256, 256, 0, 0.4);
+}
+
+.fulfill_elective_units {
+  position: absolute;
+  top: 26.4%;
+  left: 90.3%;
+  width: 2.9%;
+  height: 51%;
+  background: rgba(0, 128, 0, 0.4);
+}
+
+.balloon2-left {
+  position: relative;
+  display: inline-block;
+  margin: 1.5em 0 1.5em 15px;
+  padding: 7px 10px;
+  min-width: 120px;
+  max-width: 100%;
+  color: #555;
+  font-size: 16px;
+  background: #fff;
+  border: solid 3px #555;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.balloon2-left:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -24px;
+  margin-top: -12px;
+  border: 12px solid transparent;
+  border-right: 12px solid #fff;
+  z-index: 2;
+}
+
+.balloon2-left:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -30px;
+  margin-top: -14px;
+  border: 14px solid transparent;
+  border-right: 14px solid #555;
+  z-index: 1;
+}
+
+.balloon2-left p {
+  margin: 0;
+  padding: 0;
 }
