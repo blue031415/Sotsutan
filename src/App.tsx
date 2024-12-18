@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import PopUp from "./components/popup";
+import ElectivePopup from "./components/popup_rishu";
 import {
   subjectsList,
   subjectsList_advance,
@@ -9,6 +10,16 @@ import {
   pe_list,
   English_list,
 } from "./subjects";
+import kdbData from './kdb_json/kdb_1218.json';
+
+
+interface CourseInfo {
+  科目番号: string;
+  科目名: string;
+  標準履修年次: string;
+  実施学期: string;
+  曜時限: string;
+}
 
 type subjectList = {
   name: string;
@@ -22,7 +33,32 @@ type electiveSubjectList = {
   numberOfUnits: number;
 };
 
+const formatKdbData = (data: any[]): CourseInfo[] => {
+  return data.map(item => ({
+    科目番号: item.科目番号 || '',
+    科目名: item.科目名 || '',
+    標準履修年次: item.標準履修年次 || '',
+    実施学期: item.実施学期 || '',
+    曜時限: item.曜時限 || ''
+  })).filter(item => item.科目番号 && item.科目名);
+};
+
 function App() {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
+  const [courseData] = useState<CourseInfo[]>(formatKdbData(kdbData));
+
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault(); // イベントのデフォルト動作を防止
+    const rect = e.currentTarget.getBoundingClientRect();
+    setPopupPosition({ 
+      x: rect.right + 10, // 要素の右側に10pxの余白を追加
+      y: rect.top
+    });
+    setIsPopupOpen(true);
+  };
+
   const [showRishunenji, setShowRishunenji] = useState(false);
   const [subjectStatuses, setSubjectStatuses] = useState<subjectList[]>([]);
   const [subjectStatuses_advance, setSubjectStatuses_advance] = useState<
@@ -184,7 +220,6 @@ function App() {
       ) {
         updatedelectiveMuseum.push(subject);
       } else {
-        console.log(subject);
         updatedOtherSubjects.push(subject);
       }
     });
@@ -589,6 +624,9 @@ function App() {
     );
   };
 
+
+  
+
   const judge_elective_basic = () => {
     if (!unit_basic) return <></>;
     return (
@@ -639,16 +677,24 @@ function App() {
                 : "rgba(256, 256, 0, 0.4)",
             zIndex: 4,
           }}
+          onClick={handleClick}
         >
           <div className="elective_basic">
             {electiveSubjects_advanced.map((subject, index) => (
               <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
             ))}
           </div>
+
         </div>
         <div className="advanced-white-area">
           <p>現在取得済み：{unit_advanced}</p>
         </div>
+        <ElectivePopup
+            isOpen={isPopupOpen}
+            onClose={() => setIsPopupOpen(false)}
+            courseData={courseData}
+            position={popupPosition}
+          />
       </div>
     );
   };
