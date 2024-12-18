@@ -10,6 +10,8 @@ import {
   pe_list,
   English_list,
 } from "./subjects";
+import kdbData from './kdb_json/kdb_1218.json';
+
 
 type subjectList = {
   name: string;
@@ -23,9 +25,21 @@ type electiveSubjectList = {
   numberOfUnits: number;
 };
 
+const formatKdbData = (data: any[]): CourseInfo[] => {
+  return data.map(item => ({
+    科目番号: item.科目番号 || '',
+    科目名: item.科目名 || '',
+    標準履修年次: item.標準履修年次 || '',
+    実施学期: item.実施学期 || '',
+    曜時限: item.曜時限 || ''
+  })).filter(item => item.科目番号 && item.科目名);
+};
+
 function App() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
+  const [courseData, setCourseData] = useState<CourseInfo[]>(formatKdbData(kdbData));
+
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault(); // イベントのデフォルト動作を防止
@@ -679,7 +693,7 @@ function App() {
         <ElectivePopup
             isOpen={isPopupOpen}
             onClose={() => setIsPopupOpen(false)}
-            items={electiveSubjects_advanced.map(subject => subject.name)}
+            courseData={courseData}
             position={popupPosition}
           />
       </div>

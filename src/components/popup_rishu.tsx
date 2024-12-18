@@ -1,14 +1,25 @@
+import React from 'react';
+
+
+interface CourseInfo {
+  科目番号: string;
+  科目名: string;
+  標準履修年次: string;
+  実施学期: string;
+  曜時限: string;
+}
+
 interface ElectivePopupProps {
   isOpen: boolean;
   onClose: () => void;
-  items: string[];
+  courseData: CourseInfo[];
   position: { x: number; y: number };
 }
 
 const ElectivePopup: React.FC<ElectivePopupProps> = ({ 
   isOpen, 
   onClose, 
-  items,
+  courseData,
   position
 }) => {
   if (!isOpen) return null;
@@ -44,23 +55,41 @@ const ElectivePopup: React.FC<ElectivePopupProps> = ({
           maxHeight: '300px',
           overflowY: 'auto',
 					height: 'fit-content',
-					width: 'fit-content'
+					width: 'fit-content',
+          minWidth: '400px'
         }}
       >
-        {/* <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
-          {items.map((item, index) => (
-            <li 
-              key={index}
-              style={{ 
-                padding: '0.5rem 0',
-                borderBottom: '1px solid #eee'
-              }}
-            >
-              {item.replace(/"/g, '')}
-            </li>
-          ))}
-        </ul> */}
-				<img src="sample.png" style={{width: '350px'}}/>
+        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <thead>
+            <tr style={{ borderBottom: '2px solid #ddd' }}>
+              <th style={{ padding: '8px', textAlign: 'left' }}>科目番号</th>
+              <th style={{ padding: '8px', textAlign: 'left' }}>科目名</th>
+              <th style={{ padding: '8px', textAlign: 'left' }}>標準履修年次</th>
+              <th style={{ padding: '8px', textAlign: 'left' }}>実施学期</th>
+              <th style={{ padding: '8px', textAlign: 'left' }}>曜時限</th>
+            </tr>
+          </thead>
+          <tbody>
+            {courseData
+              .filter(course => 
+                course.科目番号.startsWith('GA4') || 
+                course.科目番号.startsWith('GC5')
+              )
+              .map(course => (
+                <tr 
+                  key={course.科目番号}
+                  style={{ borderBottom: '1px solid #eee' }}
+                >
+                  <td style={{ padding: '8px' }}>{course.科目番号}</td>
+                  <td style={{ padding: '8px' }}>{course.科目名}</td>
+                  <td style={{ padding: '8px' }}>{course.標準履修年次}</td>
+                  <td style={{ padding: '8px' }}>{course.実施学期}</td>
+                  <td style={{ padding: '8px' }}>{course.曜時限}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+        <button onClick={onClose}>close</button>
       </div>
     </>
   );
