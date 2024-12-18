@@ -13,6 +13,14 @@ import {
 import kdbData from './kdb_json/kdb_1218.json';
 
 
+interface CourseInfo {
+  科目番号: string;
+  科目名: string;
+  標準履修年次: string;
+  実施学期: string;
+  曜時限: string;
+}
+
 type subjectList = {
   name: string;
   index: number;
@@ -38,7 +46,7 @@ const formatKdbData = (data: any[]): CourseInfo[] => {
 function App() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
-  const [courseData, setCourseData] = useState<CourseInfo[]>(formatKdbData(kdbData));
+  const [courseData] = useState<CourseInfo[]>(formatKdbData(kdbData));
 
 
   const handleClick = (e: React.MouseEvent) => {
