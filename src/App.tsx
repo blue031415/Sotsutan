@@ -868,6 +868,49 @@ function App() {
     );
   };
 
+  const check_elective_units = () => {
+    let elective_units =
+      Math.min(unit_basic === null ? 0 : unit_basic, 32) +
+      Math.min(unit_advanced === null ? 0 : unit_advanced, 20) +
+      Math.min(
+        (unit_gakusi === null ? 0 : unit_gakusi) +
+          (unit_electivePE === null ? 0 : unit_electivePE) +
+          (unit_electiveLanguage === null ? 0 : unit_electiveLanguage) +
+          (unit_electiveJapanese === null ? 0 : unit_electiveJapanese) +
+          (unit_electiveArt === null ? 0 : unit_electiveArt),
+        10
+      ) +
+      Math.min(
+        (unit_electiveGBGE === null ? 0 : unit_electiveGBGE) +
+          (unit_electiveMuseum === null ? 0 : unit_electiveMuseum) +
+          (unit_otherSubjects === null ? 0 : unit_otherSubjects),
+        15
+      );
+    if (elective_units < 74 && unit_basic) {
+      return (
+        <div className="alert_lack_of_elective_units">
+          <div className="balloon2-left">
+            <p>現在取得済み:</p>
+            {elective_units}単位
+            <p>単位不足!</p>
+          </div>
+        </div>
+      );
+    } else if (elective_units >= 74 && unit_basic) {
+      return (
+        <div className="fulfill_elective_units">
+          <div className="balloon2-left">
+            <p>現在取得済み:</p>
+            {elective_units}単位
+            <p>単位充足!</p>
+          </div>
+        </div>
+      );
+    } else {
+      return <></>;
+    }
+  };
+
   return (
     <>
       <div className="header">
@@ -877,6 +920,17 @@ function App() {
         <p className="description">
           twinsからダウンロードできる成績のcsvを「ファイルを選択」からアップロードすることで履修中・修得済みの単位がグレーアウトされます
         </p>
+        <p>・履修中(twinsに登録中)の単位は「単位修得済み」の判定となります。</p>
+        <p>
+          ・必修科目は単位修得済みなら緑色、未修得なら白か黄色で表示されます。
+        </p>
+        <p>
+          ・選択科目(複数選択科目)は最低取得すべき単位数を満たしていれば緑色、そうでなければ黄色で表示されます。
+        </p>
+        <p>
+          ・選択科目で卒業に必要な単位数を満たしているかについては画面右側の選択科目合計取得単位数をご確認ください
+        </p>
+        <p></p>
         <PopUp />
         <img src="hover_ex.png" alt="吹き出し内の凡例" width="500px"></img>
       </div>
@@ -935,6 +989,7 @@ function App() {
           {judge_electiveGBGE()}
           {judge_electiveMuseum()}
           {judge_otherSubjects()}
+          {check_elective_units()}
         </div>
       </div>
     </>
