@@ -1,98 +1,130 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import './popup_rishu.css';
 
 interface CourseInfo {
   科目番号: string;
   科目名: string;
-  標準履修年次: string;
-  実施学期: string;
-  曜時限: string;
+  曜時限?: string;
+  標準履修年次?: string;
+  実施学期?: string;
+  単位数?: number;  // 追加
 }
 
-interface ElectivePopupProps {
+interface PopupRishuProps {
   isOpen: boolean;
   onClose: () => void;
   courseData: CourseInfo[];
   position: { x: number; y: number };
 }
 
-const ElectivePopup: React.FC<ElectivePopupProps> = ({ 
-  isOpen, 
-  onClose, 
-  courseData,
-  position
+const PopupRishu: React.FC<PopupRishuProps> = ({
+  isOpen,
+  onClose,
+  courseData
 }) => {
+  const [selectedYear, setSelectedYear] = useState<number>(1);
+  const [selectedSemester, setSelectedSemester] = useState<string>('春A');
+  const weekdays = ['月', '火', '水', '木', '金'];
+  const periods = Array.from({length: 7}, (_, i) => i + 1);
+  const semesters = ['春A', '春B', '春C', '秋A', '秋B', '秋C'];
+
   if (!isOpen) return null;
 
+  // GA4/GC5のみをフィルタリング
+  const filterByCourseNumber = (courses: CourseInfo[]) => {
+    return courses.filter(course => 
+      course.科目番号.startsWith('GA4') || 
+      course.科目番号.startsWith('GC5')
+    );
+  };
+
+  // 時限・年次情報のない科目を抽出
+  const specialCourses = filterByCourseNumber(
+    courseData.filter(course => 
+      !course.曜時限 || !course.標準履修年次 || 
+      course.曜時限.trim() === '' || 
+      course.標準履修年次.trim() === ''
+    )
+  );
+
+  // 通常の科目を年次と実施学期でフィルタリング
+  const getCoursesForCell = (day: string, period: number) => {
+    return filterByCourseNumber(
+      courseData.filter(course => 
+        course.曜時限?.includes(`${day}${period}`) &&
+        course.標準履修年次?.includes(selectedYear.toString()) &&
+        course.実施学期?.includes(selectedSemester)
+      )
+    );
+  };
+
   return (
-    <>
-      <div 
-        className="popup-overlay"
-        onClick={onClose}
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.3)',
-          zIndex: 999,
-					height: 'fit-content',
-					width: 'fit-content'
-        }}
-      />
-      <div
-        className="popup-content"
-        style={{
-          position: 'fixed',
-          left: `${position.x}px`,
-          top: `${position.y}px`,
-          backgroundColor: 'white',
-          padding: '1rem',
-          borderRadius: '4px',
-          boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-          zIndex: 1000,
-          maxHeight: '300px',
-          overflowY: 'auto',
-					height: 'fit-content',
-					width: 'fit-content',
-          minWidth: '400px'
-        }}
-      >
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-          <thead>
-            <tr style={{ borderBottom: '2px solid #ddd' }}>
-              <th style={{ padding: '8px', textAlign: 'left' }}>科目番号</th>
-              <th style={{ padding: '8px', textAlign: 'left' }}>科目名</th>
-              <th style={{ padding: '8px', textAlign: 'left' }}>標準履修年次</th>
-              <th style={{ padding: '8px', textAlign: 'left' }}>実施学期</th>
-              <th style={{ padding: '8px', textAlign: 'left' }}>曜時限</th>
-            </tr>
-          </thead>
-          <tbody>
-            {courseData
-              .filter(course => 
-                course.科目番号.startsWith('GA4') || 
-                course.科目番号.startsWith('GC5')
-              )
-              .map(course => (
-                <tr 
-                  key={course.科目番号}
-                  style={{ borderBottom: '1px solid #eee' }}
-                >
-                  <td style={{ padding: '8px' }}>{course.科目番号}</td>
-                  <td style={{ padding: '8px' }}>{course.科目名}</td>
-                  <td style={{ padding: '8px' }}>{course.標準履修年次}</td>
-                  <td style={{ padding: '8px' }}>{course.実施学期}</td>
-                  <td style={{ padding: '8px' }}>{course.曜時限}</td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-        <button onClick={onClose}>close</button>
+    <div className="popup">
+      <button className="close-button" onClick={onClose}>×</button>
+      
+      <div className="semester-selector">
+        {semesters.map(semester => (
+          <button
+            key={semester}
+            className={`semester-button ${selectedSemester === semester ? 'active' : ''}`}
+            onClick={() => setSelectedSemester(semester)}
+          >
+            {semester}
+          </button>
+        ))}
       </div>
-    </>
+
+      <div className="year-selector">
+        {[1, 2, 3, 4].map(year => (
+          <button
+            key={year}
+            className={`year-button ${selectedYear === year ? 'active' : ''}`}
+            onClick={() => setSelectedYear(year)}
+          >
+            {year}年次
+          </button>
+        ))}
+      </div>
+
+      <table className="timetable">
+        <thead>
+          <tr>
+            <th></th>
+            {weekdays.map(day => (
+              <th key={day}>{day}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {periods.map(period => (
+            <tr key={period}>
+              <td>{period}</td>
+              {weekdays.map(day => (
+                <td key={`${day}${period}`}>
+                  {getCoursesForCell(day, period).map(course => (
+                    <div key={course.科目番号} className="course-cell">
+                      {course.科目名}
+                      {course.単位数 && <div className="course-units">{course.単位数}単位</div>}
+                    </div>
+                  ))}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <div className="special-courses">
+        <h3>その他の科目</h3>
+        {specialCourses.map(course => (
+          <div key={course.科目番号} className="special-course-item">
+            {course.科目名}
+            {course.単位数 && <span className="course-units">{course.単位数}単位</span>}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 
-export default ElectivePopup;
+export default PopupRishu;
