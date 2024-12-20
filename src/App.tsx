@@ -16,9 +16,10 @@ import kdbData from './kdb_json/kdb_1218.json';
 interface CourseInfo {
   科目番号: string;
   科目名: string;
-  標準履修年次: string;
-  実施学期: string;
-  曜時限: string;
+  曜時限?: string;
+  標準履修年次?: string;
+  実施学期?: string;
+  単位数?: number;
 }
 
 type subjectList = {
@@ -33,13 +34,107 @@ type electiveSubjectList = {
   numberOfUnits: number;
 };
 
+const parseYearString = (yearStr: string): string => {
+  if (!yearStr) return '{}';
+  
+  let numbers: number[] = [];
+  
+  // ハイフンがある場合（例：1-4）
+  if (yearStr.includes('-')) {
+    const [start, end] = yearStr.split('-').map(Number);
+    numbers = Array.from({length: end - start + 1}, (_, i) => start + i);
+  }
+  // 中黒で区切られている場合（例：3・4）
+  else if (yearStr.includes('・')) {
+    numbers = yearStr.split('・').map(Number);
+  }
+  // 単一の数字の場合
+  else {
+    numbers = [Number(yearStr)];
+  }
+  
+  return `${numbers.join(',')}}`;
+};
+
+const parseSemesterString = (semester: string): string[] => {
+  const seasons = ['春', '秋'];
+  const modules = ['A', 'B', 'C'];
+  
+  let result: string[] = [];
+  
+  seasons.forEach(season => {
+    if (semester.includes(season)) {
+      if (semester.includes('ABC')) {
+        modules.forEach(module => {
+          result.push(`${season}${module}`);
+        });
+      } else {
+        modules.forEach(module => {
+          if (semester.includes(module)) {
+            result.push(`${season}${module}`);
+          }
+        });
+      }
+    }
+  });
+  
+  return result;
+};
+
+const parseTimeSlots = (timeStr: string): string[] => {
+  if (!timeStr) return [];
+  
+  // 曜日のパターン
+  const dayPattern = '[月火水木金]';
+  
+  // 入力文字列に曜日が含まれているかチェック
+  if (!timeStr.match(new RegExp(dayPattern))) {
+    return [timeStr];
+  }  
+  // 結果を格納する配列
+  const slots: string[] = [];
+  
+  // 「月・木3,4」のような形式を分割
+  const dayGroups = timeStr.split(/[,・]/);
+  
+  let currentDay = '';
+  
+  dayGroups.forEach(group => {
+    group = group.trim();
+    
+    // 曜日を含む場合は保存
+    if (group.match(new RegExp(dayPattern))) {
+      currentDay = group.match(new RegExp(dayPattern))![0];
+      group = group.replace(currentDay, '');
+    }
+    
+    // 時限の処理
+    if (group.includes('-')) {
+      // 範囲指定の場合 (例: 4-6)
+      const [start, end] = group.split('-').map(Number);
+      for (let i = start; i <= end; i++) {
+        slots.push(`${currentDay}${i}`);
+      }
+    } else {
+      // 単一の数字の場合
+      const period = group.match(/\d+/);
+      if (period) {
+        slots.push(`${currentDay}${period[0]}`);
+      }
+    }
+  });
+  
+  return slots;
+};
+
 const formatKdbData = (data: any[]): CourseInfo[] => {
   return data.map(item => ({
     科目番号: item.科目番号 || '',
     科目名: item.科目名 || '',
-    標準履修年次: item.標準履修年次 || '',
-    実施学期: item.実施学期 || '',
-    曜時限: item.曜時限 || ''
+    標準履修年次: parseYearString(item.標準履修年次 || ''),
+    実施学期: parseSemesterString(item.実施学期 || '').join(','),
+    曜時限: parseTimeSlots(item.曜時限 || '').join(','),
+    単位数: Number(item.単位数) || 0
   })).filter(item => item.科目番号 && item.科目名);
 };
 
