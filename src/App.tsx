@@ -10,8 +10,7 @@ import {
   pe_list,
   English_list,
 } from "./subjects";
-import kdbData from './kdb_json/kdb_1218.json';
-
+import kdbData from "./kdb_json/kdb_1218.json";
 
 interface CourseInfo {
   科目番号: string;
@@ -35,41 +34,41 @@ type electiveSubjectList = {
 };
 
 const parseYearString = (yearStr: string): string => {
-  if (!yearStr) return '{}';
-  
+  if (!yearStr) return "{}";
+
   let numbers: number[] = [];
-  
+
   // ハイフンがある場合（例：1-4）
-  if (yearStr.includes('-')) {
-    const [start, end] = yearStr.split('-').map(Number);
-    numbers = Array.from({length: end - start + 1}, (_, i) => start + i);
+  if (yearStr.includes("-")) {
+    const [start, end] = yearStr.split("-").map(Number);
+    numbers = Array.from({ length: end - start + 1 }, (_, i) => start + i);
   }
   // 中黒で区切られている場合（例：3・4）
-  else if (yearStr.includes('・')) {
-    numbers = yearStr.split('・').map(Number);
+  else if (yearStr.includes("・")) {
+    numbers = yearStr.split("・").map(Number);
   }
   // 単一の数字の場合
   else {
     numbers = [Number(yearStr)];
   }
-  
-  return `${numbers.join(',')}}`;
+
+  return `${numbers.join(",")}}`;
 };
 
 const parseSemesterString = (semester: string): string[] => {
-  const seasons = ['春', '秋'];
-  const modules = ['A', 'B', 'C'];
-  
+  const seasons = ["春", "秋"];
+  const modules = ["A", "B", "C"];
+
   let result: string[] = [];
-  
-  seasons.forEach(season => {
+
+  seasons.forEach((season) => {
     if (semester.includes(season)) {
-      if (semester.includes('ABC')) {
-        modules.forEach(module => {
+      if (semester.includes("ABC")) {
+        modules.forEach((module) => {
           result.push(`${season}${module}`);
         });
       } else {
-        modules.forEach(module => {
+        modules.forEach((module) => {
           if (semester.includes(module)) {
             result.push(`${season}${module}`);
           }
@@ -77,41 +76,41 @@ const parseSemesterString = (semester: string): string[] => {
       }
     }
   });
-  
+
   return result;
 };
 
 const parseTimeSlots = (timeStr: string): string[] => {
   if (!timeStr) return [];
-  
+
   // 曜日のパターン
-  const dayPattern = '[月火水木金]';
-  
+  const dayPattern = "[月火水木金]";
+
   // 入力文字列に曜日が含まれているかチェック
   if (!timeStr.match(new RegExp(dayPattern))) {
     return [timeStr];
-  }  
+  }
   // 結果を格納する配列
   const slots: string[] = [];
-  
+
   // 「月・木3,4」のような形式を分割
   const dayGroups = timeStr.split(/[,・]/);
-  
-  let currentDay = '';
-  
-  dayGroups.forEach(group => {
+
+  let currentDay = "";
+
+  dayGroups.forEach((group) => {
     group = group.trim();
-    
+
     // 曜日を含む場合は保存
     if (group.match(new RegExp(dayPattern))) {
       currentDay = group.match(new RegExp(dayPattern))![0];
-      group = group.replace(currentDay, '');
+      group = group.replace(currentDay, "");
     }
-    
+
     // 時限の処理
-    if (group.includes('-')) {
+    if (group.includes("-")) {
       // 範囲指定の場合 (例: 4-6)
-      const [start, end] = group.split('-').map(Number);
+      const [start, end] = group.split("-").map(Number);
       for (let i = start; i <= end; i++) {
         slots.push(`${currentDay}${i}`);
       }
@@ -123,19 +122,21 @@ const parseTimeSlots = (timeStr: string): string[] => {
       }
     }
   });
-  
+
   return slots;
 };
 
 const formatKdbData = (data: any[]): CourseInfo[] => {
-  return data.map(item => ({
-    科目番号: item.科目番号 || '',
-    科目名: item.科目名 || '',
-    標準履修年次: parseYearString(item.標準履修年次 || ''),
-    実施学期: parseSemesterString(item.実施学期 || '').join(','),
-    曜時限: parseTimeSlots(item.曜時限 || '').join(','),
-    単位数: Number(item.単位数) || 0
-  })).filter(item => item.科目番号 && item.科目名);
+  return data
+    .map((item) => ({
+      科目番号: item.科目番号 || "",
+      科目名: item.科目名 || "",
+      標準履修年次: parseYearString(item.標準履修年次 || ""),
+      実施学期: parseSemesterString(item.実施学期 || "").join(","),
+      曜時限: parseTimeSlots(item.曜時限 || "").join(","),
+      単位数: Number(item.単位数) || 0,
+    }))
+    .filter((item) => item.科目番号 && item.科目名);
 };
 
 function App() {
@@ -143,13 +144,12 @@ function App() {
   const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
   const [courseData] = useState<CourseInfo[]>(formatKdbData(kdbData));
 
-
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault(); // イベントのデフォルト動作を防止
     const rect = e.currentTarget.getBoundingClientRect();
-    setPopupPosition({ 
+    setPopupPosition({
       x: rect.right + 10, // 要素の右側に10pxの余白を追加
-      y: rect.top
+      y: rect.top,
     });
     setIsPopupOpen(true);
   };
@@ -558,13 +558,7 @@ function App() {
             width: "11.5%",
             height: "1.98%",
           }}
-        >
-          {information.length === 3 ? (
-            <img src="checkmark_v3.png"></img>
-          ) : (
-            <img src="exclamation-mark.png"></img>
-          )}
-        </div>
+        ></div>
       </div>
     );
   };
@@ -608,13 +602,7 @@ function App() {
             width: "11.5%",
             height: "1.98%",
           }}
-        >
-          {sougou_must.length === 2 ? (
-            <img src="checkmark_v3.png"></img>
-          ) : (
-            <img src="exclamation-mark.png"></img>
-          )}
-        </div>
+        ></div>
       </div>
     );
   };
@@ -656,13 +644,7 @@ function App() {
             width: "11.5%",
             height: "1.98%",
           }}
-        >
-          {pe.length === 4 ? (
-            <img src="checkmark_v3.png"></img>
-          ) : (
-            <img src="exclamation-mark.png"></img>
-          )}
-        </div>
+        ></div>
       </div>
     );
   };
@@ -708,19 +690,10 @@ function App() {
             width: "11.5%",
             height: "1.98%",
           }}
-        >
-          {English.length === 4 ? (
-            <img src="checkmark_v3.png"></img>
-          ) : (
-            <img src="exclamation-mark.png"></img>
-          )}
-        </div>
+        ></div>
       </div>
     );
   };
-
-
-  
 
   const judge_elective_basic = () => {
     if (!unit_basic) return <></>;
@@ -779,17 +752,16 @@ function App() {
               <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
             ))}
           </div>
-
         </div>
         <div className="advanced-white-area">
           <p>現在取得済み：{unit_advanced}</p>
         </div>
         <ElectivePopup
-            isOpen={isPopupOpen}
-            onClose={() => setIsPopupOpen(false)}
-            courseData={courseData}
-            position={popupPosition}
-          />
+          isOpen={isPopupOpen}
+          onClose={() => setIsPopupOpen(false)}
+          courseData={courseData}
+          position={popupPosition}
+        />
       </div>
     );
   };
