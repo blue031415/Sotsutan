@@ -214,6 +214,8 @@ function App() {
     null
   );
 
+  const [file_upload, setFile_upload] = useState(false);
+
   const toggleRishuneji = () => {
     setShowRishunenji(!showRishunenji);
   };
@@ -413,6 +415,8 @@ function App() {
   const fetchData = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
+
+    setFile_upload(true);
 
     try {
       const reader = new FileReader();
@@ -767,7 +771,22 @@ function App() {
   };
 
   const judge_gakusi = () => {
-    if (!unit_gakusi) return <></>;
+    if (!file_upload) return <></>;
+    else if (!unit_gakusi)
+      return (
+        <>
+          <div
+            style={{
+              position: "absolute",
+              top: `${26.4}%`,
+              left: "57.5%",
+              width: "8.67%",
+              height: "8%",
+              backgroundColor: "rgba(256, 256, 0, 0.4)",
+            }}
+          ></div>
+        </>
+      );
     return (
       <div>
         <div
@@ -805,7 +824,20 @@ function App() {
   };
 
   const judge_electivePE = () => {
-    if (!unit_electivePE) return <></>;
+    if (!file_upload) return <></>;
+    else if (!unit_electivePE)
+      return (
+        <div
+          style={{
+            position: "absolute",
+            top: `${34.2}%`,
+            left: "57.5%",
+            width: "8.67%",
+            height: "2.1%",
+            backgroundColor: "rgba(0, 128, 0, 0.4)",
+          }}
+        ></div>
+      );
     return (
       <div
         className="hover_electivePE"
@@ -818,17 +850,34 @@ function App() {
           backgroundColor: "rgba(0, 128, 0, 0.4)",
         }}
       >
-        <div className="electivePE">
-          {electivePE.map((subject, index) => (
-            <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
-          ))}
+        <div>
+          <div className="electivePE">
+            {electivePE.map((subject, index) => (
+              <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
+            ))}
+          </div>
         </div>
       </div>
     );
   };
 
   const judge_electiveLanguage = () => {
-    if (!unit_electiveLanguage) return <></>;
+    if (!file_upload) return <></>;
+    else if (!unit_electiveLanguage)
+      return (
+        <>
+          <div
+            style={{
+              position: "absolute",
+              top: `${36.2}%`,
+              left: "57.5%",
+              width: "8.67%",
+              height: "2.1%",
+              backgroundColor: "rgba(0, 128, 0, 0.4)",
+            }}
+          ></div>
+        </>
+      );
     return (
       <div
         className="hover_electiveLanguage"
@@ -851,7 +900,22 @@ function App() {
   };
 
   const judge_electiveJapanese = () => {
-    if (!unit_electiveJapanese) return <></>;
+    if (!file_upload) return <></>;
+    if (!unit_electiveJapanese)
+      return (
+        <>
+          <div
+            style={{
+              position: "absolute",
+              top: `${38.2}%`,
+              left: "57.5%",
+              width: "8.67%",
+              height: "2.1%",
+              backgroundColor: "rgba(0, 128, 0, 0.4)",
+            }}
+          ></div>
+        </>
+      );
     return (
       <div
         className="hover_electiveJapanese"
@@ -874,7 +938,23 @@ function App() {
   };
 
   const judge_electiveArt = () => {
-    if (!unit_electiveArt) return <></>;
+    if (!file_upload) return <></>;
+    else if (!unit_electiveArt)
+      return (
+        <>
+          <div
+            style={{
+              position: "absolute",
+              top: `${40.2}%`,
+              left: "57.5%",
+              width: "8.67%",
+              height: "2.1%",
+              backgroundColor: "rgba(0, 128, 0, 0.4)",
+            }}
+          ></div>
+        </>
+      );
+
     return (
       <div
         className="hover_electiveJapanese"
