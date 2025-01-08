@@ -700,7 +700,27 @@ function App() {
   };
 
   const judge_elective_basic = () => {
-    if (!unit_basic) return <></>;
+    if (!file_upload) return <></>;
+    if (!unit_basic)
+      return (
+        <>
+          <div
+            className="hover_elective_basic"
+            style={{
+              position: "absolute",
+              top: `${26.4}%`,
+              left: "36%",
+              width: "10%",
+              height: "47.9%",
+              backgroundColor: "rgba(255, 255, 0, 0.4)",
+              zIndex: 3,
+            }}
+          ></div>
+          <div className="basic-white-area">
+            <p>現在修得済み：{unit_basic}</p>
+          </div>
+        </>
+      );
     return (
       <div>
         <div
@@ -725,14 +745,34 @@ function App() {
           </div>
         </div>
         <div className="basic-white-area">
-          <p>現在取得済み：{unit_basic}</p>
+          <p>現在修得済み：{unit_basic}</p>
         </div>
       </div>
     );
   };
 
   const judge_elective_advanced = () => {
-    if (!unit_advanced) return <></>;
+    if (!file_upload) return <></>;
+    if (!unit_advanced)
+      return (
+        <>
+          <div
+            className="hover_elective_basic"
+            style={{
+              position: "absolute",
+              top: `${26.4}%`,
+              left: "12.3%",
+              width: "10.2%",
+              height: "47.9%",
+              backgroundColor: "rgba(256, 256, 0, 0.4)",
+              zIndex: 4,
+            }}
+          ></div>
+          <div className="advanced-white-area">
+            <p>現在修得済み：0</p>
+          </div>
+        </>
+      );
     return (
       <div>
         <div
@@ -758,7 +798,7 @@ function App() {
           </div>
         </div>
         <div className="advanced-white-area">
-          <p>現在取得済み：{unit_advanced}</p>
+          <p>現在修得済み：{unit_advanced}</p>
         </div>
         <ElectivePopup
           isOpen={isPopupOpen}
@@ -785,6 +825,9 @@ function App() {
               backgroundColor: "rgba(256, 256, 0, 0.4)",
             }}
           ></div>
+          <div className="common-white-area">
+            <p>現在修得済み：0</p>
+          </div>
         </>
       );
     return (
@@ -811,7 +854,7 @@ function App() {
         </div>
         <div className="common-white-area">
           <p>
-            現在取得済み：
+            現在修得済み：
             {unit_gakusi +
               (unit_electivePE === null ? 0 : unit_electivePE) +
               (unit_electiveLanguage === null ? 0 : unit_electiveLanguage) +
@@ -977,7 +1020,23 @@ function App() {
   };
 
   const judge_electiveGBGE = () => {
-    if (!unit_electiveGBGE) return <></>;
+    if (!file_upload) return <></>;
+    else if (!unit_electiveGBGE)
+      return (
+        <>
+          <div
+            style={{
+              position: "absolute",
+              top: `${38.4}%`,
+              left: "74.1%",
+              width: "9.3%",
+              height: "4.1%",
+              backgroundColor: "rgba(0, 128, 0, 0.4)",
+              zIndex: 1,
+            }}
+          ></div>
+        </>
+      );
     return (
       <div
         className="hover_electiveGBGE"
@@ -1001,7 +1060,23 @@ function App() {
   };
 
   const judge_electiveMuseum = () => {
-    if (!unit_electiveMuseum) return <></>;
+    if (!file_upload) return <></>;
+    else if (!unit_electiveMuseum)
+      return (
+        <>
+          <div
+            style={{
+              position: "absolute",
+              top: `${42.5}%`,
+              left: "74.1%",
+              width: "9.3%",
+              height: "7.9%",
+              backgroundColor: "rgba(0, 128, 0, 0.4)",
+              zIndex: 2,
+            }}
+          ></div>
+        </>
+      );
     return (
       <div
         className="hover_electiveMuseum"
@@ -1025,7 +1100,26 @@ function App() {
   };
 
   const judge_otherSubjects = () => {
-    if (!unit_otherSubjects) return <></>;
+    if (!file_upload) return <></>;
+    if (!unit_otherSubjects)
+      return (
+        <>
+          <div
+            style={{
+              position: "absolute",
+              top: `${26.4}%`,
+              left: "74.1%",
+              width: "9.3%",
+              height: "11.9%",
+              backgroundColor: "rgba(256, 256, 0, 0.4)",
+              zIndex: 0,
+            }}
+          ></div>
+          <div className="relation-white-area">
+            <p>現在修得済み：0</p>
+          </div>
+        </>
+      );
     return (
       <div>
         <div
@@ -1051,7 +1145,7 @@ function App() {
         </div>
         <div className="relation-white-area">
           <p>
-            現在取得済み：
+            現在修得済み：
             {unit_otherSubjects +
               (unit_electiveGBGE === null ? 0 : unit_electiveGBGE) +
               (unit_electiveMuseum === null ? 0 : unit_electiveMuseum)}
@@ -1063,27 +1157,33 @@ function App() {
 
   const check_elective_units = () => {
     let elective_units =
-      Math.min(unit_basic === null ? 0 : unit_basic, 32) +
-      Math.min(unit_advanced === null ? 0 : unit_advanced, 20) +
+      Math.min(unit_basic === null ? 0 : unit_basic, 47) +
+      Math.min(unit_advanced === null ? 0 : unit_advanced, 35) +
       Math.min(
-        (unit_gakusi === null ? 0 : unit_gakusi) +
-          (unit_electivePE === null ? 0 : unit_electivePE) +
-          (unit_electiveLanguage === null ? 0 : unit_electiveLanguage) +
-          (unit_electiveJapanese === null ? 0 : unit_electiveJapanese) +
-          (unit_electiveArt === null ? 0 : unit_electiveArt),
+        Math.min(unit_gakusi === null ? 0 : unit_gakusi, 4) +
+          Math.min(unit_electivePE === null ? 0 : unit_electivePE, 2) +
+          Math.min(
+            unit_electiveLanguage === null ? 0 : unit_electiveLanguage,
+            6
+          ) +
+          Math.min(
+            unit_electiveJapanese === null ? 0 : unit_electiveJapanese,
+            2
+          ) +
+          Math.min(unit_electiveArt === null ? 0 : unit_electiveArt, 6),
         10
       ) +
       Math.min(
-        (unit_electiveGBGE === null ? 0 : unit_electiveGBGE) +
-          (unit_electiveMuseum === null ? 0 : unit_electiveMuseum) +
-          (unit_otherSubjects === null ? 0 : unit_otherSubjects),
+        Math.min(unit_electiveGBGE === null ? 0 : unit_electiveGBGE, 9) +
+          Math.min(unit_electiveMuseum === null ? 0 : unit_electiveMuseum, 9) +
+          Math.min(unit_otherSubjects === null ? 0 : unit_otherSubjects, 15),
         15
       );
-    if (elective_units < 74 && unit_basic) {
+    if (elective_units < 74 && file_upload) {
       return (
         <div className="alert_lack_of_elective_units">
           <div className="balloon2-left">
-            <p>現在取得済み:</p>
+            <p>現在修得済み:</p>
             {elective_units}単位
             <p>単位不足!</p>
           </div>
