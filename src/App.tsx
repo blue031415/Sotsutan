@@ -816,6 +816,7 @@ function App() {
       return (
         <>
           <div
+            className="hover_gakusi"
             style={{
               position: "absolute",
               top: `${26.4}%`,
@@ -824,7 +825,9 @@ function App() {
               height: "8%",
               backgroundColor: "rgba(256, 256, 0, 0.4)",
             }}
-          ></div>
+          >
+            <div className="gakusi">この区分の科目は履修・修得していません</div>
+          </div>
           <div className="common-white-area">
             <p>現在修得済み：0</p>
           </div>
@@ -871,6 +874,7 @@ function App() {
     else if (!unit_electivePE)
       return (
         <div
+          className="hover_electivePE"
           style={{
             position: "absolute",
             top: `${34.2}%`,
@@ -879,7 +883,11 @@ function App() {
             height: "2.1%",
             backgroundColor: "rgba(0, 128, 0, 0.4)",
           }}
-        ></div>
+        >
+          <div className="electivePE">
+            この区分の科目は履修・修得していません
+          </div>
+        </div>
       );
     return (
       <div
@@ -910,6 +918,7 @@ function App() {
       return (
         <>
           <div
+            className="hover_electiveLanguage"
             style={{
               position: "absolute",
               top: `${36.2}%`,
@@ -918,7 +927,11 @@ function App() {
               height: "2.1%",
               backgroundColor: "rgba(0, 128, 0, 0.4)",
             }}
-          ></div>
+          >
+            <div className="electiveLanguage">
+              この区分の科目は履修・修得していません
+            </div>
+          </div>
         </>
       );
     return (
@@ -948,6 +961,7 @@ function App() {
       return (
         <>
           <div
+            className="hover_electiveJapanese"
             style={{
               position: "absolute",
               top: `${38.2}%`,
@@ -956,7 +970,11 @@ function App() {
               height: "2.1%",
               backgroundColor: "rgba(0, 128, 0, 0.4)",
             }}
-          ></div>
+          >
+            <div className="electiveJapanese">
+              この区分の科目は履修・修得していません
+            </div>
+          </div>
         </>
       );
     return (
@@ -986,6 +1004,7 @@ function App() {
       return (
         <>
           <div
+            className="hover_electiveJapanese"
             style={{
               position: "absolute",
               top: `${40.2}%`,
@@ -994,7 +1013,11 @@ function App() {
               height: "2.1%",
               backgroundColor: "rgba(0, 128, 0, 0.4)",
             }}
-          ></div>
+          >
+            <div className="electiveJapanese">
+              この区分の科目は履修・修得していません
+            </div>
+          </div>
         </>
       );
 
@@ -1025,6 +1048,7 @@ function App() {
       return (
         <>
           <div
+            className="hover_electiveGBGE"
             style={{
               position: "absolute",
               top: `${38.4}%`,
@@ -1034,7 +1058,11 @@ function App() {
               backgroundColor: "rgba(0, 128, 0, 0.4)",
               zIndex: 1,
             }}
-          ></div>
+          >
+            <div className="electiveGBGE">
+              この区分の科目は履修・修得していません
+            </div>
+          </div>
         </>
       );
     return (
@@ -1065,6 +1093,7 @@ function App() {
       return (
         <>
           <div
+            className="hover_electiveMuseum"
             style={{
               position: "absolute",
               top: `${42.5}%`,
@@ -1074,7 +1103,11 @@ function App() {
               backgroundColor: "rgba(0, 128, 0, 0.4)",
               zIndex: 2,
             }}
-          ></div>
+          >
+            <div className="electiveMuseum">
+              この区分の科目は履修・修得していません
+            </div>
+          </div>
         </>
       );
     return (
