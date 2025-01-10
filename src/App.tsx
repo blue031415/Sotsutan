@@ -1218,7 +1218,7 @@ function App() {
           <div className="balloon2-left">
             <p>現在修得済み:</p>
             {elective_units}単位
-            <p>単位不足!</p>
+            <p>あと{74 - elective_units}単位必要!</p>
           </div>
         </div>
       );
