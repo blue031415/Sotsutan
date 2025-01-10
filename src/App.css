@@ -304,7 +304,6 @@
 .hover_elective_basic {
   border-color: black;
   border-width: 2px;
-  border-style: solid;
   box-sizing: border-box;
   position: relative;
   z-index: 2;
