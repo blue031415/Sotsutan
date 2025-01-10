@@ -729,7 +729,7 @@ function App() {
             position: "absolute",
             top: `${26.4}%`,
             left: "36%",
-            width: "10%",
+            width: "6%",
             height: "47.9%",
             backgroundColor:
               unit_basic >= 32
@@ -781,7 +781,7 @@ function App() {
             position: "absolute",
             top: `${26.4}%`,
             left: "12.3%",
-            width: "10.2%",
+            width: "6.2%",
             height: "47.9%",
             backgroundColor:
               unit_advanced >= 32
