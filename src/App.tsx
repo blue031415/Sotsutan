@@ -710,7 +710,7 @@ function App() {
               position: "absolute",
               top: `${26.4}%`,
               left: "36%",
-              width: "10%",
+              width: "6%",
               height: "47.9%",
               backgroundColor: "rgba(255, 255, 0, 0.4)",
               zIndex: 3,
@@ -729,7 +729,7 @@ function App() {
             position: "absolute",
             top: `${26.4}%`,
             left: "36%",
-            width: "10%",
+            width: "6%",
             height: "47.9%",
             backgroundColor:
               unit_basic >= 32
@@ -762,7 +762,7 @@ function App() {
               position: "absolute",
               top: `${26.4}%`,
               left: "12.3%",
-              width: "10.2%",
+              width: "6.2%",
               height: "47.9%",
               backgroundColor: "rgba(256, 256, 0, 0.4)",
               zIndex: 4,
@@ -781,7 +781,7 @@ function App() {
             position: "absolute",
             top: `${26.4}%`,
             left: "12.3%",
-            width: "10.2%",
+            width: "6.2%",
             height: "47.9%",
             backgroundColor:
               unit_advanced >= 32
@@ -1260,16 +1260,22 @@ function App() {
         <PopUp />
         <img src="hover_ex.png" alt="吹き出し内の凡例" width="500px"></img>
       </div>
-      <input
-        type="file"
-        name="csv_import"
-        accept="csv"
-        id="upload-file"
-        onChange={fetchData}
-      ></input>
-      <button onClick={toggleRishuneji}>
-        {showRishunenji ? "履修年次を表示しない" : "履修年次を表示する"}
-      </button>
+      <div>
+        <label htmlFor="upload-file" className="custom-button">
+          csvファイルをアップロード
+        </label>
+        <input
+          type="file"
+          id="upload-file"
+          name="csv_import"
+          accept=".csv"
+          onChange={fetchData}
+          style={{ display: "none" }}
+        />
+        <button onClick={toggleRishuneji}>
+          {showRishunenji ? "履修年次を表示しない" : "履修年次を表示する"}
+        </button>
+      </div>
       <div className="highlight-box">
         <div className="youran_mast">
           <img src={showRishunenji ? "mast24_rishunenji.png" : "mast24.png"} />
