@@ -1215,20 +1215,24 @@ function App() {
     if (elective_units < 74 && file_upload) {
       return (
         <div className="alert_lack_of_elective_units">
-          <div className="balloon2-left">
-            <p>現在修得済み:</p>
-            {elective_units}単位
-            <p>あと{74 - elective_units}単位必要!</p>
+          <div className="location_of_balloon">
+            <div className="balloon2-left">
+              <p>現在修得済み:</p>
+              {elective_units}単位
+              <p>あと{74 - elective_units}単位必要!</p>
+            </div>
           </div>
         </div>
       );
     } else if (elective_units >= 74 && unit_basic) {
       return (
         <div className="fulfill_elective_units">
-          <div className="balloon2-left">
-            <p>現在取得済み:</p>
-            {elective_units}単位
-            <p>単位充足!</p>
+          <div className="location_of_balloon">
+            <div className="balloon2-left">
+              <p>現在取得済み:</p>
+              {elective_units}単位
+              <p>単位充足!</p>
+            </div>
           </div>
         </div>
       );
