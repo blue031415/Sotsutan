@@ -667,8 +667,8 @@
 }
 
 .basic-white-area {
-  width: 6.5%;
-  left: 35.6%;
+  width: 10%;
+  left: 36%;
   position: absolute;
   background: #f8f9fa;
   text-align: center;
@@ -707,8 +707,8 @@
 }
 
 .advanced-white-area {
-  width: 6.5%;
-  left: 12%;
+  width: 10%;
+  left: 12.4%;
   position: absolute;
   background: #f8f9fa;
   text-align: center;
@@ -749,7 +749,7 @@
   background: #f8f9fa;
   text-align: center;
   align-items: center;
-  width: 8.4%;
+  width: 10%;
   top: 69%;
   left: 57.6%;
   height: 4%;
@@ -789,7 +789,7 @@
   background: #f8f9fa;
   text-align: center;
   align-items: center;
-  width: 9%;
+  width: 10%;
   top: 69%;
   left: 74.25%;
   height: 4%;
