@@ -1262,7 +1262,7 @@ function App() {
       </div>
       <div>
         <label htmlFor="upload-file" className="custom-button">
-          csvファイルをアップロード
+          CSVファイルをアップロード
         </label>
         <input
           type="file"
