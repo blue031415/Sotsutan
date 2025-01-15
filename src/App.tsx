@@ -497,7 +497,7 @@ function App() {
               flagSubjectList_sougou_must
             )
           ) {
-            if (row[7] !== `"D"` && row[7] !== "`F`") {
+            if (row[7] !== `"D"` && row[7] !== `"F"`) {
               updateElectiveSubjects.push({
                 name: row[3],
                 subjectId: row[2],
