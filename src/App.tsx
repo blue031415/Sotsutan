@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
+import Header from "./components/header";
 import PopUp from "./components/popup";
 import ElectivePopup from "./components/popup_rishu";
 import {
@@ -1239,43 +1240,21 @@ function App() {
 
   return (
     <>
-      <div className="header">
-        <p className="tool-title">履修支援ツール</p>
-        <h1 className="main-title">そつたん</h1>
-        <h2 className="sub-title">mast22, 23, 24生に対応しています</h2>
-        <p className="description">
-          twinsからダウンロードできる成績のcsvを「ファイルを選択」からアップロードすることで履修中・修得済みの単位がグレーアウトされます
-        </p>
-        <p>・履修中(twinsに登録中)の単位は「単位修得済み」の判定となります。</p>
-        <p>
-          ・必修科目は単位修得済みなら緑色、未修得なら白か黄色で表示されます。
-        </p>
-        <p>
-          ・選択科目(複数選択科目)は最低取得すべき単位数を満たしていれば緑色、そうでなければ黄色で表示されます。
-        </p>
-        <p>
-          ・選択科目で卒業に必要な単位数を満たしているかについては画面右側の選択科目合計取得単位数をご確認ください
-        </p>
-        <p></p>
-        <PopUp />
-        <img src="hover_ex.png" alt="吹き出し内の凡例" width="500px"></img>
-      </div>
-      <div>
-        <label htmlFor="upload-file" className="custom-button">
-          CSVファイルをアップロード
-        </label>
-        <input
-          type="file"
-          id="upload-file"
-          name="csv_import"
-          accept=".csv"
-          onChange={fetchData}
-          style={{ display: "none" }}
-        />
-        <button onClick={toggleRishuneji}>
-          {showRishunenji ? "履修年次を表示しない" : "履修年次を表示する"}
-        </button>
-      </div>
+      <Header />
+      <label htmlFor="upload-file" className="custom-button">
+        CSVファイルをアップロード
+      </label>
+      <input
+        type="file"
+        id="upload-file"
+        name="csv_import"
+        accept=".csv"
+        onChange={fetchData}
+        style={{ display: "none" }}
+      />
+      <button onClick={toggleRishuneji}>
+        {showRishunenji ? "履修年次を表示しない" : "履修年次を表示する"}
+      </button>
       <div className="highlight-box">
         <div className="youran_mast">
           <img src={showRishunenji ? "mast24_rishunenji.png" : "mast24.png"} />
