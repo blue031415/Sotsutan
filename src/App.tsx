@@ -1167,7 +1167,7 @@ function App() {
   };
 
   const check_elective_units = () => {
-    let elective_units =
+    const elective_units =
       Math.min(unit_basic === null ? 0 : unit_basic, 47) +
       Math.min(unit_advanced === null ? 0 : unit_advanced, 35) +
       Math.min(
