@@ -1260,16 +1260,22 @@ function App() {
         <PopUp />
         <img src="hover_ex.png" alt="吹き出し内の凡例" width="500px"></img>
       </div>
-      <input
-        type="file"
-        name="csv_import"
-        accept="csv"
-        id="upload-file"
-        onChange={fetchData}
-      ></input>
-      <button onClick={toggleRishuneji}>
-        {showRishunenji ? "履修年次を表示しない" : "履修年次を表示する"}
-      </button>
+      <div>
+        <label htmlFor="upload-file" className="custom-button">
+          CSVファイルをアップロード
+        </label>
+        <input
+          type="file"
+          id="upload-file"
+          name="csv_import"
+          accept=".csv"
+          onChange={fetchData}
+          style={{ display: "none" }}
+        />
+        <button onClick={toggleRishuneji}>
+          {showRishunenji ? "履修年次を表示しない" : "履修年次を表示する"}
+        </button>
+      </div>
       <div className="highlight-box">
         <div className="youran_mast">
           <img src={showRishunenji ? "mast24_rishunenji.png" : "mast24.png"} />
