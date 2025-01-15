@@ -692,7 +692,7 @@ function App() {
     if (!file_upload) return <></>;
     const elements =
       unit_basic === 0 ? (
-        <p>この区分の科目は履修・修得していません</p>
+        <p style={{ color: "red" }}>この区分の科目は履修・修得していません</p>
       ) : (
         <table className="hoberTable">
           <thead>
@@ -743,7 +743,7 @@ function App() {
     if (!file_upload) return <></>;
     const elements =
       unit_basic === 0 ? (
-        <p>この区分の科目は履修・修得していません</p>
+        <p style={{ color: "red" }}>この区分の科目は履修・修得していません</p>
       ) : (
         <table className="hoberTable">
           <thead>
@@ -801,7 +801,7 @@ function App() {
     if (!file_upload) return <></>;
     const elements =
       unit_basic === 0 ? (
-        <p>この区分の科目は履修・修得していません</p>
+        <p style={{ color: "red" }}>この区分の科目は履修・修得していません</p>
       ) : (
         <table className="hoberTable">
           <thead>
@@ -1114,7 +1114,7 @@ function App() {
     if (!file_upload) return <></>;
     const elements =
       unit_basic === 0 ? (
-        <p>この区分の科目は履修・修得していません</p>
+        <p style={{ color: "red" }}>この区分の科目は履修・修得していません</p>
       ) : (
         <table className="hoberTable">
           <thead>
