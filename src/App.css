@@ -675,13 +675,35 @@
   align-items: center;
   top: 69%;
   height: 4%;
-  z-index: 10;
+  z-index: 3;
   font-size: 30%;
   white-space: nowrap;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   font-weight: bold;
   border: 2px solid black;
+}
+
+.basic-white-area:before {
+  content: "";
+  position: absolute;
+  top: 97%;
+  left: 50%;
+  transform: translateX(-50%); /* 中央揃え */
+  border: 8px solid transparent;
+  border-top: 12px solid #f8f9fa; /* 上方向の三角形を作る */
+  z-index: 2;
+}
+
+.basic-white-area:after {
+  content: "";
+  position: absolute;
+  top: 100%; /* 下方向に配置 */
+  left: 50%; /* 吹き出しの中央に配置 */
+  transform: translateX(-50%); /* 中央揃え */
+  border: 10px solid transparent;
+  border-top: 14px solid black; /* 上方向の三角形を作る（外側の境界線） */
+  z-index: 1;
 }
 
 .advanced-white-area {
@@ -693,12 +715,33 @@
   align-items: center;
   top: 69%;
   height: 4%;
-  z-index: 10;
+  z-index: 4;
   font-size: 30%;
   white-space: nowrap;
   border-radius: 10px;
   font-weight: bold;
   border: 2px solid black;
+}
+.advanced-white-area:before {
+  content: "";
+  position: absolute;
+  top: 97%;
+  left: 50%;
+  transform: translateX(-50%); /* 中央揃え */
+  border: 8px solid transparent;
+  border-top: 12px solid #f8f9fa; /* 上方向の三角形を作る */
+  z-index: 2;
+}
+
+.advanced-white-area:after {
+  content: "";
+  position: absolute;
+  top: 100%; /* 下方向に配置 */
+  left: 50%; /* 吹き出しの中央に配置 */
+  transform: translateX(-50%); /* 中央揃え */
+  border: 10px solid transparent;
+  border-top: 14px solid black; /* 上方向の三角形を作る（外側の境界線） */
+  z-index: 1;
 }
 
 .common-white-area {
@@ -710,13 +753,35 @@
   top: 69%;
   left: 57.6%;
   height: 4%;
-  z-index: 10;
+  z-index: 1;
   font-size: 30%;
   white-space: nowrap;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   font-weight: bold;
   border: 2px solid black;
+}
+
+.common-white-area:before {
+  content: "";
+  position: absolute;
+  top: 97%;
+  left: 50%;
+  transform: translateX(-50%); /* 中央揃え */
+  border: 8px solid transparent;
+  border-top: 12px solid #f8f9fa; /* 上方向の三角形を作る */
+  z-index: 2;
+}
+
+.common-white-area:after {
+  content: "";
+  position: absolute;
+  top: 100%; /* 下方向に配置 */
+  left: 50%; /* 吹き出しの中央に配置 */
+  transform: translateX(-50%); /* 中央揃え */
+  border: 10px solid transparent;
+  border-top: 14px solid black; /* 上方向の三角形を作る（外側の境界線） */
+  z-index: 1;
 }
 
 .relation-white-area {
@@ -728,13 +793,35 @@
   top: 69%;
   left: 74.25%;
   height: 4%;
-  z-index: 10;
+  z-index: 2;
   font-size: 30%;
   white-space: nowrap;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   font-weight: bold;
   border: 2px solid black;
+}
+
+.relation-white-area:before {
+  content: "";
+  position: absolute;
+  top: 97%;
+  left: 50%;
+  transform: translateX(-50%); /* 中央揃え */
+  border: 8px solid transparent;
+  border-top: 12px solid #f8f9fa; /* 上方向の三角形を作る */
+  z-index: 2;
+}
+
+.relation-white-area:after {
+  content: "";
+  position: absolute;
+  top: 100%; /* 下方向に配置 */
+  left: 50%; /* 吹き出しの中央に配置 */
+  transform: translateX(-50%); /* 中央揃え */
+  border: 10px solid transparent;
+  border-top: 14px solid black; /* 上方向の三角形を作る（外側の境界線） */
+  z-index: 1;
 }
 
 .alert_lack_of_elective_units {
@@ -757,7 +844,7 @@
 
 .location_of_balloon {
   position: absolute;
-  top: 82%;
+  top: 84%;
   left: 50%;
 }
 
@@ -777,11 +864,11 @@
 .balloon2-left:before {
   content: "";
   position: absolute;
-  top: 56%;
-  left: -20px;
+  top: 57%;
+  left: -18px;
   margin-top: -12px;
   border: 8px solid transparent;
-  border-right: 12px solid #fff;
+  border-right: 12px solid #f8f9fa;
   z-index: 2;
 }
 
@@ -789,7 +876,7 @@
   content: "";
   position: absolute;
   top: 56%;
-  left: -26px;
+  left: -23.5px;
   margin-top: -14px;
   border: 10px solid transparent;
   border-right: 14px solid black;
