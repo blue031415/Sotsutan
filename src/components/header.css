@@ -28,7 +28,6 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 10px;
 }
 
 .checkmark-icon {
@@ -47,6 +46,11 @@
   width: 220px;
   height: 100px;
   object-fit: contain;
+}
+
+.subjectlist-example {
+	padding-top: 10px;
+	height: 100px;
 }
 
 .usage {

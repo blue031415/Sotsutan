@@ -8,6 +8,7 @@ import download_icon from "./download_icon.png";
 import upload_icon from "./upload_icon.png";
 import caution from "./caution.png";
 import info_icon from "./info_icon.png";
+import subjectlist from "./subjectlist.png";
 import PopUp from "./popup";
 
 const Header = () => {
@@ -64,6 +65,17 @@ const Header = () => {
               alt="hover_red"
               className="hover-example"
             ></img>
+          </div>
+          <div className="function-row">
+            <div>
+              <img src={checkmark} alt="checkmark" className="checkmark-icon" />
+              専門科目選択科目・専門基礎科目選択科目の部分をクリックすることで科目リストが表示されます
+            </div>
+            <img
+              src={subjectlist}
+              alt="subjectlist"
+              className="subjectlist-example"
+            />
           </div>
           <div className="function-row">
             <img src={checkmark} alt="checkmark" className="checkmark-icon" />
