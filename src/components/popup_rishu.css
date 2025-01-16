@@ -7,8 +7,8 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 800px; /* 固定幅 */
-  height: 600px; /* 固定高さ */
+  width: 800px;
+  height: 600px;
   overflow-y: auto;
   z-index: 1000;
   display: flex;
@@ -16,9 +16,10 @@
 }
 
 .close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  position: sticky;
+  top: 0;
+  right: 0;
+  align-self: flex-end;
   border: none;
   background: none;
   font-size: 24px;
