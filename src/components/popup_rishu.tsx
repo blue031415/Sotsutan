@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./popup_rishu.css";
 
 interface CourseInfo {
@@ -24,23 +24,10 @@ const PopupBasicRishu: React.FC<PopupRishuProps> = ({
   courseData,
   courseFilters,
 }) => {
-  const [selectedYear, setSelectedYear] = useState<number>(1);
-  const [selectedSemester, setSelectedSemester] = useState<string>("春A");
-  const semesters = ["春A", "春B", "春C", "秋A", "秋B", "秋C"];
-
   if (!isOpen) return null;
 
-  const filterByCourseNumber = (courses: CourseInfo[]) =>
-    courses.filter((course) =>
-      courseFilters.some((filter) => course.科目番号.startsWith(filter))
-    );
-
-  const filteredCourses = filterByCourseNumber(
-    courseData.filter(
-      (course) =>
-        course.標準履修年次?.includes(selectedYear.toString()) &&
-        course.実施学期?.includes(selectedSemester)
-    )
+  const filteredCourses = courseData.filter((course) =>
+    courseFilters.some((filter) => course.科目番号.startsWith(filter))
   );
 
   return (
@@ -48,32 +35,6 @@ const PopupBasicRishu: React.FC<PopupRishuProps> = ({
       <button className="close-button" onClick={onClose}>
         ×
       </button>
-
-      <div className="semester-selector">
-        {semesters.map((semester) => (
-          <button
-            key={semester}
-            className={`semester-button ${
-              selectedSemester === semester ? "active" : ""
-            }`}
-            onClick={() => setSelectedSemester(semester)}
-          >
-            {semester}
-          </button>
-        ))}
-      </div>
-
-      <div className="year-selector">
-        {[1, 2, 3, 4].map((year) => (
-          <button
-            key={year}
-            className={`year-button ${selectedYear === year ? "active" : ""}`}
-            onClick={() => setSelectedYear(year)}
-          >
-            {year}年次
-          </button>
-        ))}
-      </div>
 
       <table className="timetable">
         <thead>
