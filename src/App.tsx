@@ -717,7 +717,7 @@ function App() {
             }}
           ></div>
           <div className="basic-white-area">
-            <p>現在修得済み：{unit_basic}</p>
+            <p>現在修得済み：{unit_basic}単位</p>
           </div>
         </>
       );
@@ -745,7 +745,7 @@ function App() {
           </div>
         </div>
         <div className="basic-white-area">
-          <p>現在修得済み：{unit_basic}</p>
+          <p>現在修得済み：{unit_basic}単位</p>
         </div>
       </div>
     );
@@ -769,7 +769,7 @@ function App() {
             }}
           ></div>
           <div className="advanced-white-area">
-            <p>現在修得済み：0</p>
+            <p>現在修得済み：0単位</p>
           </div>
         </>
       );
@@ -798,7 +798,7 @@ function App() {
           </div>
         </div>
         <div className="advanced-white-area">
-          <p>現在修得済み：{unit_advanced}</p>
+          <p>現在修得済み：{unit_advanced}単位</p>
         </div>
         <ElectivePopup
           isOpen={isPopupOpen}
@@ -829,7 +829,7 @@ function App() {
             <div className="gakusi">この区分の科目は履修・修得していません</div>
           </div>
           <div className="common-white-area">
-            <p>現在修得済み：0</p>
+            <p>現在修得済み：0単位</p>
           </div>
         </>
       );
@@ -863,6 +863,7 @@ function App() {
               (unit_electiveLanguage === null ? 0 : unit_electiveLanguage) +
               (unit_electiveJapanese === null ? 0 : unit_electiveJapanese) +
               (unit_electiveArt === null ? 0 : unit_electiveArt)}
+            単位
           </p>
         </div>
       </div>
@@ -1149,7 +1150,7 @@ function App() {
             }}
           ></div>
           <div className="relation-white-area">
-            <p>現在修得済み：0</p>
+            <p>現在修得済み：0単位</p>
           </div>
         </>
       );
@@ -1182,6 +1183,7 @@ function App() {
             {unit_otherSubjects +
               (unit_electiveGBGE === null ? 0 : unit_electiveGBGE) +
               (unit_electiveMuseum === null ? 0 : unit_electiveMuseum)}
+            単位
           </p>
         </div>
       </div>
@@ -1215,20 +1217,22 @@ function App() {
     if (elective_units < 74 && file_upload) {
       return (
         <div className="alert_lack_of_elective_units">
-          <div className="balloon2-left">
-            <p>現在修得済み:</p>
-            {elective_units}単位
-            <p>あと{74 - elective_units}単位必要!</p>
+          <div className="location_of_balloon">
+            <div className="balloon2-left">
+              <p>現在修得済み:{elective_units}単位</p>
+              <p>あと{74 - elective_units}単位必要!</p>
+            </div>
           </div>
         </div>
       );
     } else if (elective_units >= 74 && unit_basic) {
       return (
         <div className="fulfill_elective_units">
-          <div className="balloon2-left">
-            <p>現在取得済み:</p>
-            {elective_units}単位
-            <p>単位充足!</p>
+          <div className="location_of_balloon">
+            <div className="balloon2-left">
+              <p>現在修得済み:{elective_units}単位</p>
+              <p>単位充足!</p>
+            </div>
           </div>
         </div>
       );
