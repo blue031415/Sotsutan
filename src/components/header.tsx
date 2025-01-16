@@ -8,6 +8,7 @@ import download_icon from "./download_icon.png";
 import upload_icon from "./upload_icon.png";
 import caution from "./caution.png";
 import info_icon from "./info_icon.png";
+import PopUp from "./popup";
 
 const Header = () => {
   return (
@@ -84,12 +85,12 @@ const Header = () => {
             TwinsからCSVファイルをダウンロードする
             <div className="usage-csv">
               <img src={info_icon} alt="info_icon" className="info-icon" />
-              CSVのダウンロード方法はこちら
+              <PopUp />
             </div>
           </div>
           <div className="usage-row">
             <img src={upload_icon} alt="upload" className="usage-icon" />
-            「ファイルを選択」でCSVファイルをアップロードする
+            「CSVファイルをアップロード」をクリックしてCSVファイルをアップロードする
           </div>
           <div className="usage-caution">
             <img src={caution} alt="caution" className="usage-caution-icon" />
