@@ -83,6 +83,8 @@
 
 .usage-row {
   display: flex;
+	margin-top: 10px;;
+	margin-left: 10px;
   align-items: center;
   gap: 10px;
   margin-bottom: 10px;
@@ -98,10 +100,27 @@
 .usage-caution {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .usage-caution-icon {
   margin-right: 10px;
 	width: 20px;
 	height: 20px;
+}
+
+.notice {
+	margin-bottom: 100px;
+}
+
+.usage-csv {
+  display: flex;
+  align-items: center;
+	margin-left: 10px;
+}
+
+.info-icon {
+	width: 20px;
+	height: 20px;
+	margin-right: 5px;
 }

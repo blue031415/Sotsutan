@@ -7,6 +7,7 @@ import hover_red from "./hover_red.png";
 import download_icon from "./download_icon.png";
 import upload_icon from "./upload_icon.png";
 import caution from "./caution.png";
+import info_icon from "./info_icon.png";
 
 const Header = () => {
   return (
@@ -81,7 +82,10 @@ const Header = () => {
               className="usage-icon"
             />
             TwinsからCSVファイルをダウンロードする
-            <div>CSVのダウンロード方法はこちら</div>
+            <div className="usage-csv">
+              <img src={info_icon} alt="info_icon" className="info-icon" />
+              CSVのダウンロード方法はこちら
+            </div>
           </div>
           <div className="usage-row">
             <img src={upload_icon} alt="upload" className="usage-icon" />
@@ -96,7 +100,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <div className="caution">
+      <div className="notice">
         情報の正確性には細心の注意を払っていますが、本サービスによって生じた不利益等について一切の責任を負いません
       </div>
     </>
