@@ -40,6 +40,7 @@ button {
 
 .Link {
   cursor: pointer;
+  color: gray;
 }
 
 .Link:hover {
