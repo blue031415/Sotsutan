@@ -34,7 +34,7 @@ type electiveSubjectList = {
 };
 
 const parseYearString = (yearStr: string): string => {
-  if (!yearStr) return "{}";
+  if (!yearStr) return "";
 
   let numbers: number[] = [];
 
@@ -52,7 +52,7 @@ const parseYearString = (yearStr: string): string => {
     numbers = [Number(yearStr)];
   }
 
-  return `${numbers.join(",")}}`;
+  return numbers.join(",");
 };
 
 const parseSemesterString = (semester: string): string[] => {
@@ -143,14 +143,30 @@ function App() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
   const [courseData] = useState<CourseInfo[]>(formatKdbData(kdbData));
+  const [currentFilters, setCurrentFilters] = useState<string[]>([
+    "GC2",
+    "GA1",
+  ]);
 
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault(); // イベントのデフォルト動作を防止
+  const handleBasicClick = (e: React.MouseEvent) => {
+    e.preventDefault();
     const rect = e.currentTarget.getBoundingClientRect();
     setPopupPosition({
-      x: rect.right + 10, // 要素の右側に10pxの余白を追加
+      x: rect.right + 10,
       y: rect.top,
     });
+    setCurrentFilters(["GC2", "GA1"]);
+    setIsPopupOpen(true);
+  };
+
+  const handleAdvancedClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const rect = e.currentTarget.getBoundingClientRect();
+    setPopupPosition({
+      x: rect.right + 10,
+      y: rect.top,
+    });
+    setCurrentFilters(["GC5", "GA4"]);
     setIsPopupOpen(true);
   };
 
@@ -715,9 +731,19 @@ function App() {
               backgroundColor: "rgba(255, 255, 0, 0.4)",
               zIndex: 3,
             }}
+            onClick={handleBasicClick}
           ></div>
           <div className="basic-white-area">
             <p>現在修得済み：{unit_basic}</p>
+          </div>
+          <div>
+            <ElectivePopup
+              isOpen={isPopupOpen}
+              onClose={() => setIsPopupOpen(false)}
+              courseData={courseData}
+              position={popupPosition}
+              courseFilters={currentFilters}
+            />
           </div>
         </>
       );
@@ -737,6 +763,7 @@ function App() {
                 : "rgba(255, 255, 0, 0.4)",
             zIndex: 3,
           }}
+          onClick={handleBasicClick}
         >
           <div className="elective_basic">
             {electiveSubjects_basic.map((subject, index) => (
@@ -746,6 +773,15 @@ function App() {
         </div>
         <div className="basic-white-area">
           <p>現在修得済み：{unit_basic}</p>
+        </div>
+        <div>
+          <ElectivePopup
+            isOpen={isPopupOpen}
+            onClose={() => setIsPopupOpen(false)}
+            courseData={courseData}
+            position={popupPosition}
+            courseFilters={currentFilters}
+          />
         </div>
       </div>
     );
@@ -767,10 +803,18 @@ function App() {
               backgroundColor: "rgba(256, 256, 0, 0.4)",
               zIndex: 4,
             }}
+            onClick={handleAdvancedClick}
           ></div>
           <div className="advanced-white-area">
             <p>現在修得済み：0</p>
           </div>
+          <ElectivePopup
+            isOpen={isPopupOpen}
+            onClose={() => setIsPopupOpen(false)}
+            courseData={courseData}
+            position={popupPosition}
+            courseFilters={currentFilters}
+          />
         </>
       );
     return (
@@ -789,7 +833,7 @@ function App() {
                 : "rgba(256, 256, 0, 0.4)",
             zIndex: 4,
           }}
-          onClick={handleClick}
+          onClick={handleAdvancedClick}
         >
           <div className="elective_basic">
             {electiveSubjects_advanced.map((subject, index) => (
@@ -805,6 +849,7 @@ function App() {
           onClose={() => setIsPopupOpen(false)}
           courseData={courseData}
           position={popupPosition}
+          courseFilters={currentFilters}
         />
       </div>
     );
