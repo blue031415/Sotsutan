@@ -29,8 +29,6 @@
   align-items: center;
   gap: 10px;
   margin-bottom: 10px;
-  position: relative;
-  padding-right: 460px;
 }
 
 .checkmark-icon {
@@ -42,26 +40,14 @@
 .subject-example {
   width: 300px;
   height: 30px;
-  position: absolute;
-  right: 0;
   object-fit: contain;
 }
 
 .hover-example {
   width: 220px;
   height: 100px;
-  position: absolute;
   object-fit: contain;
 }
-
-.hover-example:first-of-type {
-  right: 230px; /* 2番目の画像幅 + 間隔10px */
-}
-
-.hover-example:last-of-type {
-  right: 0;
-}
-
 
 .usage {
 	border-radius: 30px;
