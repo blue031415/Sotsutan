@@ -25,6 +25,7 @@ type subjectList = {
   name: string;
   index: number;
   height: number;
+  status: boolean;
 };
 
 type electiveSubjectList = {
@@ -192,27 +193,16 @@ function App() {
     []
   );
 
-  const [unit_basic, setUnit_basic] = useState<number | null>(null);
-  const [unit_advanced, setUnit_advanced] = useState<number | null>(null);
-  const [unit_gakusi, setUnit_gakusi] = useState<number | null>(null);
-  const [unit_electivePE, setUnit_electivePE] = useState<number | null>(null);
-  const [unit_electiveLanguage, setUnit_electiveLanguage] = useState<
-    number | null
-  >(null);
-  const [unit_electiveJapanese, setUnit_electiveJapanese] = useState<
-    number | null
-  >(null);
-  const [unit_electiveArt, setUnit_electiveArt] = useState<number | null>(null);
-  const [unit_electiveGBGE, setUnit_electiveGBGE] = useState<number | null>(
-    null
-  );
-  const [unit_electiveMuseum, setUnit_electiveMuseum] = useState<number | null>(
-    null
-  );
-
-  const [unit_otherSubjects, setUnit_otherSubjects] = useState<number | null>(
-    null
-  );
+  const [unit_basic, setUnit_basic] = useState<number>(0);
+  const [unit_advanced, setUnit_advanced] = useState<number>(0);
+  const [unit_gakusi, setUnit_gakusi] = useState<number>(0);
+  const [unit_electivePE, setUnit_electivePE] = useState<number>(0);
+  const [unit_electiveLanguage, setUnit_electiveLanguage] = useState<number>(0);
+  const [unit_electiveJapanese, setUnit_electiveJapanese] = useState<number>(0);
+  const [unit_electiveArt, setUnit_electiveArt] = useState<number>(0);
+  const [unit_electiveGBGE, setUnit_electiveGBGE] = useState<number>(0);
+  const [unit_electiveMuseum, setUnit_electiveMuseum] = useState<number>(0);
+  const [unit_otherSubjects, setUnit_otherSubjects] = useState<number>(0);
 
   const [file_upload, setFile_upload] = useState(false);
 
@@ -226,19 +216,32 @@ function App() {
     row: any
   ) => {
     let count = 0;
+    const checkedList = updateList.map((subject) => subject.name);
     subjectList.forEach((subject) => {
       if (
         row[3] === `"${subject.name}"` &&
         row[7] !== '"D"' &&
         row[7] !== '"F"'
       ) {
-        // 科目名が一致し、かつ成績がDでない場合
+        if (!checkedList.includes(subject.name)) {
+          // 科目名が一致し、かつ成績がDでない場合
+          updateList.push({
+            name: subject.name,
+            index: subject.index,
+            height: subject.height,
+            status: true,
+          });
+        } else {
+          updateList[checkedList.indexOf(subject.name)].status = true;
+        }
+        count++;
+      } else if (!checkedList.includes(subject.name)) {
         updateList.push({
           name: subject.name,
           index: subject.index,
           height: subject.height,
+          status: false,
         });
-        count++;
       }
     });
     if (count > 0) {
@@ -469,6 +472,9 @@ function App() {
           let peCounter = 0;
           let flagSubjectList_pe;
           pe_list.forEach((subject) => {
+            const checkedListPe = updatedSubjectStatuses_pe.map(
+              (subject) => subject.name
+            );
             const first_four = subject.name.slice(0, 4);
             const last_two = subject.name.slice(4, 7);
             if (
@@ -476,12 +482,26 @@ function App() {
               row[3].slice(-4, -1) == last_two &&
               row[7] !== '"D"'
             ) {
+              if (!checkedListPe.includes(subject.name)) {
+                updatedSubjectStatuses_pe.push({
+                  name: subject.name,
+                  index: subject.index,
+                  height: subject.height,
+                  status: true,
+                });
+              } else {
+                updatedSubjectStatuses_pe[
+                  checkedListPe.indexOf(subject.name)
+                ].status = true;
+              }
+              peCounter++;
+            } else if (!checkedListPe.includes(subject.name)) {
               updatedSubjectStatuses_pe.push({
                 name: subject.name,
                 index: subject.index,
                 height: subject.height,
+                status: false,
               });
-              peCounter++;
             }
           });
           if (peCounter === 0) flagSubjectList_pe = false;
@@ -522,8 +542,10 @@ function App() {
   };
 
   const judge_information = () => {
-    console.log();
     if (information.length === 0) return;
+    const passListInfo = information
+      .map((subject) => subject.status)
+      .includes(false);
     return (
       <div
         className="hover_info"
@@ -533,21 +555,18 @@ function App() {
           left: "46.1%",
           width: "11.5%",
           height: "1.98%",
-          backgroundColor:
-            information.length === 3
-              ? "rgba(0, 128, 0, 0.4)"
-              : "rgba(256, 256, 0, 0.4)",
+          backgroundColor: !passListInfo
+            ? "rgba(0, 128, 0, 0.4)"
+            : "rgba(256, 256, 0, 0.4)",
           zIndex: 1,
         }}
       >
         <div className="info">
-          {information_list.map((subject, index) => (
+          {information.map((subject, index) => (
             <div
               key={index}
               style={{
-                color: information.find((item) => item.name === subject.name)
-                  ? "green"
-                  : "red",
+                color: subject.status ? "green" : "red",
               }}
             >
               {subject.name}
@@ -569,6 +588,9 @@ function App() {
 
   const judge_sougou_must = () => {
     if (sougou_must.length === 0) return;
+    const passListSougou = sougou_must
+      .map((subject) => subject.status)
+      .includes(false);
     return (
       <div
         className="hover_sougou_must"
@@ -578,20 +600,17 @@ function App() {
           left: "46.1%",
           width: "11.5%",
           height: `${1.98 * 4}%`,
-          backgroundColor:
-            sougou_must.length === 2
-              ? "rgba(0, 128, 0, 0.4)"
-              : "rgba(256, 256, 0, 0.4)",
+          backgroundColor: !passListSougou
+            ? "rgba(0, 128, 0, 0.4)"
+            : "rgba(256, 256, 0, 0.4)",
         }}
       >
         <div className="sougou_must">
-          {sougou_must_list.map((subject, index) => (
+          {sougou_must.map((subject, index) => (
             <div
               key={index}
               style={{
-                color: sougou_must.find((item) => item.name === subject.name)
-                  ? "green"
-                  : "red",
+                color: subject.status ? "green" : "red",
               }}
             >
               {subject.name}
@@ -613,6 +632,8 @@ function App() {
 
   const judge_pe = () => {
     if (pe.length === 0) return;
+    const passListPe = pe.map((subject) => subject.status).includes(false);
+    console.log(pe);
     return (
       <div
         className="hover_pe"
@@ -622,18 +643,17 @@ function App() {
           left: "46.1%",
           width: "11.5%",
           height: `${1.98}%`,
-          backgroundColor:
-            pe.length === 4 ? "rgba(0, 128, 0, 0.4)" : "rgba(256, 256, 0, 0.4)",
+          backgroundColor: !passListPe
+            ? "rgba(0, 128, 0, 0.4)"
+            : "rgba(256, 256, 0, 0.4)",
         }}
       >
         <div className="pe">
-          {pe_list.map((subject, index) => (
+          {pe.map((subject, index) => (
             <div
               key={index}
               style={{
-                color: pe.find((item) => item.name === subject.name)
-                  ? "green"
-                  : "red",
+                color: subject.status ? "green" : "red",
               }}
             >
               {subject.name}
@@ -656,6 +676,9 @@ function App() {
   const judge_English = () => {
     console.log();
     if (English.length === 0) return;
+    const passListEnglish = English.map((subject) => subject.status).includes(
+      false
+    );
     return (
       <div
         className="hover_English"
@@ -665,21 +688,18 @@ function App() {
           left: "46.1%",
           width: "11.5%",
           height: "1.98%",
-          backgroundColor:
-            English.length === 4
-              ? "rgba(0, 128, 0, 0.4)"
-              : "rgba(256, 256, 0, 0.4)",
+          backgroundColor: !passListEnglish
+            ? "rgba(0, 128, 0, 0.4)"
+            : "rgba(256, 256, 0, 0.4)",
           zIndex: 3,
         }}
       >
         <div className="English">
-          {English_list.map((subject, index) => (
+          {English.map((subject, index) => (
             <div
               key={index}
               style={{
-                color: English.find((item) => item.name === subject.name)
-                  ? "green"
-                  : "red",
+                color: subject.status ? "green" : "red",
               }}
             >
               {subject.name}
@@ -701,25 +721,28 @@ function App() {
 
   const judge_elective_basic = () => {
     if (!file_upload) return <></>;
-    if (!unit_basic)
-      return (
-        <>
-          <div
-            className="hover_elective_basic"
-            style={{
-              position: "absolute",
-              top: `${26.4}%`,
-              left: "36%",
-              width: "6%",
-              height: "47.9%",
-              backgroundColor: "rgba(255, 255, 0, 0.4)",
-              zIndex: 3,
-            }}
-          ></div>
-          <div className="basic-white-area">
-            <p>現在修得済み：{unit_basic}単位</p>
-          </div>
-        </>
+    const elements =
+      unit_basic === 0 ? (
+        <p style={{ color: "red" }}>この区分の科目は履修・修得していません</p>
+      ) : (
+        <table className="hoberTable">
+          <thead>
+            <tr>
+              <th>科目番号</th>
+              <th>科目名</th>
+              <th>単位数</th>
+            </tr>
+          </thead>
+          <tbody>
+            {electiveSubjects_basic.map((subject, index) => (
+              <tr key={index}>
+                <td>{subject.subjectId.replace(/"/g, "").trim()}</td>
+                <td>{subject.name.replace(/"/g, "").trim()}</td>
+                <td>{subject.numberOfUnits}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       );
     return (
       <div>
@@ -738,11 +761,7 @@ function App() {
             zIndex: 3,
           }}
         >
-          <div className="elective_basic">
-            {electiveSubjects_basic.map((subject, index) => (
-              <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
-            ))}
-          </div>
+          <div className="elective_basic">{elements}</div>
         </div>
         <div className="basic-white-area">
           <p>現在修得済み：{unit_basic}単位</p>
@@ -753,25 +772,28 @@ function App() {
 
   const judge_elective_advanced = () => {
     if (!file_upload) return <></>;
-    if (!unit_advanced)
-      return (
-        <>
-          <div
-            className="hover_elective_basic"
-            style={{
-              position: "absolute",
-              top: `${26.4}%`,
-              left: "12.3%",
-              width: "6.2%",
-              height: "47.9%",
-              backgroundColor: "rgba(256, 256, 0, 0.4)",
-              zIndex: 4,
-            }}
-          ></div>
-          <div className="advanced-white-area">
-            <p>現在修得済み：0単位</p>
-          </div>
-        </>
+    const elements =
+      unit_basic === 0 ? (
+        <p style={{ color: "red" }}>この区分の科目は履修・修得していません</p>
+      ) : (
+        <table className="hoberTable">
+          <thead>
+            <tr>
+              <th>科目番号</th>
+              <th>科目名</th>
+              <th>単位数</th>
+            </tr>
+          </thead>
+          <tbody>
+            {electiveSubjects_advanced.map((subject, index) => (
+              <tr key={index}>
+                <td>{subject.subjectId.replace(/"/g, "").trim()}</td>
+                <td>{subject.name.replace(/"/g, "").trim()}</td>
+                <td>{subject.numberOfUnits}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       );
     return (
       <div>
@@ -791,11 +813,7 @@ function App() {
           }}
           onClick={handleClick}
         >
-          <div className="elective_basic">
-            {electiveSubjects_advanced.map((subject, index) => (
-              <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
-            ))}
-          </div>
+          <div className="elective_basic">{elements}</div>
         </div>
         <div className="advanced-white-area">
           <p>現在修得済み：{unit_advanced}単位</p>
@@ -812,26 +830,28 @@ function App() {
 
   const judge_gakusi = () => {
     if (!file_upload) return <></>;
-    else if (!unit_gakusi)
-      return (
-        <>
-          <div
-            className="hover_gakusi"
-            style={{
-              position: "absolute",
-              top: `${26.4}%`,
-              left: "57.5%",
-              width: "8.67%",
-              height: "8%",
-              backgroundColor: "rgba(256, 256, 0, 0.4)",
-            }}
-          >
-            <div className="gakusi">この区分の科目は履修・修得していません</div>
-          </div>
-          <div className="common-white-area">
-            <p>現在修得済み：0単位</p>
-          </div>
-        </>
+    const elements =
+      unit_basic === 0 ? (
+        <p style={{ color: "red" }}>この区分の科目は履修・修得していません</p>
+      ) : (
+        <table className="hoberTable">
+          <thead>
+            <tr>
+              <th>科目番号</th>
+              <th>科目名</th>
+              <th>単位数</th>
+            </tr>
+          </thead>
+          <tbody>
+            {gakusiSubjects.map((subject, index) => (
+              <tr key={index}>
+                <td>{subject.subjectId.replace(/"/g, "").trim()}</td>
+                <td>{subject.name.replace(/"/g, "").trim()}</td>
+                <td>{subject.numberOfUnits}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       );
     return (
       <div>
@@ -849,11 +869,7 @@ function App() {
                 : "rgba(256, 256, 0, 0.4)",
           }}
         >
-          <div className="gakusi">
-            {gakusiSubjects.map((subject, index) => (
-              <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
-            ))}
-          </div>
+          <div className="gakusi">{elements}</div>
         </div>
         <div className="common-white-area">
           <p>
@@ -872,23 +888,28 @@ function App() {
 
   const judge_electivePE = () => {
     if (!file_upload) return <></>;
-    else if (!unit_electivePE)
-      return (
-        <div
-          className="hover_electivePE"
-          style={{
-            position: "absolute",
-            top: `${34.2}%`,
-            left: "57.5%",
-            width: "8.67%",
-            height: "2.1%",
-            backgroundColor: "rgba(0, 128, 0, 0.4)",
-          }}
-        >
-          <div className="electivePE">
-            この区分の科目は履修・修得していません
-          </div>
-        </div>
+    const elements =
+      unit_basic === 0 ? (
+        <p>この区分の科目は履修・修得していません</p>
+      ) : (
+        <table className="hoberTable">
+          <thead>
+            <tr>
+              <th>科目番号</th>
+              <th>科目名</th>
+              <th>単位数</th>
+            </tr>
+          </thead>
+          <tbody>
+            {electivePE.map((subject, index) => (
+              <tr key={index}>
+                <td>{subject.subjectId.replace(/"/g, "").trim()}</td>
+                <td>{subject.name.replace(/"/g, "").trim()}</td>
+                <td>{subject.numberOfUnits}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       );
     return (
       <div
@@ -903,11 +924,7 @@ function App() {
         }}
       >
         <div>
-          <div className="electivePE">
-            {electivePE.map((subject, index) => (
-              <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
-            ))}
-          </div>
+          <div className="electivePE">{elements}</div>
         </div>
       </div>
     );
@@ -915,25 +932,28 @@ function App() {
 
   const judge_electiveLanguage = () => {
     if (!file_upload) return <></>;
-    else if (!unit_electiveLanguage)
-      return (
-        <>
-          <div
-            className="hover_electiveLanguage"
-            style={{
-              position: "absolute",
-              top: `${36.2}%`,
-              left: "57.5%",
-              width: "8.67%",
-              height: "2.1%",
-              backgroundColor: "rgba(0, 128, 0, 0.4)",
-            }}
-          >
-            <div className="electiveLanguage">
-              この区分の科目は履修・修得していません
-            </div>
-          </div>
-        </>
+    const elements =
+      unit_basic === 0 ? (
+        <p>この区分の科目は履修・修得していません</p>
+      ) : (
+        <table className="hoberTable">
+          <thead>
+            <tr>
+              <th>科目番号</th>
+              <th>科目名</th>
+              <th>単位数</th>
+            </tr>
+          </thead>
+          <tbody>
+            {electiveLanguage.map((subject, index) => (
+              <tr key={index}>
+                <td>{subject.subjectId.replace(/"/g, "").trim()}</td>
+                <td>{subject.name.replace(/"/g, "").trim()}</td>
+                <td>{subject.numberOfUnits}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       );
     return (
       <div
@@ -947,36 +967,35 @@ function App() {
           backgroundColor: "rgba(0, 128, 0, 0.4)",
         }}
       >
-        <div className="electiveLanguage">
-          {electiveLanguage.map((subject, index) => (
-            <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
-          ))}
-        </div>
+        <div className="electiveLanguage">{elements}</div>
       </div>
     );
   };
 
   const judge_electiveJapanese = () => {
     if (!file_upload) return <></>;
-    if (!unit_electiveJapanese)
-      return (
-        <>
-          <div
-            className="hover_electiveJapanese"
-            style={{
-              position: "absolute",
-              top: `${38.2}%`,
-              left: "57.5%",
-              width: "8.67%",
-              height: "2.1%",
-              backgroundColor: "rgba(0, 128, 0, 0.4)",
-            }}
-          >
-            <div className="electiveJapanese">
-              この区分の科目は履修・修得していません
-            </div>
-          </div>
-        </>
+    const elements =
+      unit_basic === 0 ? (
+        <p>この区分の科目は履修・修得していません</p>
+      ) : (
+        <table className="hoberTable">
+          <thead>
+            <tr>
+              <th>科目番号</th>
+              <th>科目名</th>
+              <th>単位数</th>
+            </tr>
+          </thead>
+          <tbody>
+            {electiveJapanese.map((subject, index) => (
+              <tr key={index}>
+                <td>{subject.subjectId.replace(/"/g, "").trim()}</td>
+                <td>{subject.name.replace(/"/g, "").trim()}</td>
+                <td>{subject.numberOfUnits}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       );
     return (
       <div
@@ -990,38 +1009,36 @@ function App() {
           backgroundColor: "rgba(0, 128, 0, 0.4)",
         }}
       >
-        <div className="electiveJapanese">
-          {electiveJapanese.map((subject, index) => (
-            <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
-          ))}
-        </div>
+        <div className="electiveJapanese">{elements}</div>
       </div>
     );
   };
 
   const judge_electiveArt = () => {
     if (!file_upload) return <></>;
-    else if (!unit_electiveArt)
-      return (
-        <>
-          <div
-            className="hover_electiveJapanese"
-            style={{
-              position: "absolute",
-              top: `${40.2}%`,
-              left: "57.5%",
-              width: "8.67%",
-              height: "2.1%",
-              backgroundColor: "rgba(0, 128, 0, 0.4)",
-            }}
-          >
-            <div className="electiveJapanese">
-              この区分の科目は履修・修得していません
-            </div>
-          </div>
-        </>
+    const elements =
+      unit_basic === 0 ? (
+        <p>この区分の科目は履修・修得していません</p>
+      ) : (
+        <table className="hoberTable">
+          <thead>
+            <tr>
+              <th>科目番号</th>
+              <th>科目名</th>
+              <th>単位数</th>
+            </tr>
+          </thead>
+          <tbody>
+            {electiveArt.map((subject, index) => (
+              <tr key={index}>
+                <td>{subject.subjectId.replace(/"/g, "").trim()}</td>
+                <td>{subject.name.replace(/"/g, "").trim()}</td>
+                <td>{subject.numberOfUnits}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       );
-
     return (
       <div
         className="hover_electiveJapanese"
@@ -1034,37 +1051,35 @@ function App() {
           backgroundColor: "rgba(0, 128, 0, 0.4)",
         }}
       >
-        <div className="electiveJapanese">
-          {electiveArt.map((subject, index) => (
-            <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
-          ))}
-        </div>
+        <div className="electiveJapanese">{elements}</div>
       </div>
     );
   };
 
   const judge_electiveGBGE = () => {
     if (!file_upload) return <></>;
-    else if (!unit_electiveGBGE)
-      return (
-        <>
-          <div
-            className="hover_electiveGBGE"
-            style={{
-              position: "absolute",
-              top: `${38.4}%`,
-              left: "74.1%",
-              width: "9.3%",
-              height: "4.1%",
-              backgroundColor: "rgba(0, 128, 0, 0.4)",
-              zIndex: 1,
-            }}
-          >
-            <div className="electiveGBGE">
-              この区分の科目は履修・修得していません
-            </div>
-          </div>
-        </>
+    const elements =
+      unit_basic === 0 ? (
+        <p>この区分の科目は履修・修得していません</p>
+      ) : (
+        <table className="hoberTable">
+          <thead>
+            <tr>
+              <th>科目番号</th>
+              <th>科目名</th>
+              <th>単位数</th>
+            </tr>
+          </thead>
+          <tbody>
+            {electiveGBGE.map((subject, index) => (
+              <tr key={index}>
+                <td>{subject.subjectId.replace(/"/g, "").trim()}</td>
+                <td>{subject.name.replace(/"/g, "").trim()}</td>
+                <td>{subject.numberOfUnits}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       );
     return (
       <div
@@ -1079,37 +1094,35 @@ function App() {
           zIndex: 1,
         }}
       >
-        <div className="electiveGBGE">
-          {electiveGBGE.map((subject, index) => (
-            <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
-          ))}
-        </div>
+        <div className="electiveGBGE">{elements}</div>
       </div>
     );
   };
 
   const judge_electiveMuseum = () => {
     if (!file_upload) return <></>;
-    else if (!unit_electiveMuseum)
-      return (
-        <>
-          <div
-            className="hover_electiveMuseum"
-            style={{
-              position: "absolute",
-              top: `${42.5}%`,
-              left: "74.1%",
-              width: "9.3%",
-              height: "7.9%",
-              backgroundColor: "rgba(0, 128, 0, 0.4)",
-              zIndex: 2,
-            }}
-          >
-            <div className="electiveMuseum">
-              この区分の科目は履修・修得していません
-            </div>
-          </div>
-        </>
+    const elements =
+      unit_basic === 0 ? (
+        <p>この区分の科目は履修・修得していません</p>
+      ) : (
+        <table className="hoberTable">
+          <thead>
+            <tr>
+              <th>科目番号</th>
+              <th>科目名</th>
+              <th>単位数</th>
+            </tr>
+          </thead>
+          <tbody>
+            {electiveMuseum.map((subject, index) => (
+              <tr key={index}>
+                <td>{subject.subjectId.replace(/"/g, "").trim()}</td>
+                <td>{subject.name.replace(/"/g, "").trim()}</td>
+                <td>{subject.numberOfUnits}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       );
     return (
       <div
@@ -1124,35 +1137,35 @@ function App() {
           zIndex: 2,
         }}
       >
-        <div className="electiveMuseum">
-          {electiveMuseum.map((subject, index) => (
-            <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
-          ))}
-        </div>
+        <div className="electiveMuseum">{elements}</div>
       </div>
     );
   };
 
   const judge_otherSubjects = () => {
     if (!file_upload) return <></>;
-    if (!unit_otherSubjects)
-      return (
-        <>
-          <div
-            style={{
-              position: "absolute",
-              top: `${26.4}%`,
-              left: "74.1%",
-              width: "9.3%",
-              height: "11.9%",
-              backgroundColor: "rgba(256, 256, 0, 0.4)",
-              zIndex: 0,
-            }}
-          ></div>
-          <div className="relation-white-area">
-            <p>現在修得済み：0単位</p>
-          </div>
-        </>
+    const elements =
+      unit_basic === 0 ? (
+        <p style={{ color: "red" }}>この区分の科目は履修・修得していません</p>
+      ) : (
+        <table className="hoberTable">
+          <thead>
+            <tr>
+              <th>科目番号</th>
+              <th>科目名</th>
+              <th>単位数</th>
+            </tr>
+          </thead>
+          <tbody>
+            {otherSubjects.map((subject, index) => (
+              <tr key={index}>
+                <td>{subject.subjectId.replace(/"/g, "").trim()}</td>
+                <td>{subject.name.replace(/"/g, "").trim()}</td>
+                <td>{subject.numberOfUnits}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       );
     return (
       <div>
@@ -1171,11 +1184,7 @@ function App() {
             zIndex: 0,
           }}
         >
-          <div className="otherSubjects">
-            {otherSubjects.map((subject, index) => (
-              <div key={index}>{subject.name.replace(/"/g, "").trim()}</div>
-            ))}
-          </div>
+          <div className="otherSubjects">{elements}</div>
         </div>
         <div className="relation-white-area">
           <p>
@@ -1191,7 +1200,7 @@ function App() {
   };
 
   const check_elective_units = () => {
-    let elective_units =
+    const elective_units =
       Math.min(unit_basic === null ? 0 : unit_basic, 47) +
       Math.min(unit_advanced === null ? 0 : unit_advanced, 35) +
       Math.min(
@@ -1240,7 +1249,8 @@ function App() {
       return <></>;
     }
   };
-
+  // console.log("専門基礎", subjectStatuses);
+  // console.log("専門", subjectStatuses_advance);
   return (
     <>
       <div className="header">
@@ -1293,7 +1303,9 @@ function App() {
                 left: "22.5%",
                 width: "13.4%",
                 height: "1.98%",
-                backgroundColor: "rgba(0, 128, 0, 0.4)",
+                backgroundColor: subject.status
+                  ? "rgba(0, 128, 0, 0.4)"
+                  : "rgba(256, 256, 0, 0.4)",
               }}
             ></div>
           ))}
@@ -1307,7 +1319,9 @@ function App() {
                 left: "2.2%",
                 width: "10.2%",
                 height: `${1.98 * subject.height}%`,
-                backgroundColor: "rgba(0, 128, 0, 0.4)",
+                backgroundColor: subject.status
+                  ? "rgba(0, 128, 0, 0.4)"
+                  : "rgba(256, 256, 0, 0.4)",
               }}
             ></div>
           ))}
