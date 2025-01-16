@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./popup_rishu.css";
 
 interface CourseInfo {
@@ -24,6 +24,17 @@ const PopupBasicRishu: React.FC<PopupRishuProps> = ({
   courseData,
   courseFilters,
 }) => {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   const filteredCourses = courseData.filter((course) =>
@@ -35,7 +46,6 @@ const PopupBasicRishu: React.FC<PopupRishuProps> = ({
       <button className="close-button" onClick={onClose}>
         ×
       </button>
-
       <table className="timetable">
         <thead>
           <tr>
