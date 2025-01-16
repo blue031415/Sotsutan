@@ -1,7 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import Header from "./components/header";
-import PopUp from "./components/popup";
 import ElectivePopup from "./components/popup_rishu";
 import {
   subjectsList,
