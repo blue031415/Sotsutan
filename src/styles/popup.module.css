@@ -37,3 +37,11 @@ button {
   background-color: rgb(254, 241, 219);
   margin-bottom: 20px;
 }
+
+.Link {
+  cursor: pointer;
+}
+
+.Link:hover {
+  color: blue;
+}
