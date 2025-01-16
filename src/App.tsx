@@ -753,7 +753,7 @@ function App() {
             top: `${26.4}%`,
             left: "36%",
             width: "6%",
-            height: "47.9%",
+            height: "51%",
             backgroundColor:
               unit_basic >= 32
                 ? "rgba(0, 128, 0, 0.4)"
@@ -804,9 +804,9 @@ function App() {
             top: `${26.4}%`,
             left: "12.3%",
             width: "6.2%",
-            height: "47.9%",
+            height: "51%",
             backgroundColor:
-              unit_advanced >= 32
+              unit_advanced >= 20
                 ? "rgba(0, 128, 0, 0.4)"
                 : "rgba(256, 256, 0, 0.4)",
             zIndex: 4,
@@ -1249,6 +1249,67 @@ function App() {
       return <></>;
     }
   };
+
+  const hilight_common_units = () => {
+    const common_units =
+      Math.min(unit_gakusi === null ? 0 : unit_gakusi, 4) +
+      Math.min(unit_electivePE === null ? 0 : unit_electivePE, 2) +
+      Math.min(unit_electiveLanguage === null ? 0 : unit_electiveLanguage, 6) +
+      Math.min(unit_electiveJapanese === null ? 0 : unit_electiveJapanese, 2) +
+      Math.min(unit_electiveArt === null ? 0 : unit_electiveArt, 6);
+
+    if (file_upload) {
+      return (
+        <div
+          className="hilight_advenced_units"
+          style={{
+            position: "absolute",
+            top: `${74.3}%`,
+            left: "57.5%",
+            width: "8.67%",
+            height: "3.15%",
+            backgroundColor:
+              common_units >= 1
+                ? "rgba(0, 128, 0, 0.4)"
+                : "rgba(255, 255, 0, 0.4)",
+            zIndex: 3,
+          }}
+        ></div>
+      );
+    } else {
+      return <></>;
+    }
+  };
+
+  const hilight_relative_units = () => {
+    const relative_units =
+      Math.min(unit_otherSubjects === null ? 0 : unit_otherSubjects, 15) +
+      Math.min(unit_electiveGBGE === null ? 0 : unit_electiveGBGE, 9) +
+      Math.min(unit_electiveMuseum === null ? 0 : unit_electiveMuseum, 9);
+
+    if (file_upload) {
+      return (
+        <div
+          className="hilight_advenced_units"
+          style={{
+            position: "absolute",
+            top: `${74.3}%`,
+            left: "74.1%",
+            width: "9.3%",
+            height: "3.15%",
+            backgroundColor:
+              relative_units >= 6
+                ? "rgba(0, 128, 0, 0.4)"
+                : "rgba(255, 255, 0, 0.4)",
+            zIndex: 3,
+          }}
+        ></div>
+      );
+    } else {
+      return <></>;
+    }
+  };
+
   // console.log("専門基礎", subjectStatuses);
   // console.log("専門", subjectStatuses_advance);
   return (
@@ -1340,6 +1401,8 @@ function App() {
           {judge_electiveMuseum()}
           {judge_otherSubjects()}
           {check_elective_units()}
+          {hilight_common_units()}
+          {hilight_relative_units()}
         </div>
       </div>
     </>
