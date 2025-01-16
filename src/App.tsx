@@ -1145,7 +1145,7 @@ function App() {
   const judge_otherSubjects = () => {
     if (!file_upload) return <></>;
     const elements =
-      unit_otherSubjects + unit_electiveGBGE + unit_electiveMuseum === 0 ? (
+      unit_otherSubjects === 0 ? (
         <p style={{ color: "red" }}>この区分の科目は履修・修得していません</p>
       ) : (
         <table className="hoberTable">
