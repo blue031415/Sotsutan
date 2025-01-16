@@ -1,8 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import Header from "./components/header";
-import ElectivePopup from "./components/popup_rishu.tsx";
-
+import ElectivePopup from "./components/popup_rishu";
 import {
   subjectsList,
   subjectsList_advance,
