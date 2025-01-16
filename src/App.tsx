@@ -517,7 +517,7 @@ function App() {
               flagSubjectList_sougou_must
             )
           ) {
-            if (row[7] !== `"D"` && row[7] !== "`F`") {
+            if (row[7] !== `"D"` && row[7] !== `"F"`) {
               updateElectiveSubjects.push({
                 name: row[3],
                 subjectId: row[2],
@@ -752,7 +752,7 @@ function App() {
             position: "absolute",
             top: `${26.4}%`,
             left: "36%",
-            width: "10%",
+            width: "6%",
             height: "47.9%",
             backgroundColor:
               unit_basic >= 32
@@ -764,7 +764,7 @@ function App() {
           <div className="elective_basic">{elements}</div>
         </div>
         <div className="basic-white-area">
-          <p>現在修得済み：{unit_basic}</p>
+          <p>現在修得済み：{unit_basic}単位</p>
         </div>
       </div>
     );
@@ -803,7 +803,7 @@ function App() {
             position: "absolute",
             top: `${26.4}%`,
             left: "12.3%",
-            width: "10.2%",
+            width: "6.2%",
             height: "47.9%",
             backgroundColor:
               unit_advanced >= 32
@@ -816,7 +816,7 @@ function App() {
           <div className="elective_basic">{elements}</div>
         </div>
         <div className="advanced-white-area">
-          <p>現在修得済み：{unit_advanced}</p>
+          <p>現在修得済み：{unit_advanced}単位</p>
         </div>
         <ElectivePopup
           isOpen={isPopupOpen}
@@ -879,6 +879,7 @@ function App() {
               (unit_electiveLanguage === null ? 0 : unit_electiveLanguage) +
               (unit_electiveJapanese === null ? 0 : unit_electiveJapanese) +
               (unit_electiveArt === null ? 0 : unit_electiveArt)}
+            単位
           </p>
         </div>
       </div>
@@ -1191,6 +1192,7 @@ function App() {
             {unit_otherSubjects +
               (unit_electiveGBGE === null ? 0 : unit_electiveGBGE) +
               (unit_electiveMuseum === null ? 0 : unit_electiveMuseum)}
+            単位
           </p>
         </div>
       </div>
@@ -1224,20 +1226,22 @@ function App() {
     if (elective_units < 74 && file_upload) {
       return (
         <div className="alert_lack_of_elective_units">
-          <div className="balloon2-left">
-            <p>現在修得済み:</p>
-            {elective_units}単位
-            <p>単位不足!</p>
+          <div className="location_of_balloon">
+            <div className="balloon2-left">
+              <p>現在修得済み:{elective_units}単位</p>
+              <p>あと{74 - elective_units}単位必要!</p>
+            </div>
           </div>
         </div>
       );
     } else if (elective_units >= 74 && unit_basic) {
       return (
         <div className="fulfill_elective_units">
-          <div className="balloon2-left">
-            <p>現在取得済み:</p>
-            {elective_units}単位
-            <p>単位充足!</p>
+          <div className="location_of_balloon">
+            <div className="balloon2-left">
+              <p>現在修得済み:{elective_units}単位</p>
+              <p>単位充足!</p>
+            </div>
           </div>
         </div>
       );
@@ -1270,16 +1274,22 @@ function App() {
         <PopUp />
         <img src="hover_ex.png" alt="吹き出し内の凡例" width="500px"></img>
       </div>
-      <input
-        type="file"
-        name="csv_import"
-        accept="csv"
-        id="upload-file"
-        onChange={fetchData}
-      ></input>
-      <button onClick={toggleRishuneji}>
-        {showRishunenji ? "履修年次を表示しない" : "履修年次を表示する"}
-      </button>
+      <div>
+        <label htmlFor="upload-file" className="custom-button">
+          CSVファイルをアップロード
+        </label>
+        <input
+          type="file"
+          id="upload-file"
+          name="csv_import"
+          accept=".csv"
+          onChange={fetchData}
+          style={{ display: "none" }}
+        />
+        <button onClick={toggleRishuneji}>
+          {showRishunenji ? "履修年次を表示しない" : "履修年次を表示する"}
+        </button>
+      </div>
       <div className="highlight-box">
         <div className="youran_mast">
           <img src={showRishunenji ? "mast24_rishunenji.png" : "mast24.png"} />
