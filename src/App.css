@@ -278,7 +278,7 @@
   position: absolute;
   color: black;
   padding: 5px;
-  width: 230px;
+  width: fit-content;
   top: 20;
   left: 100%;
   box-sizing: border-box;
@@ -290,6 +290,7 @@
   font-size: 10%;
   z-index: 3;
   color: green;
+  white-space: nowrap;
 }
 
 .hover_elective_basic {
@@ -305,34 +306,6 @@
   visibility: visible;
 }
 
-.basic-white-area {
-  position: absolute;
-  background: white; /* 背景色を白に設定 */
-  text-align: center;
-  align-items: center;
-  width: 9.72%;
-  top: 65%;
-  left: 36.14%;
-  height: 9.1%; /* 必要に応じて高さを指定 */
-  z-index: 10;
-  font-size: 30%;
-  white-space: nowrap;
-}
-
-.advanced-white-area {
-  position: absolute;
-  background: white;
-  text-align: center;
-  align-items: center;
-  width: 9.92%;
-  top: 65%;
-  left: 12.45%;
-  height: 9.1%;
-  z-index: 10;
-  font-size: 30%;
-  white-space: nowrap;
-}
-
 .gakusi {
   opacity: 0;
   transition: 0.5s;
@@ -340,7 +313,7 @@
   position: absolute;
   color: green;
   padding: 5px;
-  width: 180px;
+  width: fit-content;
   bottom: 56px;
   box-sizing: border-box;
   text-align: center;
@@ -384,7 +357,7 @@
   position: absolute;
   color: green;
   padding: 5px;
-  width: 180px;
+  width: fit-content;
   bottom: 24px;
   box-sizing: border-box;
   text-align: center;
@@ -428,7 +401,7 @@
   position: absolute;
   color: green;
   padding: 5px;
-  width: 180px;
+  width: fit-content;
   bottom: 24px;
   box-sizing: border-box;
   text-align: center;
@@ -472,7 +445,7 @@
   position: absolute;
   color: green;
   padding: 5px;
-  width: 180px;
+  width: fit-content;
   bottom: 24px;
   box-sizing: border-box;
   text-align: center;
@@ -516,7 +489,7 @@
   position: absolute;
   color: green;
   padding: 5px;
-  width: 180px;
+  width: fit-content;
   bottom: 24px;
   box-sizing: border-box;
   text-align: center;
@@ -560,7 +533,7 @@
   position: absolute;
   color: green;
   padding: 5px;
-  width: 180px;
+  width: fit-content;
   bottom: 40px;
   box-sizing: border-box;
   text-align: center;
@@ -604,7 +577,7 @@
   position: absolute;
   color: green;
   padding: 5px;
-  width: 180px;
+  width: fit-content;
   bottom: 40px;
   box-sizing: border-box;
   text-align: center;
@@ -648,7 +621,7 @@
   position: absolute;
   color: green;
   padding: 5px;
-  width: 180px;
+  width: fit-content;
   bottom: 80px;
   box-sizing: border-box;
   text-align: center;
@@ -685,32 +658,162 @@
   visibility: visible;
 }
 
-.common-white-area {
+.basic-white-area {
+  width: 10%;
+  left: 36%;
   position: absolute;
-  background: white;
+  background: #f8f9fa;
   text-align: center;
   align-items: center;
-  width: 8.6%;
-  top: 65%;
-  left: 57.6%;
-  height: 9.2%;
-  z-index: 10;
+  top: 69%;
+  height: 4%;
+  z-index: 3;
   font-size: 30%;
   white-space: nowrap;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+  border: 2px solid black;
+}
+
+.basic-white-area:before {
+  content: "";
+  position: absolute;
+  top: 97%;
+  left: 50%;
+  transform: translateX(-50%); /* 中央揃え */
+  border: 8px solid transparent;
+  border-top: 12px solid #f8f9fa; /* 上方向の三角形を作る */
+  z-index: 2;
+}
+
+.basic-white-area:after {
+  content: "";
+  position: absolute;
+  top: 100%; /* 下方向に配置 */
+  left: 50%; /* 吹き出しの中央に配置 */
+  transform: translateX(-50%); /* 中央揃え */
+  border: 10px solid transparent;
+  border-top: 14px solid black; /* 上方向の三角形を作る（外側の境界線） */
+  z-index: 1;
+}
+
+.advanced-white-area {
+  width: 10%;
+  left: 12.4%;
+  position: absolute;
+  background: #f8f9fa;
+  text-align: center;
+  align-items: center;
+  top: 69%;
+  height: 4%;
+  z-index: 4;
+  font-size: 30%;
+  white-space: nowrap;
+  border-radius: 10px;
+  font-weight: bold;
+  border: 2px solid black;
+}
+.advanced-white-area:before {
+  content: "";
+  position: absolute;
+  top: 97%;
+  left: 50%;
+  transform: translateX(-50%); /* 中央揃え */
+  border: 8px solid transparent;
+  border-top: 12px solid #f8f9fa; /* 上方向の三角形を作る */
+  z-index: 2;
+}
+
+.advanced-white-area:after {
+  content: "";
+  position: absolute;
+  top: 100%; /* 下方向に配置 */
+  left: 50%; /* 吹き出しの中央に配置 */
+  transform: translateX(-50%); /* 中央揃え */
+  border: 10px solid transparent;
+  border-top: 14px solid black; /* 上方向の三角形を作る（外側の境界線） */
+  z-index: 1;
+}
+
+.common-white-area {
+  position: absolute;
+  background: #f8f9fa;
+  text-align: center;
+  align-items: center;
+  width: 10%;
+  top: 69%;
+  left: 57.6%;
+  height: 4%;
+  z-index: 1;
+  font-size: 30%;
+  white-space: nowrap;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+  border: 2px solid black;
+}
+
+.common-white-area:before {
+  content: "";
+  position: absolute;
+  top: 97%;
+  left: 50%;
+  transform: translateX(-50%); /* 中央揃え */
+  border: 8px solid transparent;
+  border-top: 12px solid #f8f9fa; /* 上方向の三角形を作る */
+  z-index: 2;
+}
+
+.common-white-area:after {
+  content: "";
+  position: absolute;
+  top: 100%; /* 下方向に配置 */
+  left: 50%; /* 吹き出しの中央に配置 */
+  transform: translateX(-50%); /* 中央揃え */
+  border: 10px solid transparent;
+  border-top: 14px solid black; /* 上方向の三角形を作る（外側の境界線） */
+  z-index: 1;
 }
 
 .relation-white-area {
   position: absolute;
-  background: white;
+  background: #f8f9fa;
   text-align: center;
   align-items: center;
-  width: 9.19%;
-  top: 65%;
+  width: 10%;
+  top: 69%;
   left: 74.25%;
-  height: 9.2%;
-  z-index: 10;
+  height: 4%;
+  z-index: 2;
   font-size: 30%;
   white-space: nowrap;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+  border: 2px solid black;
+}
+
+.relation-white-area:before {
+  content: "";
+  position: absolute;
+  top: 97%;
+  left: 50%;
+  transform: translateX(-50%); /* 中央揃え */
+  border: 8px solid transparent;
+  border-top: 12px solid #f8f9fa; /* 上方向の三角形を作る */
+  z-index: 2;
+}
+
+.relation-white-area:after {
+  content: "";
+  position: absolute;
+  top: 100%; /* 下方向に配置 */
+  left: 50%; /* 吹き出しの中央に配置 */
+  transform: translateX(-50%); /* 中央揃え */
+  border: 10px solid transparent;
+  border-top: 14px solid black; /* 上方向の三角形を作る（外側の境界線） */
+  z-index: 1;
 }
 
 .alert_lack_of_elective_units {
@@ -731,44 +834,53 @@
   background: rgba(0, 128, 0, 0.4);
 }
 
+.location_of_balloon {
+  position: absolute;
+  top: 84%;
+  left: 50%;
+}
+
 .balloon2-left {
-  position: relative;
-  display: inline-block;
-  margin: 1.5em 0 1.5em 15px;
-  padding: 7px 10px;
-  min-width: 120px;
-  max-width: 100%;
-  color: #555;
-  font-size: 16px;
-  background: #fff;
-  border: solid 3px #555;
-  box-sizing: border-box;
-  text-align: left;
+  position: absolute;
+  background: #f8f9fa;
+  text-align: center;
+  align-items: center;
+  width: 130px;
+  z-index: 10;
+  font-size: 30%;
+  border-radius: 10px;
+  font-weight: bold;
+  border: 2px solid black;
 }
 
 .balloon2-left:before {
   content: "";
   position: absolute;
-  top: 50%;
-  left: -24px;
+  top: 57%;
+  left: -18px;
   margin-top: -12px;
-  border: 12px solid transparent;
-  border-right: 12px solid #fff;
+  border: 8px solid transparent;
+  border-right: 12px solid #f8f9fa;
   z-index: 2;
 }
 
 .balloon2-left:after {
   content: "";
   position: absolute;
-  top: 50%;
-  left: -30px;
+  top: 56%;
+  left: -23.5px;
   margin-top: -14px;
-  border: 14px solid transparent;
-  border-right: 14px solid #555;
+  border: 10px solid transparent;
+  border-right: 14px solid black;
   z-index: 1;
 }
 
 .balloon2-left p {
   margin: 0;
   padding: 0;
+}
+
+.hoberTable td,
+.hoberTable th {
+  white-space: nowrap;
 }
