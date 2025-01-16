@@ -773,7 +773,7 @@ function App() {
   const judge_elective_advanced = () => {
     if (!file_upload) return <></>;
     const elements =
-      unit_basic === 0 ? (
+      unit_advanced === 0 ? (
         <p style={{ color: "red" }}>この区分の科目は履修・修得していません</p>
       ) : (
         <table className="hoberTable">
@@ -831,7 +831,7 @@ function App() {
   const judge_gakusi = () => {
     if (!file_upload) return <></>;
     const elements =
-      unit_basic === 0 ? (
+      unit_gakusi === 0 ? (
         <p style={{ color: "red" }}>この区分の科目は履修・修得していません</p>
       ) : (
         <table className="hoberTable">
@@ -889,7 +889,7 @@ function App() {
   const judge_electivePE = () => {
     if (!file_upload) return <></>;
     const elements =
-      unit_basic === 0 ? (
+      unit_electivePE === 0 ? (
         <p>この区分の科目は履修・修得していません</p>
       ) : (
         <table className="hoberTable">
@@ -933,7 +933,7 @@ function App() {
   const judge_electiveLanguage = () => {
     if (!file_upload) return <></>;
     const elements =
-      unit_basic === 0 ? (
+      unit_electiveLanguage === 0 ? (
         <p>この区分の科目は履修・修得していません</p>
       ) : (
         <table className="hoberTable">
@@ -975,7 +975,7 @@ function App() {
   const judge_electiveJapanese = () => {
     if (!file_upload) return <></>;
     const elements =
-      unit_basic === 0 ? (
+      unit_electiveJapanese === 0 ? (
         <p>この区分の科目は履修・修得していません</p>
       ) : (
         <table className="hoberTable">
@@ -1017,7 +1017,7 @@ function App() {
   const judge_electiveArt = () => {
     if (!file_upload) return <></>;
     const elements =
-      unit_basic === 0 ? (
+      unit_electiveArt === 0 ? (
         <p>この区分の科目は履修・修得していません</p>
       ) : (
         <table className="hoberTable">
@@ -1059,7 +1059,7 @@ function App() {
   const judge_electiveGBGE = () => {
     if (!file_upload) return <></>;
     const elements =
-      unit_basic === 0 ? (
+      unit_electiveGBGE === 0 ? (
         <p>この区分の科目は履修・修得していません</p>
       ) : (
         <table className="hoberTable">
@@ -1102,7 +1102,7 @@ function App() {
   const judge_electiveMuseum = () => {
     if (!file_upload) return <></>;
     const elements =
-      unit_basic === 0 ? (
+      unit_electiveMuseum === 0 ? (
         <p>この区分の科目は履修・修得していません</p>
       ) : (
         <table className="hoberTable">
@@ -1145,7 +1145,7 @@ function App() {
   const judge_otherSubjects = () => {
     if (!file_upload) return <></>;
     const elements =
-      unit_basic === 0 ? (
+      unit_otherSubjects + unit_electiveGBGE + unit_electiveMuseum === 0 ? (
         <p style={{ color: "red" }}>この区分の科目は履修・修得していません</p>
       ) : (
         <table className="hoberTable">
