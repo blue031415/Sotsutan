@@ -15,12 +15,14 @@ interface PopupRishuProps {
   onClose: () => void;
   courseData: CourseInfo[];
   position: { x: number; y: number };
+  courseFilters: string[];
 }
 
-const PopupAdvancedRishu: React.FC<PopupRishuProps> = ({
+const PopupBasicRishu: React.FC<PopupRishuProps> = ({
   isOpen,
   onClose,
   courseData,
+  courseFilters,
 }) => {
   const [selectedYear, setSelectedYear] = useState<number>(1);
   const [selectedSemester, setSelectedSemester] = useState<string>("春A");
@@ -28,12 +30,10 @@ const PopupAdvancedRishu: React.FC<PopupRishuProps> = ({
 
   if (!isOpen) return null;
 
-  const filterByCourseNumber = (courses: CourseInfo[]) => {
-    return courses.filter(
-      (course) =>
-        course.科目番号.startsWith("GA4") || course.科目番号.startsWith("GC5")
+  const filterByCourseNumber = (courses: CourseInfo[]) =>
+    courses.filter((course) =>
+      courseFilters.some((filter) => course.科目番号.startsWith(filter))
     );
-  };
 
   const filteredCourses = filterByCourseNumber(
     courseData.filter(
@@ -103,4 +103,4 @@ const PopupAdvancedRishu: React.FC<PopupRishuProps> = ({
   );
 };
 
-export default PopupAdvancedRishu;
+export default PopupBasicRishu;

@@ -1,8 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import Header from "./components/header";
-import ElectiveAdvancedPopup from "./components/popup_advanced_rishu.tsx";
-import ElectiveBasicPopup from "./components/popup_basic_rishu.tsx";
+import ElectivePopup from "./components/popup_rishu.tsx";
 
 import {
   subjectsList,
@@ -721,12 +720,15 @@ function App() {
           <div className="basic-white-area">
             <p>現在修得済み：{unit_basic}</p>
           </div>
-          <ElectiveBasicPopup
-            isOpen={isPopupOpen}
-            onClose={() => setIsPopupOpen(false)}
-            courseData={courseData}
-            position={popupPosition}
-          />
+          <div>
+            <ElectivePopup
+              isOpen={isPopupOpen}
+              onClose={() => setIsPopupOpen(false)}
+              courseData={courseData}
+              position={popupPosition}
+              courseFilters={["GC2", "GA1"]}
+            />
+          </div>
         </>
       );
     return (
@@ -756,12 +758,15 @@ function App() {
         <div className="basic-white-area">
           <p>現在修得済み：{unit_basic}</p>
         </div>
-        <ElectiveBasicPopup
-          isOpen={isPopupOpen}
-          onClose={() => setIsPopupOpen(false)}
-          courseData={courseData}
-          position={popupPosition}
-        />
+        <div>
+          <ElectivePopup
+            isOpen={isPopupOpen}
+            onClose={() => setIsPopupOpen(false)}
+            courseData={courseData}
+            position={popupPosition}
+            courseFilters={["GC2", "GA1"]}
+          />
+        </div>
       </div>
     );
   };
@@ -787,11 +792,12 @@ function App() {
           <div className="advanced-white-area">
             <p>現在修得済み：0</p>
           </div>
-          <ElectiveAdvancedPopup
+          <ElectivePopup
             isOpen={isPopupOpen}
             onClose={() => setIsPopupOpen(false)}
             courseData={courseData}
             position={popupPosition}
+            courseFilters={["GC5", "GA4"]}
           />
         </>
       );
@@ -822,11 +828,12 @@ function App() {
         <div className="advanced-white-area">
           <p>現在修得済み：{unit_advanced}</p>
         </div>
-        <ElectiveAdvancedPopup
+        <ElectivePopup
           isOpen={isPopupOpen}
           onClose={() => setIsPopupOpen(false)}
           courseData={courseData}
           position={popupPosition}
+          courseFilters={["GC5", "GA4"]}
         />
       </div>
     );
