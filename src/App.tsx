@@ -1,8 +1,9 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import Header from "./components/header";
-import PopUp from "./components/popup";
-import ElectivePopup from "./components/popup_rishu";
+import ElectiveAdvancedPopup from "./components/popup_advanced_rishu.tsx";
+import ElectiveBasicPopup from "./components/popup_basic_rishu.tsx";
+
 import {
   subjectsList,
   subjectsList_advance,
@@ -35,7 +36,7 @@ type electiveSubjectList = {
 };
 
 const parseYearString = (yearStr: string): string => {
-  if (!yearStr) return "{}";
+  if (!yearStr) return "";
 
   let numbers: number[] = [];
 
@@ -53,9 +54,8 @@ const parseYearString = (yearStr: string): string => {
     numbers = [Number(yearStr)];
   }
 
-  return `${numbers.join(",")}}`;
+  return numbers.join(",");
 };
-
 const parseSemesterString = (semester: string): string[] => {
   const seasons = ["春", "秋"];
   const modules = ["A", "B", "C"];
@@ -716,10 +716,17 @@ function App() {
               backgroundColor: "rgba(255, 255, 0, 0.4)",
               zIndex: 3,
             }}
+            onClick={handleClick}
           ></div>
           <div className="basic-white-area">
             <p>現在修得済み：{unit_basic}</p>
           </div>
+          <ElectiveBasicPopup
+            isOpen={isPopupOpen}
+            onClose={() => setIsPopupOpen(false)}
+            courseData={courseData}
+            position={popupPosition}
+          />
         </>
       );
     return (
@@ -738,6 +745,7 @@ function App() {
                 : "rgba(255, 255, 0, 0.4)",
             zIndex: 3,
           }}
+          onClick={handleClick}
         >
           <div className="elective_basic">
             {electiveSubjects_basic.map((subject, index) => (
@@ -748,6 +756,12 @@ function App() {
         <div className="basic-white-area">
           <p>現在修得済み：{unit_basic}</p>
         </div>
+        <ElectiveBasicPopup
+          isOpen={isPopupOpen}
+          onClose={() => setIsPopupOpen(false)}
+          courseData={courseData}
+          position={popupPosition}
+        />
       </div>
     );
   };
@@ -768,10 +782,17 @@ function App() {
               backgroundColor: "rgba(256, 256, 0, 0.4)",
               zIndex: 4,
             }}
+            onClick={handleClick}
           ></div>
           <div className="advanced-white-area">
             <p>現在修得済み：0</p>
           </div>
+          <ElectiveAdvancedPopup
+            isOpen={isPopupOpen}
+            onClose={() => setIsPopupOpen(false)}
+            courseData={courseData}
+            position={popupPosition}
+          />
         </>
       );
     return (
@@ -801,7 +822,7 @@ function App() {
         <div className="advanced-white-area">
           <p>現在修得済み：{unit_advanced}</p>
         </div>
-        <ElectivePopup
+        <ElectiveAdvancedPopup
           isOpen={isPopupOpen}
           onClose={() => setIsPopupOpen(false)}
           courseData={courseData}
