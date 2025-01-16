@@ -25,6 +25,7 @@ type subjectList = {
   name: string;
   index: number;
   height: number;
+  status: boolean;
 };
 
 type electiveSubjectList = {
@@ -215,19 +216,32 @@ function App() {
     row: any
   ) => {
     let count = 0;
+    const checkedList = updateList.map((subject) => subject.name);
     subjectList.forEach((subject) => {
       if (
         row[3] === `"${subject.name}"` &&
         row[7] !== '"D"' &&
         row[7] !== '"F"'
       ) {
-        // 科目名が一致し、かつ成績がDでない場合
+        if (!checkedList.includes(subject.name)) {
+          // 科目名が一致し、かつ成績がDでない場合
+          updateList.push({
+            name: subject.name,
+            index: subject.index,
+            height: subject.height,
+            status: true,
+          });
+        } else {
+          updateList[checkedList.indexOf(subject.name)].status = true;
+        }
+        count++;
+      } else if (!checkedList.includes(subject.name)) {
         updateList.push({
           name: subject.name,
           index: subject.index,
           height: subject.height,
+          status: false,
         });
-        count++;
       }
     });
     if (count > 0) {
@@ -458,6 +472,9 @@ function App() {
           let peCounter = 0;
           let flagSubjectList_pe;
           pe_list.forEach((subject) => {
+            const checkedListPe = updatedSubjectStatuses_pe.map(
+              (subject) => subject.name
+            );
             const first_four = subject.name.slice(0, 4);
             const last_two = subject.name.slice(4, 7);
             if (
@@ -465,12 +482,26 @@ function App() {
               row[3].slice(-4, -1) == last_two &&
               row[7] !== '"D"'
             ) {
+              if (!checkedListPe.includes(subject.name)) {
+                updatedSubjectStatuses_pe.push({
+                  name: subject.name,
+                  index: subject.index,
+                  height: subject.height,
+                  status: true,
+                });
+              } else {
+                updatedSubjectStatuses_pe[
+                  checkedListPe.indexOf(subject.name)
+                ].status = true;
+              }
+              peCounter++;
+            } else if (!checkedListPe.includes(subject.name)) {
               updatedSubjectStatuses_pe.push({
                 name: subject.name,
                 index: subject.index,
                 height: subject.height,
+                status: false,
               });
-              peCounter++;
             }
           });
           if (peCounter === 0) flagSubjectList_pe = false;
@@ -511,8 +542,10 @@ function App() {
   };
 
   const judge_information = () => {
-    console.log();
     if (information.length === 0) return;
+    const passListInfo = information
+      .map((subject) => subject.status)
+      .includes(false);
     return (
       <div
         className="hover_info"
@@ -522,21 +555,18 @@ function App() {
           left: "46.1%",
           width: "11.5%",
           height: "1.98%",
-          backgroundColor:
-            information.length === 3
-              ? "rgba(0, 128, 0, 0.4)"
-              : "rgba(256, 256, 0, 0.4)",
+          backgroundColor: !passListInfo
+            ? "rgba(0, 128, 0, 0.4)"
+            : "rgba(256, 256, 0, 0.4)",
           zIndex: 1,
         }}
       >
         <div className="info">
-          {information_list.map((subject, index) => (
+          {information.map((subject, index) => (
             <div
               key={index}
               style={{
-                color: information.find((item) => item.name === subject.name)
-                  ? "green"
-                  : "red",
+                color: subject.status ? "green" : "red",
               }}
             >
               {subject.name}
@@ -558,6 +588,9 @@ function App() {
 
   const judge_sougou_must = () => {
     if (sougou_must.length === 0) return;
+    const passListSougou = sougou_must
+      .map((subject) => subject.status)
+      .includes(false);
     return (
       <div
         className="hover_sougou_must"
@@ -567,20 +600,17 @@ function App() {
           left: "46.1%",
           width: "11.5%",
           height: `${1.98 * 4}%`,
-          backgroundColor:
-            sougou_must.length === 2
-              ? "rgba(0, 128, 0, 0.4)"
-              : "rgba(256, 256, 0, 0.4)",
+          backgroundColor: !passListSougou
+            ? "rgba(0, 128, 0, 0.4)"
+            : "rgba(256, 256, 0, 0.4)",
         }}
       >
         <div className="sougou_must">
-          {sougou_must_list.map((subject, index) => (
+          {sougou_must.map((subject, index) => (
             <div
               key={index}
               style={{
-                color: sougou_must.find((item) => item.name === subject.name)
-                  ? "green"
-                  : "red",
+                color: subject.status ? "green" : "red",
               }}
             >
               {subject.name}
@@ -602,6 +632,8 @@ function App() {
 
   const judge_pe = () => {
     if (pe.length === 0) return;
+    const passListPe = pe.map((subject) => subject.status).includes(false);
+    console.log(pe);
     return (
       <div
         className="hover_pe"
@@ -611,18 +643,17 @@ function App() {
           left: "46.1%",
           width: "11.5%",
           height: `${1.98}%`,
-          backgroundColor:
-            pe.length === 4 ? "rgba(0, 128, 0, 0.4)" : "rgba(256, 256, 0, 0.4)",
+          backgroundColor: !passListPe
+            ? "rgba(0, 128, 0, 0.4)"
+            : "rgba(256, 256, 0, 0.4)",
         }}
       >
         <div className="pe">
-          {pe_list.map((subject, index) => (
+          {pe.map((subject, index) => (
             <div
               key={index}
               style={{
-                color: pe.find((item) => item.name === subject.name)
-                  ? "green"
-                  : "red",
+                color: subject.status ? "green" : "red",
               }}
             >
               {subject.name}
@@ -645,6 +676,9 @@ function App() {
   const judge_English = () => {
     console.log();
     if (English.length === 0) return;
+    const passListEnglish = English.map((subject) => subject.status).includes(
+      false
+    );
     return (
       <div
         className="hover_English"
@@ -654,21 +688,18 @@ function App() {
           left: "46.1%",
           width: "11.5%",
           height: "1.98%",
-          backgroundColor:
-            English.length === 4
-              ? "rgba(0, 128, 0, 0.4)"
-              : "rgba(256, 256, 0, 0.4)",
+          backgroundColor: !passListEnglish
+            ? "rgba(0, 128, 0, 0.4)"
+            : "rgba(256, 256, 0, 0.4)",
           zIndex: 3,
         }}
       >
         <div className="English">
-          {English_list.map((subject, index) => (
+          {English.map((subject, index) => (
             <div
               key={index}
               style={{
-                color: English.find((item) => item.name === subject.name)
-                  ? "green"
-                  : "red",
+                color: subject.status ? "green" : "red",
               }}
             >
               {subject.name}
@@ -1214,7 +1245,8 @@ function App() {
       return <></>;
     }
   };
-
+  // console.log("専門基礎", subjectStatuses);
+  // console.log("専門", subjectStatuses_advance);
   return (
     <>
       <div className="header">
@@ -1261,7 +1293,9 @@ function App() {
                 left: "22.5%",
                 width: "13.4%",
                 height: "1.98%",
-                backgroundColor: "rgba(0, 128, 0, 0.4)",
+                backgroundColor: subject.status
+                  ? "rgba(0, 128, 0, 0.4)"
+                  : "rgba(256, 256, 0, 0.4)",
               }}
             ></div>
           ))}
@@ -1275,7 +1309,9 @@ function App() {
                 left: "2.2%",
                 width: "10.2%",
                 height: `${1.98 * subject.height}%`,
-                backgroundColor: "rgba(0, 128, 0, 0.4)",
+                backgroundColor: subject.status
+                  ? "rgba(0, 128, 0, 0.4)"
+                  : "rgba(256, 256, 0, 0.4)",
               }}
             ></div>
           ))}
