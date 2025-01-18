@@ -73,6 +73,7 @@ const PopupBasicRishu: React.FC<PopupRishuProps> = ({
                   href={`https://kdb.tsukuba.ac.jp/syllabi/${getAcademicYear()}/${
                     course.科目番号
                   }/jpn`}
+                  target="_blank"
                 >
                   {course.科目番号}
                 </a>
