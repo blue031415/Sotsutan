@@ -24,6 +24,14 @@ const PopupBasicRishu: React.FC<PopupRishuProps> = ({
   courseData,
   courseFilters,
 }) => {
+  // 年度を計算する
+  const getAcademicYear = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    return month >= 4 ? year : year - 1;
+  };
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -60,7 +68,15 @@ const PopupBasicRishu: React.FC<PopupRishuProps> = ({
         <tbody>
           {filteredCourses.map((course) => (
             <tr key={course.科目番号}>
-              <td>{course.科目番号}</td>
+              <td>
+                <a
+                  href={`https://kdb.tsukuba.ac.jp/syllabi/${getAcademicYear()}/${
+                    course.科目番号
+                  }/jpn`}
+                >
+                  {course.科目番号}
+                </a>
+              </td>
               <td>{course.科目名}</td>
               <td>{course.曜時限 || "-"}</td>
               <td>{course.標準履修年次 || "-"}</td>
