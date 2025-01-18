@@ -776,9 +776,11 @@ function App() {
                 : "rgba(255, 255, 0, 0.4)",
             zIndex: 3,
           }}
-          onClick={handleBasicClick}
         >
           <div className="elective_basic">{elements}</div>
+          <button onClick={handleBasicClick} className="basic-list-button">
+            科目一覧
+          </button>
         </div>
         <div className="basic-white-area">
           <p>現在修得済み：{unit_basic}単位</p>
@@ -837,9 +839,11 @@ function App() {
                 : "rgba(256, 256, 0, 0.4)",
             zIndex: 4,
           }}
-          onClick={handleAdvancedClick}
         >
-          <div className="elective_basic">{elements}</div>
+          <div className="elective_basic">{elements} </div>
+          <button onClick={handleAdvancedClick} className="advance-list-button">
+            科目一覧
+          </button>
         </div>
         <div className="advanced-white-area">
           <p>現在修得済み：{unit_advanced}単位</p>
