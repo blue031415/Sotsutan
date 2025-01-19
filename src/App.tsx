@@ -10,7 +10,7 @@ import {
   pe_list,
   English_list,
 } from "./subjects";
-import kdbData from "./kdb_json/kdb_1218.json";
+import kdbData from "./kdb_json/kdb.json";
 
 interface CourseInfo {
   科目番号: string;
