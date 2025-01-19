@@ -69,7 +69,7 @@ const Header = () => {
           <div className="function-row">
             <div>
               <img src={checkmark} alt="checkmark" className="checkmark-icon" />
-              専門科目選択科目・専門基礎科目選択科目の部分をクリックすることで科目リストが表示されます
+              「科目一覧」をクリックすることで、その区分として履修できる科目の一覧が表示されます
             </div>
             <img
               src={subjectlist}
