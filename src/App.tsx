@@ -28,6 +28,11 @@ type subjectList = {
   status: boolean;
 };
 
+type checkedSubjectsList = subjectList & {
+  subjectId: string | null;
+  numberOfUnits: number | null;
+};
+
 type electiveSubjectList = {
   name: string;
   subjectId: string;
@@ -60,7 +65,7 @@ const parseSemesterString = (semester: string): string[] => {
   const seasons = ["春", "秋"];
   const modules = ["A", "B", "C"];
 
-  let result: string[] = [];
+  const result: string[] = [];
 
   seasons.forEach((season) => {
     if (semester.includes(season)) {
@@ -156,14 +161,16 @@ function App() {
   };
 
   const [showRishunenji, setShowRishunenji] = useState(false);
-  const [subjectStatuses, setSubjectStatuses] = useState<subjectList[]>([]);
+  const [subjectStatuses, setSubjectStatuses] = useState<checkedSubjectsList[]>(
+    []
+  );
   const [subjectStatuses_advance, setSubjectStatuses_advance] = useState<
-    subjectList[]
+    checkedSubjectsList[]
   >([]);
-  const [information, setInformation] = useState<subjectList[]>([]);
-  const [sougou_must, setSougou_must] = useState<subjectList[]>([]);
-  const [pe, setPe] = useState<subjectList[]>([]);
-  const [English, setEnglish] = useState<subjectList[]>([]);
+  const [information, setInformation] = useState<checkedSubjectsList[]>([]);
+  const [sougou_must, setSougou_must] = useState<checkedSubjectsList[]>([]);
+  const [pe, setPe] = useState<checkedSubjectsList[]>([]);
+  const [English, setEnglish] = useState<checkedSubjectsList[]>([]);
   const [electiveSubjects, setElectiveSubjects] = useState<
     electiveSubjectList[]
   >([]);
@@ -211,7 +218,7 @@ function App() {
   };
 
   const checkPass = (
-    updateList: subjectList[],
+    updateList: checkedSubjectsList[],
     subjectList: subjectList[],
     row: any
   ) => {
@@ -226,13 +233,21 @@ function App() {
         if (!checkedList.includes(subject.name)) {
           // 科目名が一致し、かつ成績がDでない場合
           updateList.push({
-            name: subject.name,
+            name: row[3].replace(/"/g, "").trim(),
             index: subject.index,
             height: subject.height,
             status: true,
+            subjectId: row[2],
+            numberOfUnits: Number(row[4].replace(/"/g, "").trim()),
           });
         } else {
           updateList[checkedList.indexOf(subject.name)].status = true;
+          updateList[checkedList.indexOf(subject.name)].subjectId = row[2]
+            .replace(/"/g, "")
+            .trim();
+          updateList[checkedList.indexOf(subject.name)].numberOfUnits = Number(
+            row[4].replace(/"/g, "").trim()
+          );
         }
         count++;
       } else if (!checkedList.includes(subject.name)) {
@@ -241,6 +256,8 @@ function App() {
           index: subject.index,
           height: subject.height,
           status: false,
+          subjectId: null,
+          numberOfUnits: null,
         });
       }
     });
@@ -432,12 +449,12 @@ function App() {
           .split("\n")
           .map((line) => line.split(",").map((x) => x.trim()));
 
-        const updatedSubjectStatuses: subjectList[] = [];
-        const updatedSubjectStatuses_advance: subjectList[] = [];
-        const updatedSubjectStatuses_information: subjectList[] = [];
-        const updatedSubjectStatuses_sougou_must: subjectList[] = [];
-        const updatedSubjectStatuses_pe: subjectList[] = [];
-        const updatedSubjectStatuses_English: subjectList[] = [];
+        const updatedSubjectStatuses: checkedSubjectsList[] = [];
+        const updatedSubjectStatuses_advance: checkedSubjectsList[] = [];
+        const updatedSubjectStatuses_information: checkedSubjectsList[] = [];
+        const updatedSubjectStatuses_sougou_must: checkedSubjectsList[] = [];
+        const updatedSubjectStatuses_pe: checkedSubjectsList[] = [];
+        const updatedSubjectStatuses_English: checkedSubjectsList[] = [];
         const updateElectiveSubjects: electiveSubjectList[] = [];
 
         data.splice(0, 1);
@@ -475,6 +492,7 @@ function App() {
             const checkedListPe = updatedSubjectStatuses_pe.map(
               (subject) => subject.name
             );
+            console.log(checkedListPe);
             const first_four = subject.name.slice(0, 4);
             const last_two = subject.name.slice(4, 7);
             if (
@@ -484,15 +502,23 @@ function App() {
             ) {
               if (!checkedListPe.includes(subject.name)) {
                 updatedSubjectStatuses_pe.push({
-                  name: subject.name,
+                  name: row[3].replace(/"/g, "").trim(),
                   index: subject.index,
                   height: subject.height,
                   status: true,
+                  subjectId: row[2].replace(/"/g, "").trim(),
+                  numberOfUnits: Number(row[4].replace(/"/g, "").trim()),
                 });
               } else {
                 updatedSubjectStatuses_pe[
                   checkedListPe.indexOf(subject.name)
                 ].status = true;
+                updatedSubjectStatuses_pe[
+                  checkedListPe.indexOf(subject.name)
+                ].subjectId = row[2].replace(/"/g, "").trim();
+                updatedSubjectStatuses_pe[
+                  checkedListPe.indexOf(subject.name)
+                ].numberOfUnits = Number(row[4].replace(/"/g, "").trim());
               }
               peCounter++;
             } else if (!checkedListPe.includes(subject.name)) {
@@ -501,9 +527,12 @@ function App() {
                 index: subject.index,
                 height: subject.height,
                 status: false,
+                subjectId: null,
+                numberOfUnits: null,
               });
             }
           });
+          console.log(updatedSubjectStatuses_pe);
           if (peCounter === 0) flagSubjectList_pe = false;
           else flagSubjectList_pe = true;
 
@@ -674,11 +703,59 @@ function App() {
   };
 
   const judge_English = () => {
-    console.log();
     if (English.length === 0) return;
-    const passListEnglish = English.map((subject) => subject.status).includes(
-      false
-    );
+    const passedListEnglish = English.filter((subject) => subject.status);
+    const failedListEnglish = English.filter((subject) => !subject.status);
+    console.log(English);
+    const passedTable =
+      passedListEnglish.length !== 0 ? (
+        <>
+          <table className="hoberTable" style={{ color: "green" }}>
+            <caption>現在修得済み・履修中</caption>
+            <thead>
+              <tr>
+                <th>科目番号</th>
+                <th>科目名</th>
+                <th>単位数</th>
+              </tr>
+            </thead>
+            <tbody>
+              {passedListEnglish.map((subject, index) => (
+                <tr key={index}>
+                  <td>
+                    {subject.subjectId
+                      ? subject.subjectId.replace(/"/g, "").trim()
+                      : null}
+                  </td>
+                  <td>{subject.name.replace(/"/g, "").trim()}</td>
+                  <td>
+                    {subject.numberOfUnits ? subject.numberOfUnits : null}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
+      ) : (
+        <></>
+      );
+    const failedTable =
+      failedListEnglish.length !== 0 ? (
+        <>
+          <table className="hoberTable" style={{ color: "red" }}>
+            <caption>現在未履修</caption>
+            <tbody>
+              {failedListEnglish.map((subject, index) => (
+                <tr key={index}>
+                  <td>{subject.name.replace(/"/g, "").trim()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
+      ) : (
+        <></>
+      );
     return (
       <div
         className="hover_English"
@@ -688,23 +765,16 @@ function App() {
           left: "46.1%",
           width: "11.5%",
           height: "1.98%",
-          backgroundColor: !passListEnglish
-            ? "rgba(0, 128, 0, 0.4)"
-            : "rgba(256, 256, 0, 0.4)",
+          backgroundColor:
+            failedListEnglish.length == 0
+              ? "rgba(0, 128, 0, 0.4)"
+              : "rgba(256, 256, 0, 0.4)",
           zIndex: 3,
         }}
       >
         <div className="English">
-          {English.map((subject, index) => (
-            <div
-              key={index}
-              style={{
-                color: subject.status ? "green" : "red",
-              }}
-            >
-              {subject.name}
-            </div>
-          ))}
+          <div>{passedTable}</div>
+          <div>{failedTable}</div>
         </div>
         <div
           style={{
