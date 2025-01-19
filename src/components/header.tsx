@@ -1,14 +1,14 @@
 import "./header.css";
-import checkmark from "./checkmark.png";
-import green_subject from "./green_subject.png";
-import yellow_subject from "./yellow_subject.png";
-import hover_green from "./hover_green.png";
-import hover_red from "./hover_red.png";
-import download_icon from "./download_icon.png";
-import upload_icon from "./upload_icon.png";
-import caution from "./caution.png";
-import info_icon from "./info_icon.png";
-import subjectlist from "./subjectlist.png";
+import checkmark from "/checkmark.png";
+import green_subject from "/green_subject.png";
+import yellow_subject from "/yellow_subject.png";
+import hover_green from "/hover_green.png";
+import hover_red from "/hover_red.png";
+import download_icon from "/download_icon.png";
+import upload_icon from "/upload_icon.png";
+import caution from "/caution.png";
+import info_icon from "/info_icon.png";
+import subjectlist from "/subjectlist.png";
 import PopUp from "./popup";
 
 const Header = () => {
