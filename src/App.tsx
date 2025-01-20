@@ -489,12 +489,12 @@ function App() {
           let peCounter = 0;
           let flagSubjectList_pe;
           pe_list.forEach((subject) => {
-            const checkedListPe = updatedSubjectStatuses_pe.map(
-              (subject) => subject.name
-            );
-            console.log(checkedListPe);
             const first_four = subject.name.slice(0, 4);
             const last_two = subject.name.slice(4, 7);
+            const checkedListPe = updatedSubjectStatuses_pe.map(
+              (subject) => subject.name.slice(0, 4) + subject.name.slice(-3)
+            );
+            // console.log("checkedListPe", checkedListPe);
             if (
               row[3].slice(1, 5) == first_four &&
               row[3].slice(-4, -1) == last_two &&
@@ -512,6 +512,9 @@ function App() {
               } else {
                 updatedSubjectStatuses_pe[
                   checkedListPe.indexOf(subject.name)
+                ].name = row[3].replace(/"/g, "").trim();
+                updatedSubjectStatuses_pe[
+                  checkedListPe.indexOf(subject.name)
                 ].status = true;
                 updatedSubjectStatuses_pe[
                   checkedListPe.indexOf(subject.name)
@@ -520,6 +523,7 @@ function App() {
                   checkedListPe.indexOf(subject.name)
                 ].numberOfUnits = Number(row[4].replace(/"/g, "").trim());
               }
+              subject.status = true;
               peCounter++;
             } else if (!checkedListPe.includes(subject.name)) {
               updatedSubjectStatuses_pe.push({
@@ -532,7 +536,8 @@ function App() {
               });
             }
           });
-          console.log(updatedSubjectStatuses_pe);
+          // console.log("pe_list", pe_list);
+          // console.log(updatedSubjectStatuses_pe);
           if (peCounter === 0) flagSubjectList_pe = false;
           else flagSubjectList_pe = true;
 
@@ -747,8 +752,58 @@ function App() {
 
   const judge_pe = () => {
     if (pe.length === 0) return;
-    const passListPe = pe.map((subject) => subject.status).includes(false);
-    console.log(pe);
+    const passedListPe = pe.filter((subject) => subject.status);
+    const failedListPe = pe.filter((subject) => !subject.status);
+    const passedTable =
+      passedListPe.length !== 0 ? (
+        <>
+          <table className="hoberTable" style={{ color: "green" }}>
+            <caption>現在修得済み・履修中</caption>
+            <thead>
+              <tr>
+                <th>科目番号</th>
+                <th>科目名</th>
+                <th>単位数</th>
+              </tr>
+            </thead>
+            <tbody>
+              {passedListPe.map((subject, index) => (
+                <tr key={index}>
+                  <td>
+                    {subject.subjectId
+                      ? subject.subjectId.replace(/"/g, "").trim()
+                      : null}
+                  </td>
+                  <td>{subject.name.replace(/"/g, "").trim()}</td>
+                  <td>
+                    {subject.numberOfUnits ? subject.numberOfUnits : null}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
+      ) : (
+        <></>
+      );
+    const failedTable =
+      failedListPe.length !== 0 ? (
+        <>
+          <table className="hoberTable" style={{ color: "red" }}>
+            <caption>現在未履修</caption>
+            <tbody>
+              {failedListPe.map((subject, index) => (
+                <tr key={index}>
+                  <td>{subject.name.replace(/"/g, "").trim()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
+      ) : (
+        <></>
+      );
+    // console.log(pe);
     return (
       <div
         className="hover_pe"
@@ -758,22 +813,15 @@ function App() {
           left: "46.1%",
           width: "11.5%",
           height: `${1.98}%`,
-          backgroundColor: !passListPe
-            ? "rgba(0, 128, 0, 0.4)"
-            : "rgba(256, 256, 0, 0.4)",
+          backgroundColor:
+            passedListPe.length === 4
+              ? "rgba(0, 128, 0, 0.4)"
+              : "rgba(256, 256, 0, 0.4)",
         }}
       >
         <div className="pe">
-          {pe.map((subject, index) => (
-            <div
-              key={index}
-              style={{
-                color: subject.status ? "green" : "red",
-              }}
-            >
-              {subject.name}
-            </div>
-          ))}
+          <div>{passedTable}</div>
+          <div>{failedTable}</div>
         </div>
         <div
           style={{
@@ -792,8 +840,8 @@ function App() {
     if (English.length === 0) return;
     const passedListEnglish = English.filter((subject) => subject.status);
     const failedListEnglish = English.filter((subject) => !subject.status);
-    console.log("English", English);
-    console.log("PassedEnglish", passedListEnglish);
+    // console.log("English", English);
+    // console.log("PassedEnglish", passedListEnglish);
     const passedTable =
       passedListEnglish.length !== 0 ? (
         <>
