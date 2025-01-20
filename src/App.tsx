@@ -572,9 +572,59 @@ function App() {
 
   const judge_information = () => {
     if (information.length === 0) return;
-    const passListInfo = information
-      .map((subject) => subject.status)
-      .includes(false);
+    const passedListInfo = information.filter((subject) => subject.status);
+    const failedListInfo = information.filter((subject) => !subject.status);
+
+    const passedTable =
+      passedListInfo.length !== 0 ? (
+        <>
+          <table className="hoberTable" style={{ color: "green" }}>
+            <caption>現在修得済み・履修中</caption>
+            <thead>
+              <tr>
+                <th>科目番号</th>
+                <th>科目名</th>
+                <th>単位数</th>
+              </tr>
+            </thead>
+            <tbody>
+              {passedListInfo.map((subject, index) => (
+                <tr key={index}>
+                  <td>
+                    {subject.subjectId
+                      ? subject.subjectId.replace(/"/g, "").trim()
+                      : null}
+                  </td>
+                  <td>{subject.name.replace(/"/g, "").trim()}</td>
+                  <td>
+                    {subject.numberOfUnits ? subject.numberOfUnits : null}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
+      ) : (
+        <></>
+      );
+    const failedTable =
+      failedListInfo.length !== 0 ? (
+        <>
+          <table className="hoberTable" style={{ color: "red" }}>
+            <caption>現在未履修</caption>
+            <tbody>
+              {failedListInfo.map((subject, index) => (
+                <tr key={index}>
+                  <td>{subject.name.replace(/"/g, "").trim()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
+      ) : (
+        <></>
+      );
+
     return (
       <div
         className="hover_info"
@@ -584,23 +634,16 @@ function App() {
           left: "46.1%",
           width: "11.5%",
           height: "1.98%",
-          backgroundColor: !passListInfo
-            ? "rgba(0, 128, 0, 0.4)"
-            : "rgba(256, 256, 0, 0.4)",
+          backgroundColor:
+            passedListInfo.length === 3
+              ? "rgba(0, 128, 0, 0.4)"
+              : "rgba(256, 256, 0, 0.4)",
           zIndex: 1,
         }}
       >
         <div className="info">
-          {information.map((subject, index) => (
-            <div
-              key={index}
-              style={{
-                color: subject.status ? "green" : "red",
-              }}
-            >
-              {subject.name}
-            </div>
-          ))}
+          <div>{passedTable}</div>
+          <div>{failedTable}</div>
         </div>
         <div
           style={{
@@ -617,9 +660,59 @@ function App() {
 
   const judge_sougou_must = () => {
     if (sougou_must.length === 0) return;
-    const passListSougou = sougou_must
-      .map((subject) => subject.status)
-      .includes(false);
+    const passedListSougou = sougou_must.filter((subject) => subject.status);
+    const failedListSougou = sougou_must.filter((subject) => !subject.status);
+
+    const passedTable =
+      passedListSougou.length !== 0 ? (
+        <>
+          <table className="hoberTable" style={{ color: "green" }}>
+            <caption>現在修得済み・履修中</caption>
+            <thead>
+              <tr>
+                <th>科目番号</th>
+                <th>科目名</th>
+                <th>単位数</th>
+              </tr>
+            </thead>
+            <tbody>
+              {passedListSougou.map((subject, index) => (
+                <tr key={index}>
+                  <td>
+                    {subject.subjectId
+                      ? subject.subjectId.replace(/"/g, "").trim()
+                      : null}
+                  </td>
+                  <td>{subject.name.replace(/"/g, "").trim()}</td>
+                  <td>
+                    {subject.numberOfUnits ? subject.numberOfUnits : null}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
+      ) : (
+        <></>
+      );
+    const failedTable =
+      failedListSougou.length !== 0 ? (
+        <>
+          <table className="hoberTable" style={{ color: "red" }}>
+            <caption>現在未履修</caption>
+            <tbody>
+              {failedListSougou.map((subject, index) => (
+                <tr key={index}>
+                  <td>{subject.name.replace(/"/g, "").trim()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
+      ) : (
+        <></>
+      );
+
     return (
       <div
         className="hover_sougou_must"
@@ -629,22 +722,15 @@ function App() {
           left: "46.1%",
           width: "11.5%",
           height: `${1.98 * 4}%`,
-          backgroundColor: !passListSougou
-            ? "rgba(0, 128, 0, 0.4)"
-            : "rgba(256, 256, 0, 0.4)",
+          backgroundColor:
+            passedListSougou.length === 2
+              ? "rgba(0, 128, 0, 0.4)"
+              : "rgba(256, 256, 0, 0.4)",
         }}
       >
         <div className="sougou_must">
-          {sougou_must.map((subject, index) => (
-            <div
-              key={index}
-              style={{
-                color: subject.status ? "green" : "red",
-              }}
-            >
-              {subject.name}
-            </div>
-          ))}
+          <div>{passedTable}</div>
+          <div>{failedTable}</div>
         </div>
         <div
           style={{
@@ -706,7 +792,8 @@ function App() {
     if (English.length === 0) return;
     const passedListEnglish = English.filter((subject) => subject.status);
     const failedListEnglish = English.filter((subject) => !subject.status);
-    console.log(English);
+    console.log("English", English);
+    console.log("PassedEnglish", passedListEnglish);
     const passedTable =
       passedListEnglish.length !== 0 ? (
         <>
@@ -766,7 +853,7 @@ function App() {
           width: "11.5%",
           height: "1.98%",
           backgroundColor:
-            failedListEnglish.length == 0
+            passedListEnglish.length === 4
               ? "rgba(0, 128, 0, 0.4)"
               : "rgba(256, 256, 0, 0.4)",
           zIndex: 3,
