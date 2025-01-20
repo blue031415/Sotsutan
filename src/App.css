@@ -659,6 +659,7 @@
 }
 
 .basic-white-area {
+  display: flex;
   width: 10%;
   left: 36%;
   position: absolute;
@@ -674,6 +675,11 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   font-weight: bold;
   border: 2px solid black;
+}
+
+.basic-white-area p {
+  width: 100%;
+  margin: 0;
 }
 
 .basic-white-area:before {
@@ -699,6 +705,7 @@
 }
 
 .advanced-white-area {
+  display: flex;
   width: 10%;
   left: 12.4%;
   position: absolute;
@@ -736,7 +743,13 @@
   z-index: 1;
 }
 
+.advanced-white-area p {
+  width: 100%;
+  margin: 0;
+}
+
 .common-white-area {
+  display: flex;
   position: absolute;
   background: #f8f9fa;
   text-align: center;
@@ -776,7 +789,13 @@
   z-index: 1;
 }
 
+.common-white-area p {
+  width: 100%;
+  margin: 0;
+}
+
 .relation-white-area {
+  display: flex;
   position: absolute;
   background: #f8f9fa;
   text-align: center;
@@ -814,6 +833,11 @@
   border: 10px solid transparent;
   border-top: 14px solid black; /* 上方向の三角形を作る（外側の境界線） */
   z-index: 1;
+}
+
+.relation-white-area p {
+  width: 100%;
+  margin: 0;
 }
 
 .alert_lack_of_elective_units {
