@@ -94,13 +94,16 @@
   z-index: 1;
 }
 .info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   opacity: 0;
   transition: 0.5s;
   background: #f8f9fa;
   position: absolute;
   color: black;
   padding: 5px;
-  width: 150px;
+  width: fit-content;
   bottom: calc(100% + 17px);
   left: 0%;
   box-sizing: border-box;
@@ -140,13 +143,16 @@
 }
 
 .sougou_must {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   opacity: 0;
   transition: 0.5s;
   background: #f8f9fa;
   position: absolute;
   color: black;
   padding: 5px;
-  width: 150px;
+  width: fit-content;
   bottom: calc(100% + 17px);
   left: 0%;
   box-sizing: border-box;
@@ -186,13 +192,16 @@
   z-index: 3;
 }
 .English {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   opacity: 0;
   transition: 0.5s;
   background: #f8f9fa;
   position: absolute;
   color: black;
   padding: 5px;
-  width: 150px;
+  width: fit-content;
   bottom: calc(100% + 17px);
   left: 0%;
   box-sizing: border-box;
@@ -231,13 +240,16 @@
   z-index: 2;
 }
 .pe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   opacity: 0;
   transition: 0.5s;
   background: #f8f9fa;
   position: absolute;
   color: black;
   padding: 5px;
-  width: 150px;
+  width: fit-content;
   bottom: calc(100% + 17px);
   left: 0%;
   box-sizing: border-box;
