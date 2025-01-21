@@ -988,7 +988,7 @@ function App() {
           </button>
         </div>
         <div className="basic-white-area">
-          <p>現在修得済み：{unit_basic}単位</p>
+          <p>修得済・履修中：{unit_basic}単位</p>
         </div>
         <div>
           <ElectivePopup
@@ -1051,7 +1051,7 @@ function App() {
           </button>
         </div>
         <div className="advanced-white-area">
-          <p>現在修得済み：{unit_advanced}単位</p>
+          <p>修得済・履修中：{unit_advanced}単位</p>
         </div>
         <ElectivePopup
           isOpen={isPopupOpen}
@@ -1109,7 +1109,7 @@ function App() {
         </div>
         <div className="common-white-area">
           <p>
-            現在修得済み：
+            修得済・履修中：
             {unit_gakusi +
               (unit_electivePE === null ? 0 : unit_electivePE) +
               (unit_electiveLanguage === null ? 0 : unit_electiveLanguage) +
@@ -1424,7 +1424,7 @@ function App() {
         </div>
         <div className="relation-white-area">
           <p>
-            現在修得済み：
+            修得済・履修中：
             {unit_otherSubjects +
               (unit_electiveGBGE === null ? 0 : unit_electiveGBGE) +
               (unit_electiveMuseum === null ? 0 : unit_electiveMuseum)}
@@ -1464,7 +1464,7 @@ function App() {
         <div className="alert_lack_of_elective_units">
           <div className="location_of_balloon">
             <div className="balloon2-left">
-              <p>現在修得済み:{elective_units}単位</p>
+              <p>修得済・履修中:{elective_units}単位</p>
               <p>あと{74 - elective_units}単位必要!</p>
             </div>
           </div>
@@ -1475,7 +1475,7 @@ function App() {
         <div className="fulfill_elective_units">
           <div className="location_of_balloon">
             <div className="balloon2-left">
-              <p>現在修得済み:{elective_units}単位</p>
+              <p>修得済・履修中:{elective_units}単位</p>
               <p>単位充足!</p>
             </div>
           </div>
