@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  gap: 10px;
 }
 
 .Explain {
@@ -30,7 +31,6 @@
 
 button {
   align-self: flex-end; /* 閉じるボタンを右下に配置 */
-  margin-top: 10px;
 }
 
 .showPopUp {
