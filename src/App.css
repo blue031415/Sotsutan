@@ -368,7 +368,6 @@
   visibility: hidden;
   pointer-events: none;
   font-size: 10%;
-  z-index: 3;
   color: green;
   white-space: nowrap;
   border-radius: 10px;
@@ -377,7 +376,7 @@
 
 .hover_elective_basic {
   position: relative;
-  z-index: 2;
+  z-index: 6;
 }
 .hover_elective_basic:hover::before {
   opacity: 1;
@@ -404,13 +403,13 @@
   visibility: hidden;
   pointer-events: none;
   font-size: 10%;
-  z-index: 1;
+  z-index: 2;
   border-radius: 10px;
   border: 2px solid black;
 }
 .hover_gakusi {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 .hover_gakusi::before {
   opacity: 0;
@@ -437,7 +436,7 @@
   margin-top: -3px;
   visibility: hidden;
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
 }
 .hover_gakusi:hover::before {
   opacity: 1;
@@ -468,13 +467,13 @@
   visibility: hidden;
   pointer-events: none;
   font-size: 10%;
-  z-index: 1;
+  z-index: 3;
   border-radius: 10px;
   border: 2px solid black;
 }
 .hover_electivePE {
   position: relative;
-  z-index: 1;
+  z-index: 3;
 }
 .hover_electivePE::before {
   opacity: 0;
@@ -501,7 +500,7 @@
   margin-top: -3px;
   visibility: hidden;
   pointer-events: none;
-  z-index: 1;
+  z-index: 3;
 }
 .hover_electivePE:hover::before {
   opacity: 1;
@@ -532,13 +531,13 @@
   visibility: hidden;
   pointer-events: none;
   font-size: 10%;
-  z-index: 1;
+  z-index: 4;
   border-radius: 10px;
   border: 2px solid black;
 }
 .hover_electiveLanguage {
   position: relative;
-  z-index: 1;
+  z-index: 4;
 }
 .hover_electiveLanguage::before {
   opacity: 0;
@@ -565,7 +564,7 @@
   margin-top: -3px;
   visibility: hidden;
   pointer-events: none;
-  z-index: 1;
+  z-index: 4;
 }
 .hover_electiveLanguage:hover::before {
   opacity: 1;
@@ -596,13 +595,13 @@
   visibility: hidden;
   pointer-events: none;
   font-size: 10%;
-  z-index: 1;
+  z-index: 4;
   border-radius: 10px;
   border: 2px solid black;
 }
 .hover_electiveJapanese {
   position: relative;
-  z-index: 1;
+  z-index: 4;
 }
 .hover_electiveJapanese::before {
   opacity: 0;
@@ -629,7 +628,7 @@
   margin-top: -3px;
   visibility: hidden;
   pointer-events: none;
-  z-index: 1;
+  z-index: 4;
 }
 .hover_electiveJapanese:hover::before {
   opacity: 1;
@@ -660,13 +659,13 @@
   visibility: hidden;
   pointer-events: none;
   font-size: 10%;
-  z-index: 1;
+  z-index: 5;
   border-radius: 10px;
   border: 2px solid black;
 }
 .hover_electiveArt {
   position: relative;
-  z-index: 1;
+  z-index: 5;
 }
 .hover_electiveArt::before {
   opacity: 0;
@@ -693,7 +692,7 @@
   margin-top: -3px;
   visibility: hidden;
   pointer-events: none;
-  z-index: 1;
+  z-index: 5;
 }
 .hover_electiveArt:hover::before {
   opacity: 1;
@@ -724,13 +723,13 @@
   visibility: hidden;
   pointer-events: none;
   font-size: 10%;
-  z-index: 1;
+  z-index: 2;
   border-radius: 10px;
   border: 2px solid black;
 }
 .hover_electiveGBGE {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 .hover_electiveGBGE::before {
   opacity: 0;
@@ -757,7 +756,7 @@
   margin-top: -3px;
   visibility: hidden;
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
 }
 .hover_electiveGBGE:hover::before {
   opacity: 1;
@@ -909,7 +908,7 @@
   align-items: center;
   top: 69%;
   height: 4%;
-  z-index: 3;
+  z-index: 7;
   font-size: 30%;
   white-space: nowrap;
   border-radius: 10px;
@@ -955,7 +954,7 @@
   align-items: center;
   top: 69%;
   height: 4%;
-  z-index: 4;
+  z-index: 7;
   font-size: 30%;
   white-space: nowrap;
   border-radius: 10px;

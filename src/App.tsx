@@ -774,7 +774,6 @@ function App() {
               unit_basic >= 32
                 ? "rgba(0, 128, 0, 0.4)"
                 : "rgba(255, 255, 0, 0.4)",
-            zIndex: 3,
           }}
         >
           <div className="elective_basic">{elements}</div>
@@ -837,7 +836,6 @@ function App() {
               unit_advanced >= 20
                 ? "rgba(0, 128, 0, 0.4)"
                 : "rgba(256, 256, 0, 0.4)",
-            zIndex: 4,
           }}
         >
           <div className="elective_basic">{elements} </div>
@@ -1122,7 +1120,6 @@ function App() {
           width: "9.3%",
           height: "4.1%",
           backgroundColor: "rgba(0, 128, 0, 0.4)",
-          zIndex: 1,
         }}
       >
         <div className="electiveGBGE">{elements}</div>
@@ -1212,7 +1209,6 @@ function App() {
               unit_otherSubjects >= 6
                 ? "rgba(0, 128, 0, 0.4)"
                 : "rgba(256, 256, 0, 0.4)",
-            zIndex: 0,
           }}
         >
           <div className="otherSubjects">{elements}</div>
