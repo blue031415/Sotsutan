@@ -1072,7 +1072,7 @@ function App() {
       );
     return (
       <div
-        className="hover_electiveJapanese"
+        className="hover_electiveArt"
         style={{
           position: "absolute",
           top: `${40.2}%`,
@@ -1082,7 +1082,7 @@ function App() {
           backgroundColor: "rgba(0, 128, 0, 0.4)",
         }}
       >
-        <div className="electiveJapanese">{elements}</div>
+        <div className="electiveArt">{elements}</div>
       </div>
     );
   };
