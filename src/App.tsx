@@ -659,7 +659,6 @@ function App() {
             passedListInfo.length === 3
               ? "rgba(0, 128, 0, 0.4)"
               : "rgba(256, 256, 0, 0.4)",
-          zIndex: 1,
         }}
       >
         <div className="info">
@@ -920,7 +919,7 @@ function App() {
             passedListEnglish.length === 4
               ? "rgba(0, 128, 0, 0.4)"
               : "rgba(256, 256, 0, 0.4)",
-          zIndex: 3,
+          zIndex: 5,
         }}
       >
         <div className="English">
@@ -947,6 +946,7 @@ function App() {
         <p style={{ color: "red" }}>この区分の科目は履修・修得していません</p>
       ) : (
         <table className="hoberTable">
+          <caption>現在修得済み・履修中</caption>
           <thead>
             <tr>
               <th>科目番号</th>
@@ -1009,6 +1009,7 @@ function App() {
         <p style={{ color: "red" }}>この区分の科目は履修・修得していません</p>
       ) : (
         <table className="hoberTable">
+          <caption>現在修得済み・履修中</caption>
           <thead>
             <tr>
               <th>科目番号</th>
@@ -1069,6 +1070,7 @@ function App() {
         <p style={{ color: "red" }}>この区分の科目は履修・修得していません</p>
       ) : (
         <table className="hoberTable">
+          <caption>現在修得済み・履修中</caption>
           <thead>
             <tr>
               <th>科目番号</th>
@@ -1127,6 +1129,7 @@ function App() {
         <p>この区分の科目は履修・修得していません</p>
       ) : (
         <table className="hoberTable">
+          <caption>現在修得済み・履修中</caption>
           <thead>
             <tr>
               <th>科目番号</th>
@@ -1171,6 +1174,7 @@ function App() {
         <p>この区分の科目は履修・修得していません</p>
       ) : (
         <table className="hoberTable">
+          <caption>現在修得済み・履修中</caption>
           <thead>
             <tr>
               <th>科目番号</th>
@@ -1213,6 +1217,7 @@ function App() {
         <p>この区分の科目は履修・修得していません</p>
       ) : (
         <table className="hoberTable">
+          <caption>現在修得済み・履修中</caption>
           <thead>
             <tr>
               <th>科目番号</th>
@@ -1255,6 +1260,7 @@ function App() {
         <p>この区分の科目は履修・修得していません</p>
       ) : (
         <table className="hoberTable">
+          <caption>現在修得済み・履修中</caption>
           <thead>
             <tr>
               <th>科目番号</th>
@@ -1297,6 +1303,7 @@ function App() {
         <p>この区分の科目は履修・修得していません</p>
       ) : (
         <table className="hoberTable">
+          <caption>現在修得済み・履修中</caption>
           <thead>
             <tr>
               <th>科目番号</th>
@@ -1339,6 +1346,7 @@ function App() {
         <p>この区分の科目は履修・修得していません</p>
       ) : (
         <table className="hoberTable">
+          <caption>現在修得済み・履修中</caption>
           <thead>
             <tr>
               <th>科目番号</th>
@@ -1382,6 +1390,7 @@ function App() {
         <p style={{ color: "red" }}>この区分の科目は履修・修得していません</p>
       ) : (
         <table className="hoberTable">
+          <caption>現在修得済み・履修中</caption>
           <thead>
             <tr>
               <th>科目番号</th>
