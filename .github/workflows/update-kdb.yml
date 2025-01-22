@@ -1,5 +1,8 @@
 name: Update KDB JSON
 
+permissions:
+  pull-requests: write
+
 on:
   schedule:
     # 日本時間の午前3時に実行
