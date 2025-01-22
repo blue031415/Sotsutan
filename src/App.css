@@ -114,6 +114,8 @@
   pointer-events: none;
   font-size: 10%;
   z-index: 1;
+  border-radius: 10px;
+  border: 2px solid black;
 }
 .hover_info::before {
   opacity: 0;
@@ -121,14 +123,32 @@
   content: "";
   position: absolute;
   border: 7px solid transparent;
-  border-top: 14px solid #f8f9fa;
+  border-top: 14px solid black;
   bottom: 17px;
   left: calc(50% - 7px);
   margin-top: -3px;
   visibility: hidden;
   pointer-events: none;
 }
+.hover_info::after {
+  opacity: 0;
+  transition: 0.5s;
+  content: "";
+  position: absolute;
+  border: 5px solid transparent;
+  border-top: 12px solid #f8f9fa;
+  bottom: 23px;
+  left: calc(50% - 5px);
+  margin-top: -3px;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
 .hover_info:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+.hover_info:hover::after {
   opacity: 1;
   visibility: visible;
 }
@@ -163,6 +183,8 @@
   pointer-events: none;
   font-size: 10%;
   z-index: 1;
+  border-radius: 10px;
+  border: 2px solid black;
 }
 
 .hover_sougou_must::before {
@@ -171,14 +193,32 @@
   content: "";
   position: absolute;
   border: 7px solid transparent;
-  border-top: 14px solid #f8f9fa;
-  bottom: 82px;
+  border-top: 14px solid black;
+  bottom: 72px;
   left: calc(50% - 7px);
   margin-top: -2px;
   visibility: hidden;
   pointer-events: none;
 }
+.hover_sougou_must::after {
+  opacity: 0;
+  transition: 0.5s;
+  content: "";
+  position: absolute;
+  border: 5px solid transparent;
+  border-top: 12px solid #f8f9fa;
+  bottom: 78px;
+  left: calc(50% - 5px);
+  margin-top: -2px;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
 .hover_sougou_must:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+.hover_sougou_must:hover::after {
   opacity: 1;
   visibility: visible;
 }
@@ -212,6 +252,8 @@
   pointer-events: none;
   font-size: 10%;
   z-index: 3;
+  border-radius: 10px;
+  border: 2px solid black;
 }
 .hover_English::before {
   opacity: 0;
@@ -219,14 +261,32 @@
   content: "";
   position: absolute;
   border: 7px solid transparent;
-  border-top: 14px solid #f8f9fa;
+  border-top: 14px solid black;
   bottom: 17px;
   left: calc(50% - 7px);
   margin-top: -3px;
   visibility: hidden;
   pointer-events: none;
 }
+.hover_English::after {
+  opacity: 0;
+  transition: 0.5s;
+  content: "";
+  position: absolute;
+  border: 5px solid transparent;
+  border-top: 12px solid #f8f9fa;
+  bottom: 23px;
+  left: calc(50% - 5px);
+  margin-top: -3px;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 3;
+}
 .hover_English:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+.hover_English:hover::after {
   opacity: 1;
   visibility: visible;
 }
@@ -260,6 +320,8 @@
   pointer-events: none;
   font-size: 10%;
   z-index: 1;
+  border-radius: 10px;
+  border: 2px solid black;
 }
 .hover_pe::before {
   opacity: 0;
@@ -267,14 +329,32 @@
   content: "";
   position: absolute;
   border: 7px solid transparent;
-  border-top: 14px solid #f8f9fa;
+  border-top: 14px solid black;
   bottom: 18px;
   left: calc(50% - 7px);
   margin-top: -3px;
   visibility: hidden;
   pointer-events: none;
 }
+.hover_pe::after {
+  opacity: 0;
+  transition: 0.5s;
+  content: "";
+  position: absolute;
+  border: 5px solid transparent;
+  border-top: 12px solid #f8f9fa;
+  bottom: 24px;
+  left: calc(50% - 5px);
+  margin-top: -3px;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
 .hover_pe:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+.hover_pe:hover::after {
   opacity: 1;
   visibility: visible;
 }
@@ -300,14 +380,15 @@
   visibility: hidden;
   pointer-events: none;
   font-size: 10%;
-  z-index: 3;
   color: green;
   white-space: nowrap;
+  border-radius: 10px;
+  border: 2px solid black;
 }
 
 .hover_elective_basic {
   position: relative;
-  z-index: 2;
+  z-index: 6;
 }
 .hover_elective_basic:hover::before {
   opacity: 1;
@@ -334,11 +415,13 @@
   visibility: hidden;
   pointer-events: none;
   font-size: 10%;
-  z-index: 1;
+  z-index: 2;
+  border-radius: 10px;
+  border: 2px solid black;
 }
 .hover_gakusi {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 .hover_gakusi::before {
   opacity: 0;
@@ -346,14 +429,32 @@
   content: "";
   position: absolute;
   border: 7px solid transparent;
-  border-top: 14px solid #f8f9fa;
+  border-top: 14px solid black;
   bottom: 36px;
   left: 20px;
   margin-top: -3px;
   visibility: hidden;
   pointer-events: none;
 }
+.hover_gakusi::after {
+  opacity: 0;
+  transition: 0.5s;
+  content: "";
+  position: absolute;
+  border: 5px solid transparent;
+  border-top: 12px solid #f8f9fa;
+  bottom: 42px;
+  left: 22px;
+  margin-top: -3px;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
 .hover_gakusi:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+.hover_gakusi:hover::after {
   opacity: 1;
   visibility: visible;
 }
@@ -378,11 +479,13 @@
   visibility: hidden;
   pointer-events: none;
   font-size: 10%;
-  z-index: 1;
+  z-index: 3;
+  border-radius: 10px;
+  border: 2px solid black;
 }
 .hover_electivePE {
   position: relative;
-  z-index: 1;
+  z-index: 3;
 }
 .hover_electivePE::before {
   opacity: 0;
@@ -390,14 +493,32 @@
   content: "";
   position: absolute;
   border: 7px solid transparent;
-  border-top: 14px solid #f8f9fa;
+  border-top: 14px solid black;
   bottom: 6px;
   left: 20px;
   margin-top: -3px;
   visibility: hidden;
   pointer-events: none;
 }
+.hover_electivePE::after {
+  opacity: 0;
+  transition: 0.5s;
+  content: "";
+  position: absolute;
+  border: 5px solid transparent;
+  border-top: 12px solid #f8f9fa;
+  bottom: 12px;
+  left: 22px;
+  margin-top: -3px;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 3;
+}
 .hover_electivePE:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+.hover_electivePE:hover::after {
   opacity: 1;
   visibility: visible;
 }
@@ -422,11 +543,13 @@
   visibility: hidden;
   pointer-events: none;
   font-size: 10%;
-  z-index: 1;
+  z-index: 4;
+  border-radius: 10px;
+  border: 2px solid black;
 }
 .hover_electiveLanguage {
   position: relative;
-  z-index: 1;
+  z-index: 4;
 }
 .hover_electiveLanguage::before {
   opacity: 0;
@@ -434,14 +557,32 @@
   content: "";
   position: absolute;
   border: 7px solid transparent;
-  border-top: 14px solid #f8f9fa;
+  border-top: 14px solid black;
   bottom: 6px;
   left: 20px;
   margin-top: -3px;
   visibility: hidden;
   pointer-events: none;
 }
+.hover_electiveLanguage::after {
+  opacity: 0;
+  transition: 0.5s;
+  content: "";
+  position: absolute;
+  border: 5px solid transparent;
+  border-top: 12px solid #f8f9fa;
+  bottom: 12px;
+  left: 22px;
+  margin-top: -3px;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 4;
+}
 .hover_electiveLanguage:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+.hover_electiveLanguage:hover::after {
   opacity: 1;
   visibility: visible;
 }
@@ -466,11 +607,13 @@
   visibility: hidden;
   pointer-events: none;
   font-size: 10%;
-  z-index: 1;
+  z-index: 4;
+  border-radius: 10px;
+  border: 2px solid black;
 }
 .hover_electiveJapanese {
   position: relative;
-  z-index: 1;
+  z-index: 4;
 }
 .hover_electiveJapanese::before {
   opacity: 0;
@@ -478,14 +621,32 @@
   content: "";
   position: absolute;
   border: 7px solid transparent;
-  border-top: 14px solid #f8f9fa;
+  border-top: 14px solid black;
   bottom: 6px;
   left: 20px;
   margin-top: -3px;
   visibility: hidden;
   pointer-events: none;
 }
+.hover_electiveJapanese::after {
+  opacity: 0;
+  transition: 0.5s;
+  content: "";
+  position: absolute;
+  border: 5px solid transparent;
+  border-top: 12px solid #f8f9fa;
+  bottom: 12px;
+  left: 22px;
+  margin-top: -3px;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 4;
+}
 .hover_electiveJapanese:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+.hover_electiveJapanese:hover::after {
   opacity: 1;
   visibility: visible;
 }
@@ -510,11 +671,13 @@
   visibility: hidden;
   pointer-events: none;
   font-size: 10%;
-  z-index: 1;
+  z-index: 5;
+  border-radius: 10px;
+  border: 2px solid black;
 }
 .hover_electiveArt {
   position: relative;
-  z-index: 1;
+  z-index: 5;
 }
 .hover_electiveArt::before {
   opacity: 0;
@@ -522,14 +685,32 @@
   content: "";
   position: absolute;
   border: 7px solid transparent;
-  border-top: 14px solid #f8f9fa;
+  border-top: 14px solid black;
   bottom: 6px;
   left: 20px;
   margin-top: -3px;
   visibility: hidden;
   pointer-events: none;
 }
+.hover_electiveArt::after {
+  opacity: 0;
+  transition: 0.5s;
+  content: "";
+  position: absolute;
+  border: 5px solid transparent;
+  border-top: 12px solid #f8f9fa;
+  bottom: 12px;
+  left: 22px;
+  margin-top: -3px;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 5;
+}
 .hover_electiveArt:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+.hover_electiveArt:hover::after {
   opacity: 1;
   visibility: visible;
 }
@@ -554,11 +735,13 @@
   visibility: hidden;
   pointer-events: none;
   font-size: 10%;
-  z-index: 1;
+  z-index: 2;
+  border-radius: 10px;
+  border: 2px solid black;
 }
 .hover_electiveGBGE {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 .hover_electiveGBGE::before {
   opacity: 0;
@@ -566,14 +749,32 @@
   content: "";
   position: absolute;
   border: 7px solid transparent;
-  border-top: 14px solid #f8f9fa;
+  border-top: 14px solid black;
   bottom: 20px;
   left: 20px;
   margin-top: -3px;
   visibility: hidden;
   pointer-events: none;
 }
+.hover_electiveGBGE::after {
+  opacity: 0;
+  transition: 0.5s;
+  content: "";
+  position: absolute;
+  border: 5px solid transparent;
+  border-top: 12px solid #f8f9fa;
+  bottom: 26px;
+  left: 22px;
+  margin-top: -3px;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
 .hover_electiveGBGE:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+.hover_electiveGBGE:hover::after {
   opacity: 1;
   visibility: visible;
 }
@@ -599,6 +800,8 @@
   pointer-events: none;
   font-size: 10%;
   z-index: 1;
+  border-radius: 10px;
+  border: 2px solid black;
 }
 .hover_electiveMuseum {
   position: relative;
@@ -610,14 +813,32 @@
   content: "";
   position: absolute;
   border: 7px solid transparent;
-  border-top: 14px solid #f8f9fa;
+  border-top: 14px solid black;
   bottom: 20px;
   left: 20px;
   margin-top: -3px;
   visibility: hidden;
   pointer-events: none;
 }
+.hover_electiveMuseum::after {
+  opacity: 0;
+  transition: 0.5s;
+  content: "";
+  position: absolute;
+  border: 5px solid transparent;
+  border-top: 12px solid #f8f9fa;
+  bottom: 26px;
+  left: 22px;
+  margin-top: -3px;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
 .hover_electiveMuseum:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+.hover_electiveMuseum:hover::after {
   opacity: 1;
   visibility: visible;
 }
@@ -643,6 +864,8 @@
   pointer-events: none;
   font-size: 10%;
   z-index: 1;
+  border-radius: 10px;
+  border: 2px solid black;
 }
 .hover_otherSubjects {
   position: relative;
@@ -654,14 +877,31 @@
   content: "";
   position: absolute;
   border: 7px solid transparent;
-  border-top: 14px solid #f8f9fa;
+  border-top: 14px solid black;
   bottom: 60px;
   left: 20px;
   margin-top: -3px;
   visibility: hidden;
   pointer-events: none;
 }
+.hover_otherSubjects::after {
+  opacity: 0;
+  transition: 0.5s;
+  content: "";
+  position: absolute;
+  border: 5px solid transparent;
+  border-top: 12px solid white;
+  bottom: 66px;
+  left: 22px;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
 .hover_otherSubjects:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+.hover_otherSubjects:hover::after {
   opacity: 1;
   visibility: visible;
 }
@@ -680,7 +920,7 @@
   align-items: center;
   top: 69%;
   height: 4%;
-  z-index: 3;
+  z-index: 7;
   font-size: 30%;
   white-space: nowrap;
   border-radius: 10px;
@@ -726,7 +966,7 @@
   align-items: center;
   top: 69%;
   height: 4%;
-  z-index: 4;
+  z-index: 7;
   font-size: 30%;
   white-space: nowrap;
   border-radius: 10px;
