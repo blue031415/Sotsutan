@@ -1299,7 +1299,7 @@ function App() {
               common_units >= 1
                 ? "rgba(0, 128, 0, 0.4)"
                 : "rgba(255, 255, 0, 0.4)",
-            zIndex: 3,
+            zIndex: 1,
           }}
         ></div>
       );
@@ -1328,7 +1328,7 @@ function App() {
               relative_units >= 6
                 ? "rgba(0, 128, 0, 0.4)"
                 : "rgba(255, 255, 0, 0.4)",
-            zIndex: 3,
+            zIndex: 1,
           }}
         ></div>
       );
