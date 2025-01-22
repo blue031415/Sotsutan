@@ -91,7 +91,7 @@
 
 .hover_info {
   position: relative;
-  z-index: 1;
+  z-index: 3;
 }
 .info {
   display: flex;
@@ -113,7 +113,7 @@
   visibility: hidden;
   pointer-events: none;
   font-size: 10%;
-  z-index: 1;
+  z-index: 3;
   border-radius: 10px;
   border: 2px solid black;
 }
@@ -142,7 +142,7 @@
   margin-top: -3px;
   visibility: hidden;
   pointer-events: none;
-  z-index: 1;
+  z-index: 3;
 }
 .hover_info:hover::before {
   opacity: 1;
@@ -229,7 +229,6 @@
 
 .hover_English {
   position: relative;
-  z-index: 3;
 }
 .English {
   display: flex;
@@ -251,7 +250,6 @@
   visibility: hidden;
   pointer-events: none;
   font-size: 10%;
-  z-index: 3;
   border-radius: 10px;
   border: 2px solid black;
 }
@@ -280,7 +278,6 @@
   margin-top: -3px;
   visibility: hidden;
   pointer-events: none;
-  z-index: 3;
 }
 .hover_English:hover::before {
   opacity: 1;
@@ -297,7 +294,7 @@
 
 .hover_pe {
   position: relative;
-  z-index: 2;
+  z-index: 4;
 }
 .pe {
   display: flex;
@@ -319,7 +316,7 @@
   visibility: hidden;
   pointer-events: none;
   font-size: 10%;
-  z-index: 1;
+  z-index: 4;
   border-radius: 10px;
   border: 2px solid black;
 }
@@ -348,7 +345,7 @@
   margin-top: -3px;
   visibility: hidden;
   pointer-events: none;
-  z-index: 1;
+  z-index: 4;
 }
 .hover_pe:hover::before {
   opacity: 1;
@@ -388,15 +385,16 @@
 
 .hover_elective_basic {
   position: relative;
-  z-index: 6;
 }
 .hover_elective_basic:hover::before {
   opacity: 1;
   visibility: visible;
+  z-index: 8;
 }
 .hover_elective_basic:hover * {
   opacity: 1;
   visibility: visible;
+  z-index: 8;
 }
 
 .gakusi {
