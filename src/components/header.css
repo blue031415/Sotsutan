@@ -1,0 +1,116 @@
+.description {
+	border-radius: 30px;
+	border: 1px solid #727272;
+	background: rgba(255, 255, 255, 0.00);
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+	max-width: 90%;
+	margin: 0 auto;
+	margin-bottom: 20px;
+	text-align: left;
+	padding: 20px;
+	color:black
+}
+
+.description h2 {
+	margin: 0;
+	padding: 0;
+}
+.function {
+	padding: 10px;
+}
+
+.detail {
+  font-size: 80%;
+	padding: 0px;
+}
+
+.function-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkmark-icon {
+  width: 20px;
+  height: 20px;
+	margin-right: 10px;
+}
+
+.subject-example {
+  width: 300px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.hover-example {
+  width: 220px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.subjectlist-example {
+	padding-top: 10px;
+	height: 100px;
+}
+
+.usage {
+	border-radius: 30px;
+	border: 1px solid #727272;
+	background: rgba(255, 255, 255, 0.00);
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+	max-width: 90%;
+	margin: 0 auto;
+	margin-bottom: 20px;
+	text-align: left;
+	padding: 20px;
+	color:black
+}
+
+.usage h2 {
+	margin: 0;
+	padding: 0;
+}
+
+.usage-row {
+  display: flex;
+	margin-top: 10px;;
+	margin-left: 10px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  position: relative;
+
+}
+
+.usage-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.usage-caution {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.usage-caution-icon {
+  margin-right: 10px;
+	width: 20px;
+	height: 20px;
+}
+
+.notice {
+	margin-bottom: 100px;
+}
+
+.usage-csv {
+  display: flex;
+  align-items: center;
+	margin-left: 10px;
+}
+
+.info-icon {
+	width: 20px;
+	height: 20px;
+	margin-right: 5px;
+}

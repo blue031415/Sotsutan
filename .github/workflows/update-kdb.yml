@@ -1,0 +1,46 @@
+name: Update KDB JSON
+
+on:
+  schedule:
+    # 日本時間の午前3時に実行
+    - cron: "0 18 * * *"
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download new KDB data
+        run: |
+          curl -o src/kdb_json/kdb.json https://raw.githubusercontent.com/s7tya/kdb-crawler/master/dist/kdb.json
+
+      - name: Check for changes
+        id: check
+        run: |
+          git diff --exit-code src/kdb_json/kdb.json || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Create PR
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          # 新しいブランチを作成
+          DATE=$(date +%Y%m%d-%H%M%S)
+          BRANCH_NAME="update-kdb-$DATE"
+          git checkout -b $BRANCH_NAME
+
+          # 変更をコミット
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add src/kdb_json/kdb.json
+          git commit -m "Update KDB data"
+          git push origin $BRANCH_NAME
+
+          # PRを作成
+          gh pr create \
+            --title "Update KDB data" \
+            --body "KDBデータの自動更新" \
+            --base main \
+            --head $BRANCH_NAME
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

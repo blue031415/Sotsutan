@@ -24,11 +24,12 @@ const PopUp = () => {
   return (
     <>
       <div>
-        <button onClick={togglePopUp} className={styles.showPopUp}>
-          CSVファイルの出力方法はこちら
-        </button>
+        <div className={styles.Link} onClick={togglePopUp}>
+          CSVファイルのダウンロード方法はこちら
+        </div>
         {isPopUpVisible && (
           <div className={styles.PopUp}>
+            <button onClick={togglePopUp}>×</button>
             <div
               className={styles.Explain}
               id="PopUp" // IDを一致させる
@@ -52,7 +53,6 @@ const PopUp = () => {
               <p>6. 「出力」ボタンを押します。これでダウンロード完了です！</p>
               <img src="/grade_output.png" alt="出力完了画面" />
             </div>
-            <button onClick={togglePopUp}>閉じる</button>
           </div>
         )}
       </div>
