@@ -2,6 +2,7 @@ name: Update KDB JSON
 
 permissions:
   pull-requests: write
+  contents: write
 
 on:
   schedule:
@@ -24,13 +25,20 @@ jobs:
         run: |
           git diff --exit-code src/kdb_json/kdb.json || echo "changed=true" >> $GITHUB_OUTPUT
 
-      - name: Create PR
+      - name: Update branch and create PR if needed
         if: steps.check.outputs.changed == 'true'
         run: |
-          # 新しいブランチを作成
-          DATE=$(date +%Y%m%d-%H%M%S)
-          BRANCH_NAME="update-kdb-$DATE"
-          git checkout -b $BRANCH_NAME
+          BRANCH_NAME="update-kdb-json"
+
+          # リモートブランチの存在確認
+          if git ls-remote --heads origin $BRANCH_NAME | grep -q $BRANCH_NAME; then
+            # ブランチが存在する場合、チェックアウト
+            git fetch origin $BRANCH_NAME
+            git checkout $BRANCH_NAME
+          else
+            # ブランチが存在しない場合、新規作成
+            git checkout -b $BRANCH_NAME
+          fi
 
           # 変更をコミット
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
@@ -39,11 +47,13 @@ jobs:
           git commit -m "Update KDB data"
           git push origin $BRANCH_NAME
 
-          # PRを作成
-          gh pr create \
-            --title "Update KDB data" \
-            --body "KDBデータの自動更新" \
-            --base main \
-            --head $BRANCH_NAME
+          # PRが存在しない場合のみ作成
+          if ! gh pr list --head $BRANCH_NAME --state open | grep -q .; then
+            gh pr create \
+              --title "Update KDB data" \
+              --body "KDBデータの自動更新" \
+              --base main \
+              --head $BRANCH_NAME
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
