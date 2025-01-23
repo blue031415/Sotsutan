@@ -2,6 +2,7 @@ name: Update KDB JSON
 
 permissions:
   pull-requests: write
+  contents: write
 
 on:
   schedule:
